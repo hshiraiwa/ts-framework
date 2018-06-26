@@ -96,7 +96,7 @@ export default class Server {
 
       this.raven = Raven.config(this.config.sentry.dsn, {
         autoBreadcrumbs: true,
-        logger: 'devnup-server',
+        logger: 'ts-framework-server',
         release: SENTRY_RELEASE,
       }).install();
 
