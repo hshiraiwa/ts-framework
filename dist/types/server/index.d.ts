@@ -1,5 +1,6 @@
 /// <reference types="winston" />
 /// <reference types="cors" />
+import * as Raven from 'raven';
 import { LoggerInstance } from 'winston';
 import { ErrorDefinitions } from './error/ErrorReporter';
 import { BaseRequest } from '../base/BaseRequest';
@@ -53,6 +54,7 @@ export default class Server {
     app: any;
     _server: any;
     logger: LoggerInstance;
+    raven: Raven.Client;
     constructor(config: ServerOptions, app?: any);
     /**
      * Starts listening on the configured port.
