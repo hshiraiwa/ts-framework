@@ -78,7 +78,7 @@ export interface ServerOptions {
 export default class Server {
   _server: any;
   logger: LoggerInstance;
-  raven: Raven;
+  raven: Raven.Client;
 
   constructor(public config: ServerOptions, public app?: any) {
     this.app = app || express();
@@ -237,7 +237,7 @@ export default class Server {
 
     errorMiddleware(this.config.errors, {
       logger: this.logger,
-      raven: this.config.sentry ? Raven : undefined,
+      raven: this.config.sentry ? this.raven : undefined,
     })(this.app);
 
   }
