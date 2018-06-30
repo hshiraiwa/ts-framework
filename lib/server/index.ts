@@ -63,6 +63,9 @@ export interface ServerOptions {
     useErrorHandler?: boolean;
     continueMiddleware?: boolean;
     allowExtendedTokenAttributes?: boolean;
+    authorize?: {
+
+    },
     token?: {
       extendedGrantTypes?: any;
       accessTokenLifetime?: number;
@@ -219,14 +222,21 @@ export default class Server {
 
     // Handles oauth server
     if (this.config.oauth) {
-      const { token, ...oauth } = this.config.oauth;
+      const { token, authorize, ...oauth } = this.config.oauth;
       if (this.logger) {
         this.logger.info('Initializing server middleware: OAuth2');
       }
 
       // Prepare OAuth 2.0 server instance and token endpoint
       this.app.oauth = new OAuthServer(oauth);
-      this.app.post('/oauth/token', this.app.oauth.token(token));
+
+      if (token) {
+        this.app.post('/oauth/token', this.app.oauth.token(token));
+      }
+
+      if (authorize) {
+        this.app.get('/authorize', this.app.oauth.authorize(authorize));
+      }
     }
 
     // Bind the error handlers

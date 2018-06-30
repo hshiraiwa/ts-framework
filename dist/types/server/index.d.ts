@@ -37,6 +37,7 @@ export interface ServerOptions {
         useErrorHandler?: boolean;
         continueMiddleware?: boolean;
         allowExtendedTokenAttributes?: boolean;
+        authorize?: {};
         token?: {
             extendedGrantTypes?: any;
             accessTokenLifetime?: number;
