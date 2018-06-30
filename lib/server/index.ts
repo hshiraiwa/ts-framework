@@ -230,12 +230,12 @@ export default class Server {
       // Prepare OAuth 2.0 server instance and token endpoint
       this.app.oauth = new OAuthServer(oauth);
 
-      if (token) {
-        this.app.post('/oauth/token', this.app.oauth.token(token));
+      if (authorize) {
+        this.app.use(this.app.oauth.authorize(authorize));
       }
 
-      if (authorize) {
-        this.app.get('/authorize', this.app.oauth.authorize(authorize));
+      if (token) {
+        this.app.post('/oauth/token', this.app.oauth.token(token));
       }
     }
 
