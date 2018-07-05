@@ -78,6 +78,7 @@ export interface ServerOptions {
 export default class Server {
   _server: any;
   logger: LoggerInstance;
+  raven: Raven.Client;
 
   constructor(public config: ServerOptions, public app?: any) {
     this.app = app || express();
@@ -93,9 +94,9 @@ export default class Server {
     if (this.logger && this.config.sentry) {
       this.logger.info('Initializing server middleware: Sentry');
 
-      Raven.config(this.config.sentry.dsn, {
+      this.raven = Raven.config(this.config.sentry.dsn, {
         autoBreadcrumbs: true,
-        logger: 'devnup-server',
+        logger: 'ts-framework-server',
         release: SENTRY_RELEASE,
       }).install();
 
@@ -236,7 +237,7 @@ export default class Server {
 
     errorMiddleware(this.config.errors, {
       logger: this.logger,
-      raven: this.config.sentry ? Raven : undefined,
+      raven: this.config.sentry ? this.raven : undefined,
     })(this.app);
 
   }
