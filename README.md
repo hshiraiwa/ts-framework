@@ -120,14 +120,6 @@ Other external plugins and middlewares for this framework
 
     Redis based cache services for performance. Currently in closed alpha.
 
-- **ts-framework-sql (coming soon)**
-
-    MySQL / Postgres database layer based on TypeORM. Currently in closed alpha.
-
-- **ts-framework-mongo (coming soon)**
-
-    MongoDB database layer based on Mongoose. Currently in closed alpha.
-
 
 ## Documentation
 
