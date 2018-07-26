@@ -1,4 +1,5 @@
 /// <reference types="winston" />
+import * as Raven from 'raven';
 import { LoggerInstance } from 'winston';
 import { BaseRequest } from '../base/BaseRequest';
 import { BaseResponse } from '../base/BaseResponse';
@@ -14,6 +15,7 @@ export default class Server {
     app: any;
     _server: any;
     logger: LoggerInstance;
+    raven: Raven.Client;
     constructor(config: ServerOptions, app?: any);
     /**
      * Starts listening on the configured port.

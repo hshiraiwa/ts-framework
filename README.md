@@ -82,6 +82,22 @@ External components available as built-in middlewares:
 - Method Override (express/method-override)
 - Cookie Parser (express/cookie-parser)
 
+
+Database providers:
+
+- **[ts-framework-mongo](https://github.com/nxtep-io/ts-framework-mongo)**
+
+    MongoDB layer based on MongooseJS.
+
+- **[ts-framework-sql](https://github.com/nxtep-io/ts-framework-sql)**
+
+    MySQL / Postgres database layer based on Typeorm. Currently in public BETA.
+
+- **[ts-framework-migration](https://gitlab.devnup.com/npm/ts-framework-migration)**
+
+    Advanced usage plugin for handling Schema migrations safely within production environments.
+   
+
 Other external plugins and middlewares for this framework
 
 - **[ts-framework-versioning](https://github.com/devnup/ts-framework-versioning)**
@@ -92,13 +108,9 @@ Other external plugins and middlewares for this framework
 
     Handles transactional notifications using SMTP (email templates) and Firebase Messaging (push notifications).
 
-- **[ts-framework-migration](https://gitlab.devnup.com/npm/ts-framework-migration)**
-
-    Advanced usage plugin for handling Schema migrations safely within production environments.
-
 - **[ts-framework-sockets](https://github.com/nxtep-io/ts-framework-sockets)**
 
-    Socket.io layer over the TS-Framework. Currently in public alpha.
+    Socket.io layer over the TS-Framework. Currently in public BETA.
 
 - **ts-framework-queue (coming soon)**
 
