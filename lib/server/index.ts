@@ -7,6 +7,7 @@ import * as Git from 'git-rev-sync';
 import * as bodyParser from 'body-parser';
 import * as cookieParser from 'cookie-parser';
 import * as methodOverride from 'method-override';
+import * as Helmet from 'helmet';
 import * as OAuthServer from 'express-oauth-server';
 import { LoggerInstance } from 'winston';
 import { Router } from './router';
@@ -18,8 +19,7 @@ import { BaseResponse } from '../base/BaseResponse';
 import { Controller, Get, Post, Put, Delete } from './router/decorators';
 import HttpCode from './error/http/HttpCode';
 import HttpError from './error/http/HttpError';
-import BaseJob from '../jobs/BaseJob';
-import { CorsOptions } from 'cors';
+import { ServerOptions } from './config';
 
 const Logger = SimpleLogger.getInstance();
 
@@ -35,48 +35,8 @@ export { default as response } from './helpers/response';
 export {
   BaseRequest, BaseResponse, Logger,
   Controller, Get, Post, Put, Delete,
-  HttpCode, HttpError,
+  HttpCode, HttpError, ServerOptions,
 };
-
-export interface ServerOptions {
-  port: number;
-  secret?: string;
-  routes?: any;
-  cors?: boolean | CorsOptions;
-  userAgent?: boolean;
-  controllers?: object;
-  bodyLimit?: string;
-  path?: {
-    filters?: string;
-    controllers?: string;
-  };
-  sentry?: {
-    dsn: string;
-  };
-  startup?: {
-    pipeline: BaseJob[];
-    [key: string]: any;
-  };
-  multer?: any;
-  oauth?: {
-    model: any; // TODO: Specify the signature
-    useErrorHandler?: boolean;
-    continueMiddleware?: boolean;
-    allowExtendedTokenAttributes?: boolean;
-    authorize?: {
-
-    },
-    token?: {
-      extendedGrantTypes?: any;
-      accessTokenLifetime?: number;
-      refreshTokenLifetime?: number;
-      requireClientAuthentication?: boolean;
-      allowExtendedTokenAttributes?: boolean;
-    }
-  };
-  logger?: LoggerInstance;
-  errors?: ErrorDefinitions;
-}
 
 export default class Server {
   _server: any;
@@ -87,10 +47,7 @@ export default class Server {
     this.logger = config.logger;
 
     // Prepare server configuration
-    this.config = {
-      ...config,
-      port: config.port || 3000,
-    };
+    this.config = { ...config, port: config.port || 3000 };
 
     // Start by registering Sentry if available
     if (this.logger && this.config.sentry) {
@@ -98,7 +55,7 @@ export default class Server {
 
       Raven.config(this.config.sentry.dsn, {
         autoBreadcrumbs: true,
-        logger: 'devnup-server',
+        logger: 'ts-framework-logger',
         release: SENTRY_RELEASE,
       }).install();
 
@@ -144,9 +101,14 @@ export default class Server {
   }
 
   /**
-   * Handles middleware initialization stuff.
+   * Handles middleware initialization stuff, cannot be async.
    */
-  public onAppReady() {
+  public onAppReady(): void {
+
+    // Enable security protections
+    if (this.config.helmet !== false) {
+      this.app.use(Helmet(this.config.helmet));
+    }
 
     // Enable the CORS middleware
     if (this.config.cors) {
