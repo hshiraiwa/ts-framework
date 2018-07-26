@@ -35,7 +35,7 @@ export { default as response } from './helpers/response';
 export {
   BaseRequest, BaseResponse, Logger,
   Controller, Get, Post, Put, Delete,
-  HttpCode, HttpError,
+  HttpCode, HttpError, ServerOptions,
 };
 
 export default class Server {
@@ -55,7 +55,7 @@ export default class Server {
 
       Raven.config(this.config.sentry.dsn, {
         autoBreadcrumbs: true,
-        logger: 'devnup-server',
+        logger: 'ts-framework-logger',
         release: SENTRY_RELEASE,
       }).install();
 

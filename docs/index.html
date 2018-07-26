@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>ts-framework (v1.0.0-rc.1)</title>
+	<title>ts-framework (v2.0.0-alpha.1)</title>
 	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="assets/css/main.css">
@@ -22,7 +22,7 @@
 						<li class="state loading">Preparing search index...</li>
 						<li class="state failure">The search index is not available</li>
 					</ul>
-					<a href="index.html" class="title">ts-framework (v1.0.0-rc.1)</a>
+					<a href="index.html" class="title">ts-framework (v2.0.0-alpha.1)</a>
 				</div>
 				<div class="table-cell" id="tsd-widgets">
 					<div id="tsd-filter">
@@ -56,7 +56,7 @@
 					<a href="globals.html">Globals</a>
 				</li>
 			</ul>
-			<h1> ts-framework (v1.0.0-rc.1)</h1>
+			<h1> ts-framework (v2.0.0-alpha.1)</h1>
 		</div>
 	</div>
 </header>
@@ -68,9 +68,9 @@
 				<p><a href="https://travis-ci.org/devnup/ts-framework"><img src="https://travis-ci.org/devnup/ts-framework.svg?branch=master" alt="Build Status"></a> &nbsp; <a href="https://coveralls.io/github/devnup/ts-framework?branch=master"><img src="https://coveralls.io/repos/github/devnup/ts-framework/badge.svg?branch=master" alt="Coverage Status"></a></p>
 				<p>A minimalistic framework for typescript based applications, with async/await and decorators support.</p>
 				<h2 id="getting-started">Getting Started</h2>
-				<h3 id="release-candidate-disclaimer">Release Candidate Disclaimer</h3>
-				<p>The current API is considered to be a &quot;Release Candidate&quot;. That means that small, potentially breaking
-					changes may still occur. Be sure to use a specific GIT_REV_HASH and a lock file in your project, so you
+				<h3 id="alpha-disclaimer">Alpha Disclaimer</h3>
+				<p>The current API is considered to be an &quot;Alpha Release&quot; of the v2 branch. That means that big, probably breaking
+					changes are expected. Be sure to use a specific GIT_REV_HASH and a lock file in your project, so you
 				won&#39;t be immediately affected by such a change.</p>
 				<p>For example:</p>
 				<pre><code class="lang-bash"><span class="hljs-comment"># Install using Yarn</span>
@@ -114,7 +114,6 @@ server.listen()
 				<p>Internal components:</p>
 				<ul>
 					<li>Logger (backed by <a href="https://npmjs.org/package/winston">winston</a>)</li>
-					<li>Database (backed by <a href="https://npmjs.org/package/mongoose">Mongoose</a>)</li>
 					<li>Router (backed by <a href="https://npmjs.org/package/express">Express</a>)<ul>
 							<li><strong>Controllers:</strong> Classes for handling API calls with decorators and async/await support</li>
 							<li><strong>Filters:</strong> Middlewares for body validation, permission handling and other interception routines</li>
@@ -154,7 +153,10 @@ server.listen()
 						<p>  Redis based cache services for performance. Currently in closed alpha.</p>
 					</li>
 					<li><p><strong>ts-framework-sql (coming soon)</strong></p>
-						<p>  MySQL / Postgres database layer based on Sequelize. Currently in closed alpha.</p>
+						<p>  MySQL / Postgres database layer based on TypeORM. Currently in closed alpha.</p>
+					</li>
+					<li><p><strong>ts-framework-mongo (coming soon)</strong></p>
+						<p>  MongoDB database layer based on Mongoose. Currently in closed alpha.</p>
 					</li>
 				</ul>
 				<h2 id="documentation">Documentation</h2>
@@ -163,6 +165,12 @@ server.listen()
 				<pre><code class="lang-sh">yarn run docs
 </code></pre>
 				<p>Then check the documentation at <code>./docs/index.html</code>.</p>
+				<h2 id="migration-guide">Migration Guide</h2>
+				<p>This migration is a draft.</p>
+				<p>The v2 breaking changes are listed below:</p>
+				<ul>
+					<li>Database layer moved to its own package</li>
+				</ul>
 				<h2 id="license">License</h2>
 				<p>The project is licensed under the <a href="./LICENSE.md">MIT License</a>.</p>
 			</div>
@@ -190,9 +198,6 @@ server.listen()
 						<a href="enums/httpsuccess.html" class="tsd-kind-icon">Http<wbr>Success</a>
 					</li>
 					<li class=" tsd-kind-class tsd-is-external">
-						<a href="classes/basedao.html" class="tsd-kind-icon">BaseDAO</a>
-					</li>
-					<li class=" tsd-kind-class tsd-is-external">
 						<a href="classes/baseerror.html" class="tsd-kind-icon">Base<wbr>Error</a>
 					</li>
 					<li class=" tsd-kind-class tsd-is-external">
@@ -200,15 +205,6 @@ server.listen()
 					</li>
 					<li class=" tsd-kind-class tsd-is-external">
 						<a href="classes/basejob.html" class="tsd-kind-icon">Base<wbr>Job</a>
-					</li>
-					<li class=" tsd-kind-class tsd-is-external">
-						<a href="classes/basemodel.html" class="tsd-kind-icon">Base<wbr>Model</a>
-					</li>
-					<li class=" tsd-kind-class tsd-is-external">
-						<a href="classes/database.html" class="tsd-kind-icon">Database</a>
-					</li>
-					<li class=" tsd-kind-class tsd-is-external">
-						<a href="classes/databaseerror.html" class="tsd-kind-icon">Database<wbr>Error</a>
 					</li>
 					<li class=" tsd-kind-class tsd-is-external">
 						<a href="classes/errorreporter.html" class="tsd-kind-icon">Error<wbr>Reporter</a>
@@ -232,25 +228,16 @@ server.listen()
 						<a href="interfaces/basecontroller.html" class="tsd-kind-icon">Base<wbr>Controller</a>
 					</li>
 					<li class=" tsd-kind-interface tsd-is-external">
-						<a href="interfaces/basemodelconstructor.html" class="tsd-kind-icon">Base<wbr>Model<wbr>Constructor</a>
-					</li>
-					<li class=" tsd-kind-interface tsd-is-external">
 						<a href="interfaces/baserequest.html" class="tsd-kind-icon">Base<wbr>Request</a>
 					</li>
 					<li class=" tsd-kind-interface tsd-is-external">
 						<a href="interfaces/baseresponse.html" class="tsd-kind-icon">Base<wbr>Response</a>
 					</li>
 					<li class=" tsd-kind-interface tsd-is-external">
-						<a href="interfaces/databaseoptions.html" class="tsd-kind-icon">Database<wbr>Options</a>
-					</li>
-					<li class=" tsd-kind-interface tsd-is-external">
 						<a href="interfaces/errordefinitions.html" class="tsd-kind-icon">Error<wbr>Definitions</a>
 					</li>
 					<li class=" tsd-kind-interface tsd-is-external">
 						<a href="interfaces/errorreporteroptions.html" class="tsd-kind-icon">Error<wbr>Reporter<wbr>Options</a>
-					</li>
-					<li class=" tsd-kind-interface tsd-is-external">
-						<a href="interfaces/iassertionhelper.html" class="tsd-kind-icon">IAssertion<wbr>Helper</a>
 					</li>
 					<li class=" tsd-kind-interface tsd-is-external">
 						<a href="interfaces/sentrytransportoptions.html" class="tsd-kind-icon">Sentry<wbr>Transport<wbr>Options</a>
@@ -292,31 +279,19 @@ server.listen()
 						<a href="globals.html#sentry_release" class="tsd-kind-icon">SENTRY_<wbr>RELEASE</a>
 					</li>
 					<li class=" tsd-kind-variable tsd-is-external tsd-is-not-exported">
-						<a href="globals.html#schema" class="tsd-kind-icon">Schema</a>
-					</li>
-					<li class=" tsd-kind-variable tsd-is-external tsd-is-not-exported">
 						<a href="globals.html#ctrl_path" class="tsd-kind-icon">ctrl_<wbr>path</a>
 					</li>
 					<li class=" tsd-kind-variable tsd-is-external tsd-is-not-exported">
 						<a href="globals.html#filter_path" class="tsd-kind-icon">filter_<wbr>path</a>
 					</li>
-					<li class=" tsd-kind-function tsd-is-external tsd-is-not-exported">
-						<a href="globals.html#assertionhelper" class="tsd-kind-icon">Assertion<wbr>Helper</a>
-					</li>
 					<li class=" tsd-kind-function tsd-is-external">
 						<a href="globals.html#controller" class="tsd-kind-icon">Controller</a>
-					</li>
-					<li class=" tsd-kind-function tsd-is-external">
-						<a href="globals.html#model" class="tsd-kind-icon">Model</a>
 					</li>
 					<li class=" tsd-kind-function tsd-is-external">
 						<a href="globals.html#asyncmiddleware" class="tsd-kind-icon">async<wbr>Middleware</a>
 					</li>
 					<li class=" tsd-kind-function tsd-is-external">
 						<a href="globals.html#legacyparams" class="tsd-kind-icon">legacy<wbr>Params</a>
-					</li>
-					<li class=" tsd-kind-function tsd-is-external">
-						<a href="globals.html#maskauthurl" class="tsd-kind-icon">mask<wbr>Auth<wbr>Url</a>
 					</li>
 					<li class=" tsd-kind-function tsd-is-external tsd-is-not-exported">
 						<a href="globals.html#routedecoratorfactory" class="tsd-kind-icon">route<wbr>Decorator<wbr>Factory</a>
