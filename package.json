@@ -21,7 +21,7 @@
     "precommit": "yarn run -s lint && yarn test"
   },
   "engines": {
-    "node": "8"
+    "node": "10"
   },
   "dependencies": {
     "@types/cors": "^2.8.4",
