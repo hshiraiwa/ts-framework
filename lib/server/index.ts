@@ -9,19 +9,16 @@ import * as cookieParser from 'cookie-parser';
 import * as methodOverride from 'method-override';
 import * as Helmet from 'helmet';
 import * as OAuthServer from 'express-oauth-server';
-import { LoggerInstance } from 'winston';
 import { Router } from './router';
+import { Logger } from 'ts-framework-common';
 import { cors, legacyParams, responseBinder } from './middlewares/index';
 import { default as errorMiddleware, ErrorDefinitions } from './error/ErrorReporter';
-import SimpleLogger from '../logger/index';
 import { BaseRequest } from '../base/BaseRequest';
 import { BaseResponse } from '../base/BaseResponse';
 import { Controller, Get, Post, Put, Delete } from './router/decorators';
 import HttpCode from './error/http/HttpCode';
 import HttpError from './error/http/HttpError';
 import { ServerOptions } from './config';
-
-const Logger = SimpleLogger.getInstance();
 
 const SENTRY_RELEASE = process.env.SENTRY_RELEASE ? process.env.SENTRY_RELEASE : (() => {
   try {
@@ -33,19 +30,19 @@ const SENTRY_RELEASE = process.env.SENTRY_RELEASE ? process.env.SENTRY_RELEASE :
 export { default as response } from './helpers/response';
 
 export {
-  BaseRequest, BaseResponse, Logger,
+  BaseRequest, BaseResponse,
   Controller, Get, Post, Put, Delete,
   HttpCode, HttpError, ServerOptions,
 };
 
 export default class Server {
   _server: any;
-  logger: LoggerInstance;
+  logger: Logger;
   raven: Raven.Client;
 
   constructor(public config: ServerOptions, public app?: any) {
     this.app = app || express();
-    this.logger = config.logger;
+    this.logger = config.logger || Logger.getInstance();
 
     // Prepare server configuration
     this.config = { ...config, port: config.port || 3000 };

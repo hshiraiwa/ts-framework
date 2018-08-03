@@ -1,20 +1,18 @@
-/// <reference types="winston" />
 import * as Raven from 'raven';
-import { LoggerInstance } from 'winston';
+import { Logger } from 'ts-framework-common';
 import { BaseRequest } from '../base/BaseRequest';
 import { BaseResponse } from '../base/BaseResponse';
 import { Controller, Get, Post, Put, Delete } from './router/decorators';
 import HttpCode from './error/http/HttpCode';
 import HttpError from './error/http/HttpError';
 import { ServerOptions } from './config';
-declare const Logger: LoggerInstance;
 export { default as response } from './helpers/response';
-export { BaseRequest, BaseResponse, Logger, Controller, Get, Post, Put, Delete, HttpCode, HttpError, ServerOptions };
+export { BaseRequest, BaseResponse, Controller, Get, Post, Put, Delete, HttpCode, HttpError, ServerOptions };
 export default class Server {
     config: ServerOptions;
     app: any;
     _server: any;
-    logger: LoggerInstance;
+    logger: Logger;
     raven: Raven.Client;
     constructor(config: ServerOptions, app?: any);
     /**

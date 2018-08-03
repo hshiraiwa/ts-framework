@@ -1,4 +1,4 @@
-import BaseError from '../../../error/BaseError';
+import { BaseError } from 'ts-framework-common';
 import { HttpCode } from './HttpCode';
 export default class HttpError extends BaseError {
     status: HttpCode;

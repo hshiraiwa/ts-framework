@@ -1,13 +1,12 @@
 import * as Raven from 'raven';
 import { BaseRequest, BaseResponse } from '../helpers/response';
-import { LoggerInstance } from 'winston';
-import SimpleLogger from '../../logger';
+import { Logger } from 'ts-framework-common';
 import { HttpServerErrors } from './http/HttpCode';
 import HttpError from './http/HttpError';
 
 export interface ErrorReporterOptions {
   raven?: Raven.Client;
-  logger?: LoggerInstance;
+  logger?: Logger;
 }
 
 export interface ErrorDefinitions {
@@ -18,14 +17,14 @@ export interface ErrorDefinitions {
 }
 
 export class ErrorReporter {
-  logger: LoggerInstance;
+  logger: Logger;
   options: ErrorReporterOptions;
   errorDefinitions: ErrorDefinitions;
 
   constructor(errorDefinitions: ErrorDefinitions, options: ErrorReporterOptions = {}) {
     this.errorDefinitions = errorDefinitions;
     this.options = options;
-    this.logger = options.logger || SimpleLogger.getInstance();
+    this.logger = options.logger || Logger.getInstance();
   }
 
   static middleware(errorDefinitions: ErrorDefinitions, options: ErrorReporterOptions): (Application) => void {

@@ -2,7 +2,7 @@
 /// <reference types="winston" />
 import { LoggerInstance } from 'winston';
 import { Request, Response } from 'express';
-import BaseError from '../../error/BaseError';
+import { BaseError } from 'ts-framework-common';
 import { default as HttpError } from '../error/http/HttpError';
 export interface BaseRequest extends Request {
     file?: any;

@@ -1,10 +1,9 @@
-/// <reference types="winston" />
 import * as Raven from 'raven';
 import { BaseRequest, BaseResponse } from '../helpers/response';
-import { LoggerInstance } from 'winston';
+import { Logger } from 'ts-framework-common';
 export interface ErrorReporterOptions {
     raven?: Raven.Client;
-    logger?: LoggerInstance;
+    logger?: Logger;
 }
 export interface ErrorDefinitions {
     [code: string]: {
@@ -13,7 +12,7 @@ export interface ErrorDefinitions {
     };
 }
 export declare class ErrorReporter {
-    logger: LoggerInstance;
+    logger: Logger;
     options: ErrorReporterOptions;
     errorDefinitions: ErrorDefinitions;
     constructor(errorDefinitions: ErrorDefinitions, options?: ErrorReporterOptions);

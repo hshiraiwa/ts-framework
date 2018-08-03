@@ -1,7 +1,7 @@
 import * as express from 'express';
 import * as request from 'supertest';
+import { BaseError } from 'ts-framework-common';
 import response from '../../../lib/server/helpers/response';
-import BaseError from '../../../lib/error/BaseError';
 import HttpError from '../../../lib/server/error/http/HttpError';
 
 describe('lib.server.helpers.response', () => {
