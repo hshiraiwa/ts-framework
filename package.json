@@ -20,7 +20,7 @@
     }
   },
   "lint-staged": {
-    "{api,config,tests}/**/*.ts": [
+    "{lib,tests}/**/*.ts": [
       "prettier --write",
       "tslint --fix",
       "git add"
