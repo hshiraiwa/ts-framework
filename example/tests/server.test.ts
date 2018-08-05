@@ -1,12 +1,12 @@
 import * as hat from 'hat';
 import * as Package from 'pjson';
 import * as request from 'supertest';
-import * as mongoose from 'mongoose';
 import MainServer from '../api/MainServer';
 
 
 describe('api.MainServer', () => {
   it('should respond to a simple status request', async () => {
+    expect.assertions(2);
     const server = new MainServer();
 
     // Perform a simple request to get a 200 response
@@ -16,7 +16,7 @@ describe('api.MainServer', () => {
       .then(async (response) => {
         expect(response.body.name).toBe(Package.name);
         expect(response.body.version).toBe(Package.version);
-        await server.stop();
+        await server.close();
       });
   });
 });

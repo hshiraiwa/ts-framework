@@ -1,26 +1,29 @@
-import * as request from 'supertest';
-import Server from '../../../lib/server';
-import HttpError from '../../../lib/server/error/http/HttpError';
+import * as request from "supertest";
+import Server, { HttpError } from "../../../lib";
 
-describe('lib.server.errors.errorReporter', () => {
-  it('GET /unknown_error (500)', async () => {
-
+describe("lib.server.errors.errorReporter", () => {
+  it("GET /unknown_error (500)", async () => {
     // Initialize a simple server
     const server = new Server({
       port: 3333,
-      cors: false,
-      routes: {
-        get: {
-          '/': (req, res) => {
-            throw new Error('TEST_ERROR');
-          },
-        },
+      security: {
+        cors: false
       },
+      router: {
+        routes: {
+          get: {
+            "/": (req, res) => {
+              throw new Error("TEST_ERROR");
+            }
+          }
+        }
+      }
     });
 
     // Perform a simple request to get a 200 response
-    await request(server.app).get('/')
-      .expect('Content-Type', /json/)
+    await request(server.app)
+      .get("/")
+      .expect("Content-Type", /json/)
       .expect(500)
       .then((response: any) => {
         expect(response.body.status).toBe(500);
@@ -29,24 +32,28 @@ describe('lib.server.errors.errorReporter', () => {
       });
   });
 
-  it('GET /http_error (400)', async () => {
-
+  it("GET /http_error (400)", async () => {
     // Initialize a simple server
     const server = new Server({
       port: 3333,
-      cors: false,
-      routes: {
-        get: {
-          '/': (req, res) => {
-            throw new HttpError('BAD_PARAMS', 400);
-          },
-        },
+      security: {
+        cors: false
       },
+      router: {
+        routes: {
+          get: {
+            "/": (req, res) => {
+              throw new HttpError("BAD_PARAMS", 400);
+            }
+          }
+        }
+      }
     });
 
     // Perform a simple request to get a 200 response
-    await request(server.app).get('/')
-      .expect('Content-Type', /json/)
+    await request(server.app)
+      .get("/")
+      .expect("Content-Type", /json/)
       .expect(400)
       .then((response: any) => {
         expect(response.body.status).toBe(400);

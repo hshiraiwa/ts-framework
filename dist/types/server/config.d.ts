@@ -1,48 +1,17 @@
-/// <reference types="cors" />
-/// <reference types="helmet" />
-/// <reference types="winston" />
-import { CorsOptions } from 'cors';
-import { IHelmetConfiguration } from 'helmet';
-import BaseJob from '../jobs/BaseJob';
-import { LoggerInstance } from 'winston';
-import { ErrorDefinitions } from './error/ErrorReporter';
-export interface ServerOptions {
+import { Job, Logger, BaseServerOptions } from 'ts-framework-common';
+import { SecurityComponentOptions, RequestComponentOptions, RouterComponentOptions } from '../components';
+import ReplServer from '../repl';
+export interface ServerOptions extends BaseServerOptions {
     port: number;
-    secret?: string;
-    routes?: any;
-    cors?: boolean | CorsOptions;
-    userAgent?: boolean;
-    controllers?: object;
-    bodyLimit?: string;
-    path?: {
-        filters?: string;
-        controllers?: string;
-    };
+    repl?: ReplServer;
+    logger?: Logger;
     sentry?: {
         dsn: string;
     };
-    helmet?: IHelmetConfiguration | false;
+    security?: SecurityComponentOptions;
+    request?: RequestComponentOptions;
+    router?: RouterComponentOptions;
     startup?: {
-        pipeline: BaseJob[];
-        [key: string]: any;
+        pipeline: Job[];
     };
-    multer?: any;
-    oauth?: {
-        model: any;
-        authorize?: any;
-        useErrorHandler?: boolean;
-        continueMiddleware?: boolean;
-        allowExtendedTokenAttributes?: boolean;
-        token?: {
-            extendedGrantTypes?: {
-                [name: string]: any;
-            };
-            accessTokenLifetime?: number;
-            refreshTokenLifetime?: number;
-            requireClientAuthentication?: boolean;
-            allowExtendedTokenAttributes?: boolean;
-        };
-    };
-    logger?: LoggerInstance;
-    errors?: ErrorDefinitions;
 }

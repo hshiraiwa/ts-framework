@@ -10,6 +10,7 @@
   "dependencies": {
     "pjson": "^1.0.9",
     "ts-framework": "file:../",
+    "ts-framework-common": "nxtep-io/ts-framework-common#v2",
     "ts-node": "^3.3.0"
   },
   "devDependencies": {
@@ -17,7 +18,6 @@
     "@types/supertest": "^2.0.4",
     "hat": "^0.0.3",
     "jest": "^22.4.3",
-    "mongodb-memory-server": "^1.7.3",
     "supertest": "^3.0.0",
     "ts-jest": "^22.4.4"
   }

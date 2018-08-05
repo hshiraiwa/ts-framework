@@ -1,6 +1,6 @@
 import { Response } from 'express';
 import { BaseError } from 'ts-framework-common';
-import HttpError from '../server/error/http/HttpError';
+import HttpError from '../error/http/HttpError';
 
 export interface BaseResponse extends Response {
   error(status: number, error: Error): void;
