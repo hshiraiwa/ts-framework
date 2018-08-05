@@ -55,8 +55,9 @@ export default class Server extends BaseServer {
    *
    * @returns {Promise<ServerOptions>}
    */
-  public listen(): Promise<ServerOptions> {
-    return new Promise((resolve, reject) => {
+  public async listen(): Promise<ServerOptions> {
+    await this.onInit(this);
+    return new Promise<ServerOptions>((resolve, reject) => {
       // Get http server instance
       this.server = this.app
         .listen(this.options.port, () => {
