@@ -3843,8 +3843,9 @@ trim-right@^1.0.1:
 
 ts-framework-common@nxtep-io/ts-framework-common#v2:
   version "2.0.0"
-  resolved "https://codeload.github.com/nxtep-io/ts-framework-common/tar.gz/8c8aec4ca7376ccc57ccaa56be1076b33aa748fd"
+  resolved "https://codeload.github.com/nxtep-io/ts-framework-common/tar.gz/e03a0776d552883dc54e066298caaa17373dde6c"
   dependencies:
+    "@types/express" "^4.16.0"
     "@types/raven" "^2.5.1"
     "@types/winston" "^2.3.9"
     clean-stack "^1.3.0"
@@ -3852,39 +3853,7 @@ ts-framework-common@nxtep-io/ts-framework-common#v2:
     winston "2.4"
     winston-raven-sentry "^1.0.1"
 
-"ts-framework@file:..":
-  version "2.1.0"
-  dependencies:
-    "@types/cors" "^2.8.4"
-    "@types/express" "^4.16.0"
-    "@types/helmet" "^0.0.38"
-    "@types/lodash" "^4.14.116"
-    async "^2.5.0"
-    base64url "^2.0.0"
-    body-parser "^1.18.2"
-    clean-stack "^1.3.0"
-    cookie-parser "^1.4.3"
-    cors "^2.8.4"
-    express "^4.16.3"
-    express-oauth-server "^2.0.0"
-    express-useragent "^1.0.8"
-    git-rev-sync "^1.9.1"
-    hat "^0.0.3"
-    helmet "^3.13.0"
-    lodash "^4.17.10"
-    method-override "^2.3.10"
-    multer "^1.3.0"
-    pjson "^1.0.9"
-    raven "^2.2.1"
-    request-ip "^2.0.2"
-    rimraf "^2.6.2"
-    source-map-support "^0.5.0"
-    ts-framework-common nxtep-io/ts-framework-common#v2
-    typescript "^3.0.1"
-    urijs "^1.19.0"
-    winston-raven-sentry "^1.0.1"
-
-"ts-framework@file:../":
+ts-framework@../:
   version "2.1.0"
   dependencies:
     "@types/cors" "^2.8.4"

@@ -26,7 +26,9 @@ export default class ReplConsole extends Service {
     };
   }
 
-  onMount(server: Server): void {}
+  onMount(server: Server): void {
+    this.server = server;
+  }
 
   public async onInit() {}
 
@@ -52,8 +54,8 @@ export default class ReplConsole extends Service {
     // Block server initialization then close on exit
     await new Promise(resolve => {
       this.repl.on("exit", () => {
-        resolve();
         server.close();
+        process.exit(0);
       });
     });
   }
@@ -65,12 +67,29 @@ export default class ReplConsole extends Service {
   }
 
   /**
+   * Clears the REPL console.
+   */
+  public clear() {
+    process.stdout.write("\u001B[2J\u001B[0;0f");
+  }
+
+  /**
    * Gets the REPL context from framework.
    */
-  public getContext() {
-    return {
-      /* Main Server */
-      server: this.server
-    };
+  public getContext(): any {
+    let ctx = {};
+
+    if (this.server) {
+      const serverDescription = this.server.describe();
+
+      ctx = {
+        /* Main Server */
+        server: this.server,
+        ...serverDescription.context
+      };
+    }
+
+    // Return the repl context
+    return { ...ctx, clear: this.clear.bind(this) };
   }
 }

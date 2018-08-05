@@ -1,8 +1,8 @@
 #!/usr/bin/env node
 /// <reference types="node" />
-import repl = require('repl');
-import { Service, ServiceOptions, ServiceDescription } from 'ts-framework-common';
-import Server from '../server';
+import repl = require("repl");
+import { Service, ServiceOptions, ServiceDescription } from "ts-framework-common";
+import Server from "../server";
 export interface ReplServerOptions extends ServiceOptions {
 }
 export default class ReplConsole extends Service {
@@ -16,9 +16,11 @@ export default class ReplConsole extends Service {
     onReady(server: Server): Promise<void>;
     onUnmount(): void;
     /**
+     * Clears the REPL console.
+     */
+    clear(): void;
+    /**
      * Gets the REPL context from framework.
      */
-    getContext(): {
-        server: Server;
-    };
+    getContext(): any;
 }
