@@ -1,5 +1,5 @@
-import { Logger, ComponentOptions, Component, ComponentType } from 'ts-framework-common';
-import Server from '../server';
+import { Logger, ComponentOptions, Component, ComponentType } from "ts-framework-common";
+import Server from "../server";
 export interface LoggerComponentOptions extends ComponentOptions {
     logger?: Logger;
     sentry?: {

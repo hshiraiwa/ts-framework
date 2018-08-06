@@ -1,6 +1,6 @@
-import * as Multer from 'multer';
-import { Logger, Component, ComponentType, ComponentOptions } from 'ts-framework-common';
-import Server from '../server';
+import * as Multer from "multer";
+import { Logger, Component, ComponentType, ComponentOptions } from "ts-framework-common";
+import Server from "../server";
 export interface RequestComponentOptions extends ComponentOptions {
     logger?: Logger;
     bodyLimit?: string;

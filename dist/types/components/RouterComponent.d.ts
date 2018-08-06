@@ -1,8 +1,8 @@
-import { Logger, ComponentType, Component, ComponentOptions } from 'ts-framework-common';
-import { ErrorDefinitions } from '../error/ErrorReporter';
-import { RouteMap } from './router';
-import { BaseController } from './router/controller';
-import Server from '../server';
+import { Logger, ComponentType, Component, ComponentOptions } from "ts-framework-common";
+import { ErrorDefinitions } from "../error/ErrorReporter";
+import { RouteMap } from "./router";
+import { BaseController } from "./router/controller";
+import Server from "../server";
 export interface RouterComponentOptions extends ComponentOptions {
     logger?: Logger;
     routes?: RouteMap;

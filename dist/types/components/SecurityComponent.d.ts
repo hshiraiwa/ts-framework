@@ -1,7 +1,7 @@
-import * as cors from 'cors';
-import * as Helmet from 'helmet';
-import { Logger, ComponentType, Component } from 'ts-framework-common';
-import Server from '../index';
+import * as cors from "cors";
+import * as Helmet from "helmet";
+import { Logger, ComponentType, Component } from "ts-framework-common";
+import Server from "../index";
 export interface SecurityComponentOptions {
     logger?: Logger;
     helmet?: Helmet.IHelmetConfiguration | false;

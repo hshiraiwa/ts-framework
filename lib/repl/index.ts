@@ -20,10 +20,7 @@ export default class ReplConsole extends Service {
   }
 
   describe(): ServiceDescription {
-    return {
-      name: "ReplServer",
-      context: this.getContext()
-    };
+    return { name: "ReplServer" };
   }
 
   onMount(server: Server): void {
