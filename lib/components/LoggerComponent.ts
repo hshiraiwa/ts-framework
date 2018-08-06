@@ -1,15 +1,16 @@
-import * as Raven from 'raven';
-import * as Git from 'git-rev-sync';
-import { Logger, ComponentOptions, Component, ComponentType } from 'ts-framework-common';
-import Server from '../server';
+import * as Raven from "raven";
+import * as Git from "git-rev-sync";
+import { Logger, ComponentOptions, Component, ComponentType } from "ts-framework-common";
+import Server from "../server";
 
 /* Generates Sentry release version based on Git repository, if available */
-const SENTRY_RELEASE = process.env.SENTRY_RELEASE ? process.env.SENTRY_RELEASE : (() => {
-  try {
-    return Git.long();
-  } catch (error) {
-  }
-})();
+const SENTRY_RELEASE = process.env.SENTRY_RELEASE
+  ? process.env.SENTRY_RELEASE
+  : (() => {
+      try {
+        return Git.long();
+      } catch (error) {}
+    })();
 
 export interface LoggerComponentOptions extends ComponentOptions {
   logger?: Logger;
@@ -27,19 +28,19 @@ export default class LoggerComponent implements Component {
   }
 
   public describe() {
-    return { name: 'LoggerMiddleware' };
+    return { name: "LoggerComponent" };
   }
 
   public onMount(server: Server): void {
     // Start by registering Sentry if available
     if (this.logger && this.options.sentry) {
-      this.logger.info('Initializing server middleware: Sentry');
+      this.logger.silly("Initializing server middleware: Sentry");
 
       // Prepare raven instance configuration
       server.raven = Raven.config(this.options.sentry.dsn, {
         autoBreadcrumbs: true,
-        logger: 'ts-framework-logger',
-        release: SENTRY_RELEASE,
+        logger: "ts-framework-logger",
+        release: SENTRY_RELEASE
       }).install();
 
       // Registers the Raven express middleware
@@ -55,9 +56,7 @@ export default class LoggerComponent implements Component {
     }
   }
 
-  async onInit(server: Server) {
-  }
+  async onInit(server: Server) {}
 
-  onUnmount(server: Server) {
-  }
+  onUnmount(server: Server) {}
 }

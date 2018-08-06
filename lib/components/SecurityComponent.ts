@@ -1,9 +1,9 @@
-import * as cors from 'cors';
-import * as Helmet from 'helmet';
-import * as requestIp from 'request-ip';
-import * as userAgent from 'express-useragent';
-import { Logger, ComponentType, Component } from 'ts-framework-common';
-import Server from '../index';
+import * as cors from "cors";
+import * as Helmet from "helmet";
+import * as requestIp from "request-ip";
+import * as userAgent from "express-useragent";
+import { Logger, ComponentType, Component } from "ts-framework-common";
+import Server from "../index";
 
 export interface SecurityComponentOptions {
   logger?: Logger;
@@ -22,7 +22,7 @@ export default class SecurityComponent implements Component {
   }
 
   public describe() {
-    return { name: 'SecurityMiddleware' };
+    return { name: "SecurityComponent" };
   }
 
   public onMount(server: Server) {
@@ -34,7 +34,7 @@ export default class SecurityComponent implements Component {
     // Enable the CORS middleware
     if (this.options.cors) {
       if (this.logger) {
-        this.logger.info('Initializing server middleware: CORS');
+        this.logger.info("Initializing server middleware: CORS");
       }
       server.app.use(cors(this.options.cors !== true ? this.options.cors : {}));
     }
@@ -42,7 +42,7 @@ export default class SecurityComponent implements Component {
     // Handle user agent middleware
     if (this.options.userAgent) {
       if (this.logger) {
-        this.logger.info('Initializing server middleware: User Agent');
+        this.logger.info("Initializing server middleware: User Agent");
       }
 
       // Parses request for the real IP
@@ -54,13 +54,11 @@ export default class SecurityComponent implements Component {
 
     // Ensures the server trust proxy
     if (this.options.trustProxy === undefined || this.options.trustProxy) {
-      server.app.set('trust_proxy', 1);
+      server.app.set("trust_proxy", 1);
     }
   }
 
-  public async onInit(server: Server) {
-  }
+  public async onInit(server: Server) {}
 
-  public onUnmount(server: Server) {
-  }
+  public onUnmount(server: Server) {}
 }

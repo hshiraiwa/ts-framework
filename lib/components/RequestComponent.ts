@@ -1,10 +1,10 @@
-import * as Multer from 'multer';
-import * as bodyParser from 'body-parser';
-import * as cookieParser from 'cookie-parser';
-import * as methodOverride from 'method-override';
-import { legacyParams, responseBinder } from './middlewares';
-import { Logger, Component, ComponentType, ComponentOptions } from 'ts-framework-common';
-import Server from '../server';
+import * as Multer from "multer";
+import * as bodyParser from "body-parser";
+import * as cookieParser from "cookie-parser";
+import * as methodOverride from "method-override";
+import { legacyParams, responseBinder } from "./middlewares";
+import { Logger, Component, ComponentType, ComponentOptions } from "ts-framework-common";
+import Server from "../server";
 
 export interface RequestComponentOptions extends ComponentOptions {
   logger?: Logger;
@@ -12,8 +12,8 @@ export interface RequestComponentOptions extends ComponentOptions {
   secret?: string;
   multer?: {
     single?: string;
-    array?: { name: string, maxCount: number };
-    fields?: { name: string, maxCount: number }[];
+    array?: { name: string; maxCount: number };
+    fields?: { name: string; maxCount: number }[];
     options?: Multer.Options;
   };
 }
@@ -27,7 +27,7 @@ export default class RequestComponent implements Component {
   }
 
   public describe() {
-    return { name: 'RequestMiddleware' };
+    return { name: "RequestComponent" };
   }
 
   public onMount(server: Server) {
@@ -38,7 +38,7 @@ export default class RequestComponent implements Component {
 
     // Handle multer middleware
     if (this.options.multer) {
-      this.logger.info('Initializing server middleware: Multer');
+      this.logger.silly("Initializing server middleware: Multer");
       const opts = this.options.multer as any;
       const multer = Multer(opts);
 
@@ -53,7 +53,7 @@ export default class RequestComponent implements Component {
         server.app.use(multer.fields(opts.fields));
       } else {
         // Defaults to single "file" field
-        server.app.use(multer.single('file'));
+        server.app.use(multer.single("file"));
       }
     }
 
@@ -65,7 +65,7 @@ export default class RequestComponent implements Component {
     // Only enable cookie parser if a secret was set
     if (this.options.secret) {
       if (this.logger) {
-        this.logger.info('Initializing server middleware: CookieParser');
+        this.logger.silly("Initializing server middleware: CookieParser");
       }
       server.app.use(cookieParser(this.options.secret));
     }
@@ -75,11 +75,7 @@ export default class RequestComponent implements Component {
     server.app.use(responseBinder);
   }
 
-  public async onInit() {
+  public async onInit() {}
 
-  }
-
-  public onUnmount() {
-
-  }
+  public onUnmount() {}
 }
