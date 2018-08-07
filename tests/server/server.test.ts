@@ -1,10 +1,6 @@
 import * as hat from "hat";
 import * as request from "supertest";
-import Server from "../../lib/server/index";
-import { Controller, Get } from "../../lib/server";
-
-// May require additional time for downloading MongoDB binaries
-jasmine.DEFAULT_TIMEOUT_INTERVAL = 300000;
+import Server, { Controller, Get } from "../../lib";
 
 describe("lib.Server", () => {
   it("should crash without controllers or routes", async () => {

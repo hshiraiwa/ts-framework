@@ -1,15 +1,17 @@
-#!/usr/bin/env node
 /// <reference types="node" />
 import repl = require("repl");
 import { Service, ServiceOptions, ServiceDescription } from "ts-framework-common";
 import Server from "../server";
-export interface ReplServerOptions extends ServiceOptions {
+export interface ReplConsoleOptions extends ServiceOptions {
+    repl?: repl.REPLServer;
+    name?: string;
+    exit?: boolean;
 }
 export default class ReplConsole extends Service {
-    options: ReplServerOptions;
+    options: ReplConsoleOptions;
     protected server?: Server;
-    protected repl: repl.REPLServer;
-    constructor(options: ReplServerOptions);
+    protected repl?: repl.REPLServer;
+    constructor(options: ReplConsoleOptions);
     describe(): ServiceDescription;
     onMount(server: Server): void;
     onInit(): Promise<void>;

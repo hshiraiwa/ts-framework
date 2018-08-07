@@ -12,7 +12,7 @@ export default class UptimeService extends Service {
     unmounted: 0,
   };
 
-  constructor(options = {}) {
+  constructor(options) {
     super(options);
     this.history.constructed = Date.now();
   }
@@ -36,7 +36,8 @@ export default class UptimeService extends Service {
   }
   uptime() {
     if (this.history.ready) {
-      Date.now() - this.history.ready;
+      // Ensure uptime is never zero after isReady
+      return Math.max(1, Date.now() - this.history.ready);
     }
     return 0;
   }

@@ -33,13 +33,5 @@ export default class Server extends BaseServer {
      *
      * @returns {Promise<void>}
      */
-    onReady(server: any): Promise<void>;
-    /**
-     * Runs the server statup jobs, wil crash if any fails.
-     */
-    protected runStartupJobs(): Promise<void>;
-    /**
-     * Startup the server components in series
-     */
-    protected runComponentsInitialization(): Promise<void>;
+    onReady(): Promise<void>;
 }

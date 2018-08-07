@@ -7,7 +7,6 @@ export default class MainServer extends Server {
     super({
       port: process.env.PORT as any || 3000,
       router: { controllers: { StatusController } },
-      repl: new ReplConsole({}),
       children: [UptimeService.getInstance()]
     });
   }

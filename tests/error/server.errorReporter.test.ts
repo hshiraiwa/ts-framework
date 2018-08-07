@@ -1,5 +1,5 @@
 import * as request from "supertest";
-import Server, { HttpError } from "../../../lib";
+import Server, { HttpError } from "../../lib";
 
 describe("lib.server.errors.errorReporter", () => {
   it("GET /unknown_error (500)", async () => {

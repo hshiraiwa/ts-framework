@@ -1,21 +1,20 @@
-#!/usr/bin/env node
-
-require("source-map-support").install();
-require("reflect-metadata");
-
 import repl = require("repl");
 import * as util from "util";
 import * as Package from "pjson";
 import { Service, ServiceOptions, ServiceDescription } from "ts-framework-common";
 import Server from "../server";
 
-export interface ReplServerOptions extends ServiceOptions {}
+export interface ReplConsoleOptions extends ServiceOptions {
+  repl?: repl.REPLServer;
+  name?: string;
+  exit?: boolean;
+}
 
 export default class ReplConsole extends Service {
   protected server?: Server;
-  protected repl: repl.REPLServer;
+  protected repl?: repl.REPLServer;
 
-  constructor(public options: ReplServerOptions) {
+  constructor(public options: ReplConsoleOptions) {
     super(options);
   }
 
@@ -33,12 +32,14 @@ export default class ReplConsole extends Service {
     this.server = server;
 
     // Start the repl server
-    this.repl = repl.start({
-      prompt: `${Package.name} > `,
-      useColors: true,
-      useGlobal: true,
-      ignoreUndefined: true
-    });
+    this.repl =
+      this.options.repl ||
+      repl.start({
+        prompt: `${this.options.name || Package.name} > `,
+        useColors: true,
+        useGlobal: true,
+        ignoreUndefined: true
+      });
 
     // Bind server context
     const ctx = this.getContext();
@@ -49,10 +50,14 @@ export default class ReplConsole extends Service {
     });
 
     // Block server initialization then close on exit
-    await new Promise(resolve => {
-      this.repl.on("exit", () => {
-        server.close();
-        process.exit(0);
+    return new Promise<void>(resolve => {
+      this.repl.on("exit", async () => {
+        await server.close();
+        if (this.options.exit !== false) {
+          process.exit(0);
+        } else {
+          resolve();
+        }
       });
     });
   }
@@ -60,6 +65,7 @@ export default class ReplConsole extends Service {
   onUnmount() {
     if (this.repl) {
       this.repl.close();
+      this.repl = undefined;
     }
   }
 

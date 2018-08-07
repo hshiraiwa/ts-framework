@@ -6,11 +6,12 @@ import UptimeService from '../services/UptimeService';
 export default class StatusController {
   @Get('/')
   static async getStatus(req, res) {
+    const service = UptimeService.getInstance();
     res.success({
       name: Package.name,
       version: Package.version,
       environment: 'development',
-      uptime: UptimeService.getInstance().uptime(),
+      uptime: service.uptime(),
     });
   }
 }

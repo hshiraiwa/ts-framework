@@ -1,6 +1,6 @@
 import * as path from "path";
 import * as request from "supertest";
-import Server from "../../../lib/server";
+import Server from "../../../lib";
 
 describe("lib.server.helpers.FilterWrapper", () => {
   it("GET /pass_simple_filter (200)", async () => {

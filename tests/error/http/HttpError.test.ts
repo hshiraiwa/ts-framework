@@ -1,4 +1,4 @@
-import { HttpError, HttpCode } from "../../../../lib";
+import { HttpError, HttpCode } from "../../../lib";
 
 describe("HttpError", () => {
   it("should instantiate a simple error", () => {

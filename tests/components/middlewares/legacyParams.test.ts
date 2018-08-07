@@ -1,8 +1,8 @@
 import * as request from "supertest";
-import Server from "../../../lib/server";
+import Server from "../../../lib";
 
-describe("lib.server.middlewares.CORS", () => {
-  it("GET /cors_inactive (200)", async () => {
+describe("lib.server.middlewares.legacyParams", () => {
+  it("GET /:test (200)", async () => {
     // Initialize a simple server
     const server = new Server({
       port: 3333,
@@ -12,7 +12,12 @@ describe("lib.server.middlewares.CORS", () => {
       router: {
         routes: {
           get: {
-            "/": (req, res) => res.json({ test: "ok" })
+            "/:test": (req, res) =>
+              res.json({
+                test: "ok",
+                param: req.param("test"),
+                unknown: req.param("unknown")
+              })
           }
         }
       }
@@ -20,22 +25,27 @@ describe("lib.server.middlewares.CORS", () => {
 
     // Perform a simple request to get a 200 response
     await request(server.app)
-      .get("/")
+      .get("/test")
       .expect("Content-Type", /json/)
-      .expect(200, { test: "ok" });
+      .expect(200, { test: "ok", param: "test" });
   });
 
-  it("GET /cors_active (200)", async () => {
+  it("GET /?param=test (200)", async () => {
     // Initialize a simple server
     const server = new Server({
       port: 3333,
       security: {
-        cors: true
+        cors: false
       },
       router: {
         routes: {
           get: {
-            "/": (req, res) => res.json({ test: "ok" })
+            "/": (req, res) =>
+              res.json({
+                test: "ok",
+                param: req.param("test"),
+                unknown: req.param("unknown")
+              })
           }
         }
       }
@@ -44,8 +54,8 @@ describe("lib.server.middlewares.CORS", () => {
     // Perform a simple request to get a 200 response
     await request(server.app)
       .get("/")
+      .query({ test: "test" })
       .expect("Content-Type", /json/)
-      .expect("Access-Control-Allow-Origin", "*")
-      .expect(200, { test: "ok" });
+      .expect(200, { test: "ok", param: "test" });
   });
 });

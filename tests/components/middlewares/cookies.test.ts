@@ -1,5 +1,5 @@
 import * as request from "supertest";
-import Server from "../../../lib/server";
+import Server from "../../../lib";
 
 describe("lib.server.middlewares.CookieParser", () => {
   it("GET / (200)", async () => {
