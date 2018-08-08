@@ -3,11 +3,11 @@ import * as express from "express";
 import { BaseServer, Component, Logger } from "ts-framework-common";
 import { BaseRequest } from "../base/BaseRequest";
 import { BaseResponse } from "../base/BaseResponse";
-import { Controller, Get, Post, Put, Delete } from "../components/router";
+import { Controller, Delete, Get, Post, Put } from "../components/router";
 import HttpCode from "../error/http/HttpCode";
 import HttpError from "../error/http/HttpError";
 import { ServerOptions } from "./config";
-import { LoggerComponent, SecurityComponent, RequestComponent, RouterComponent } from "../components";
+import { LoggerComponent, RequestComponent, RouterComponent, SecurityComponent } from "../components";
 
 export { BaseRequest, BaseResponse, Controller, Get, Post, Put, Delete, HttpCode, HttpError, ServerOptions };
 
@@ -15,7 +15,7 @@ export default class Server extends BaseServer {
   public app: express.Application;
   public raven?: Raven.Client;
   public logger: Logger;
-  protected server: any;
+  protected server?: any;
 
   constructor(public options: ServerOptions, app?: express.Application) {
     super(options);
@@ -50,13 +50,18 @@ export default class Server extends BaseServer {
     return super.onMount(this as BaseServer);
   }
 
+  public async onInit(): Promise<void> {
+    // Initialize all child components
+    return super.onInit(this as BaseServer);
+  }
+
   /**
    * Starts listening on the configured port.
    *
    * @returns {Promise<ServerOptions>}
    */
   public async listen(): Promise<ServerOptions> {
-    await this.onInit(this);
+    await this.onInit();
     return new Promise<ServerOptions>((resolve, reject) => {
       // Get http server instance
       this.server = this.app

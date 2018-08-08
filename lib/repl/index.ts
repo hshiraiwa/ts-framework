@@ -1,25 +1,33 @@
 import repl = require("repl");
 import * as util from "util";
+import * as path from "path";
 import * as Package from "pjson";
 import { Service, ServiceOptions, ServiceDescription } from "ts-framework-common";
 import Server from "../server";
+import { readFileSync } from "fs-extra";
 
 export interface ReplConsoleOptions extends ServiceOptions {
   repl?: repl.REPLServer;
   name?: string;
   exit?: boolean;
+  help?: string;
 }
 
 export default class ReplConsole extends Service {
   protected server?: Server;
   protected repl?: repl.REPLServer;
+  public options: ReplConsoleOptions;
 
-  constructor(public options: ReplConsoleOptions) {
-    super(options);
+  constructor(options: ReplConsoleOptions) {
+    super({
+      ...options,
+      name: options.name || Package.name,
+      help: options.help || readFileSync(path.join(__dirname, "../../raw/help.txt"), "utf-8")
+    } as ServiceOptions);
   }
 
   describe(): ServiceDescription {
-    return { name: "ReplServer" };
+    return { name: this.options.name };
   }
 
   onMount(server: Server): void {
@@ -35,7 +43,7 @@ export default class ReplConsole extends Service {
     this.repl =
       this.options.repl ||
       repl.start({
-        prompt: `${this.options.name || Package.name} > `,
+        prompt: `${this.options.name} > `,
         useColors: true,
         useGlobal: true,
         ignoreUndefined: true
@@ -77,6 +85,15 @@ export default class ReplConsole extends Service {
   }
 
   /**
+   * Shows help.
+   */
+  public help() {
+    if (this.options.help) {
+      this.logger.info(this.options.help);
+    }
+  }
+
+  /**
    * Gets the REPL context from framework.
    */
   public getContext(): any {
@@ -93,6 +110,10 @@ export default class ReplConsole extends Service {
     }
 
     // Return the repl context
-    return { ...ctx, clear: this.clear.bind(this) };
+    return {
+      ...ctx,
+      clear: this.clear.bind(this),
+      help: this.help.bind(this)
+    };
   }
 }

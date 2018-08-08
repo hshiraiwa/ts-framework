@@ -56,7 +56,7 @@ export default class LoggerComponent implements Component {
     }
   }
 
-  async onInit(server: Server) {}
+  public async onInit() {}
 
-  onUnmount(server: Server) {}
+  public onUnmount() {}
 }

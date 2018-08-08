@@ -15,6 +15,6 @@ export default class LoggerComponent implements Component {
         name: string;
     };
     onMount(server: Server): void;
-    onInit(server: Server): Promise<void>;
-    onUnmount(server: Server): void;
+    onInit(): Promise<void>;
+    onUnmount(): void;
 }

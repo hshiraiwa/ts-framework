@@ -6,11 +6,12 @@ export interface ReplConsoleOptions extends ServiceOptions {
     repl?: repl.REPLServer;
     name?: string;
     exit?: boolean;
+    help?: string;
 }
 export default class ReplConsole extends Service {
-    options: ReplConsoleOptions;
     protected server?: Server;
     protected repl?: repl.REPLServer;
+    options: ReplConsoleOptions;
     constructor(options: ReplConsoleOptions);
     describe(): ServiceDescription;
     onMount(server: Server): void;
@@ -21,6 +22,10 @@ export default class ReplConsole extends Service {
      * Clears the REPL console.
      */
     clear(): void;
+    /**
+     * Shows help.
+     */
+    help(): void;
     /**
      * Gets the REPL context from framework.
      */

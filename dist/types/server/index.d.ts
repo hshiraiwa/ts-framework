@@ -3,7 +3,7 @@ import * as express from "express";
 import { BaseServer, Logger } from "ts-framework-common";
 import { BaseRequest } from "../base/BaseRequest";
 import { BaseResponse } from "../base/BaseResponse";
-import { Controller, Get, Post, Put, Delete } from "../components/router";
+import { Controller, Delete, Get, Post, Put } from "../components/router";
 import HttpCode from "../error/http/HttpCode";
 import HttpError from "../error/http/HttpError";
 import { ServerOptions } from "./config";
@@ -13,9 +13,10 @@ export default class Server extends BaseServer {
     app: express.Application;
     raven?: Raven.Client;
     logger: Logger;
-    protected server: any;
+    protected server?: any;
     constructor(options: ServerOptions, app?: express.Application);
     onMount(): void;
+    onInit(): Promise<void>;
     /**
      * Starts listening on the configured port.
      *

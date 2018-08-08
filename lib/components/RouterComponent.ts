@@ -90,7 +90,7 @@ export default class RouterComponent implements Component {
     })(server.app);
   }
 
-  public async onInit(server: Server) {}
+  public async onInit() {}
 
-  public onUnmount(server: Server) {}
+  public onUnmount() {}
 }

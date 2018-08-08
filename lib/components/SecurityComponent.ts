@@ -58,7 +58,7 @@ export default class SecurityComponent implements Component {
     }
   }
 
-  public async onInit(server: Server) {}
+  public async onInit() {}
 
-  public onUnmount(server: Server) {}
+  public onUnmount() {}
 }
