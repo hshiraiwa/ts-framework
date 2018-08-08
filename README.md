@@ -109,9 +109,9 @@ Other external plugins and middlewares for this framework
 
     Redis based cache services for performance. Currently in closed alpha.
 
-- **ts-framework-sql (coming soon)**
+- **[ts-framework-sql](https://github.com/nxtep-io/ts-framework-sql)**
 
-    MySQL / Postgres database layer based on Sequelize. Currently in closed alpha.
+    MySQL / Postgres database layer based on TypeORM. Currently in  alpha.
 
 
 ## Documentation
