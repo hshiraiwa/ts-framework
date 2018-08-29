@@ -1,16 +1,17 @@
-import * as path from 'path';
-import * as util from 'util';
-import * as express from 'express';
-import * as cleanStack from 'clean-stack';
-import asyncMiddleware from '../middlewares/async';
-import FiltersWrapper from '../helpers/filter';
-import { LoggerInstance } from 'winston';
-import { BaseRequest } from '../..';
-import { BaseResponse } from '../helpers/response';
+import * as path from "path";
+import * as util from "util";
+import * as express from "express";
+import * as cleanStack from "clean-stack";
+import asyncMiddleware from "../middlewares/async";
+import FiltersWrapper from "../helpers/filter";
+import { LoggerInstance } from "winston";
+import { BaseRequest } from "../..";
+import { BaseResponse } from "../helpers/response";
+import * as urljoin from "url-join";
 
 // TODO: Inject this constants from outside
 // Prepare static full paths, relative to project root
-const ctrl_path = '../../../api/controllers';
+const ctrl_path = "../../../api/controllers";
 
 const BASE_CTRLS_PATH = path.join(__dirname, ctrl_path);
 
@@ -23,8 +24,8 @@ export interface RouterOptions {
   };
 }
 
-export type Route = ((req: BaseRequest, res: BaseResponse) => (any | Promise<any>));
-export type Filter = ((req: BaseRequest, res: BaseResponse, next: Function) => (any | Promise<any>));
+export type Route = ((req: BaseRequest, res: BaseResponse) => any | Promise<any>);
+export type Filter = ((req: BaseRequest, res: BaseResponse, next: Function) => any | Promise<any>);
 
 export type RouteDefs = {
   controller: string | Route;
@@ -45,9 +46,8 @@ export default class ServerRouter {
   options: RouterOptions;
 
   constructor(controllers: any, routes: RouteMap, options: RouterOptions = { path: {} }) {
-
     if (!controllers && !routes) {
-      throw new Error('Could not initialize the router without routes or controllers');
+      throw new Error("Could not initialize the router without routes or controllers");
     }
 
     this.options = options;
@@ -55,7 +55,7 @@ export default class ServerRouter {
     this.options.path = this.options.path || {};
     this.options.path.controllers = this.options.path.controllers || BASE_CTRLS_PATH;
 
-    const r = routes || {} as RouteMap;
+    const r = routes || ({} as RouteMap);
     const c = controllers || {};
     const decoratedRoutes = this.decoratedRoutes(c);
 
@@ -63,7 +63,7 @@ export default class ServerRouter {
       get: { ...decoratedRoutes.get, ...r.get },
       post: { ...decoratedRoutes.post, ...r.post },
       put: { ...decoratedRoutes.put, ...r.put },
-      delete: { ...decoratedRoutes.delete, ...r.delete },
+      delete: { ...decoratedRoutes.delete, ...r.delete }
     };
 
     this.init();
@@ -84,7 +84,7 @@ export default class ServerRouter {
       }
 
       if (ctrl.baseRoute) {
-        const fullRoute = path.join(ctrl.baseRoute, route);
+        const fullRoute = urljoin(ctrl.baseRoute, route);
         decoratedRoutes[fullRoute] = ctrl.routes[method][route];
       } else {
         decoratedRoutes[route] = ctrl.routes[method][route];
@@ -105,29 +105,31 @@ export default class ServerRouter {
     const decoratedRoutes = { get: {}, post: {}, put: {}, delete: {} };
 
     // Prepare API routes and its controllers from decorators
-    Object.keys(controllers || {}).map(name => ({
-      name,
-      baseRoute: controllers[name].baseRoute,
-      baseFilters: controllers[name].baseFilters,
-      routes: controllers[name].routes(),
-    })).map((ctrl: any) => {
-      decoratedRoutes.get = {
-        ...decoratedRoutes.get,
-        ...this.prepareControllerMethods('get', ctrl),
-      };
-      decoratedRoutes.post = {
-        ...decoratedRoutes.post,
-        ...this.prepareControllerMethods('post', ctrl),
-      };
-      decoratedRoutes.put = {
-        ...decoratedRoutes.put,
-        ...this.prepareControllerMethods('put', ctrl),
-      };
-      decoratedRoutes.delete = {
-        ...decoratedRoutes.delete,
-        ...this.prepareControllerMethods('delete', ctrl),
-      };
-    });
+    Object.keys(controllers || {})
+      .map(name => ({
+        name,
+        baseRoute: controllers[name].baseRoute,
+        baseFilters: controllers[name].baseFilters,
+        routes: controllers[name].routes()
+      }))
+      .map((ctrl: any) => {
+        decoratedRoutes.get = {
+          ...decoratedRoutes.get,
+          ...this.prepareControllerMethods("get", ctrl)
+        };
+        decoratedRoutes.post = {
+          ...decoratedRoutes.post,
+          ...this.prepareControllerMethods("post", ctrl)
+        };
+        decoratedRoutes.put = {
+          ...decoratedRoutes.put,
+          ...this.prepareControllerMethods("put", ctrl)
+        };
+        decoratedRoutes.delete = {
+          ...decoratedRoutes.delete,
+          ...this.prepareControllerMethods("delete", ctrl)
+        };
+      });
 
     return decoratedRoutes;
   }
@@ -159,18 +161,14 @@ export default class ServerRouter {
 
         // Add the filters wrapper instance to the routes map
         if (routes[r].filters && routes[r].filters.length) {
-
           // Validate all filters
           if (routes[r].filters.filter(f => !f).length > 0) {
             console.log(routes[r].filters);
-            throw new Error('Invalid filters for route: ' + method.toUpperCase() + ' ' + r);
+            throw new Error("Invalid filters for route: " + method.toUpperCase() + " " + r);
           }
 
           // Register route with filters in current map for biding to express
-          this.routes[method][r] = FiltersWrapper
-            .apply(routes[r].filters, this.options.path.filters)
-            .concat([ctrl]);
-
+          this.routes[method][r] = FiltersWrapper.apply(routes[r].filters, this.options.path.filters).concat([ctrl]);
         } else {
           // Register route in current map for biding to express
           this.routes[method][r] = ctrl;
