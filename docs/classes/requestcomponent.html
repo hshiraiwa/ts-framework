@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>BaseJob | ts-framework (v2.0.0-alpha.1)</title>
+	<title>RequestComponent | ts-framework (v2.1.1)</title>
 	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
@@ -22,7 +22,7 @@
 						<li class="state loading">Preparing search index...</li>
 						<li class="state failure">The search index is not available</li>
 					</ul>
-					<a href="../index.html" class="title">ts-framework (v2.0.0-alpha.1)</a>
+					<a href="../index.html" class="title">ts-framework (v2.1.1)</a>
 				</div>
 				<div class="table-cell" id="tsd-widgets">
 					<div id="tsd-filter">
@@ -56,10 +56,10 @@
 					<a href="../globals.html">Globals</a>
 				</li>
 				<li>
-					<a href="basejob.html">BaseJob</a>
+					<a href="requestcomponent.html">RequestComponent</a>
 				</li>
 			</ul>
-			<h1>Class BaseJob</h1>
+			<h1>Class RequestComponent</h1>
 		</div>
 	</div>
 </header>
@@ -70,8 +70,14 @@
 				<h3>Hierarchy</h3>
 				<ul class="tsd-hierarchy">
 					<li>
-						<span class="target">BaseJob</span>
+						<span class="target">RequestComponent</span>
 					</li>
+				</ul>
+			</section>
+			<section class="tsd-panel">
+				<h3>Implements</h3>
+				<ul class="tsd-hierarchy">
+					<li><span class="tsd-signature-type">Component</span></li>
 				</ul>
 			</section>
 			<section class="tsd-panel-group tsd-index-group">
@@ -81,20 +87,24 @@
 						<section class="tsd-index-section tsd-is-external">
 							<h3>Constructors</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-constructor tsd-parent-kind-class tsd-is-external"><a href="basejob.html#constructor" class="tsd-kind-icon">constructor</a></li>
+								<li class="tsd-kind-constructor tsd-parent-kind-class tsd-is-external"><a href="requestcomponent.html#constructor" class="tsd-kind-icon">constructor</a></li>
 							</ul>
 						</section>
 						<section class="tsd-index-section tsd-is-external">
 							<h3>Properties</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-external"><a href="basejob.html#name" class="tsd-kind-icon">name</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-external"><a href="basejob.html#options" class="tsd-kind-icon">options</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-protected tsd-is-external"><a href="requestcomponent.html#logger" class="tsd-kind-icon">logger</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-external"><a href="requestcomponent.html#options" class="tsd-kind-icon">options</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-external"><a href="requestcomponent.html#type" class="tsd-kind-icon">type</a></li>
 							</ul>
 						</section>
 						<section class="tsd-index-section tsd-is-external">
 							<h3>Methods</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-external"><a href="basejob.html#run" class="tsd-kind-icon">run</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-external"><a href="requestcomponent.html#describe" class="tsd-kind-icon">describe</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-external"><a href="requestcomponent.html#oninit" class="tsd-kind-icon">on<wbr>Init</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-external"><a href="requestcomponent.html#onmount" class="tsd-kind-icon">on<wbr>Mount</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-external"><a href="requestcomponent.html#onunmount" class="tsd-kind-icon">on<wbr>Unmount</a></li>
 							</ul>
 						</section>
 					</div>
@@ -106,48 +116,55 @@
 					<a name="constructor" class="tsd-anchor"></a>
 					<h3>constructor</h3>
 					<ul class="tsd-signatures tsd-kind-constructor tsd-parent-kind-class tsd-is-external">
-						<li class="tsd-signature tsd-kind-icon">new <wbr>Base<wbr>Job<span class="tsd-signature-symbol">(</span>name<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">String</span>, options<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="basejob.html" class="tsd-signature-type">BaseJob</a></li>
+						<li class="tsd-signature tsd-kind-icon">new <wbr>Request<wbr>Component<span class="tsd-signature-symbol">(</span>options<span class="tsd-signature-symbol">?: </span><a href="../interfaces/requestcomponentoptions.html" class="tsd-signature-type">RequestComponentOptions</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="requestcomponent.html" class="tsd-signature-type">RequestComponent</a></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/nxtep-io/ts-framework/blob/77fa37a/lib/jobs/BaseJob.ts#L3">jobs/BaseJob.ts:3</a></li>
+									<li>Defined in <a href="https://github.com/nxtep-io/ts-framework/blob/1da61c3/lib/components/RequestComponent.ts#L23">components/RequestComponent.ts:23</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5>name: <span class="tsd-signature-type">String</span></h5>
-								</li>
-								<li>
-									<h5><span class="tsd-flag ts-flagDefault value">Default value</span> options: <span class="tsd-signature-type">any</span><span class="tsd-signature-symbol"> =&nbsp;{}</span></h5>
+									<h5><span class="tsd-flag ts-flagDefault value">Default value</span> options: <a href="../interfaces/requestcomponentoptions.html" class="tsd-signature-type">RequestComponentOptions</a><span class="tsd-signature-symbol"> =&nbsp;{}</span></h5>
 								</li>
 							</ul>
-							<h4 class="tsd-returns-title">Returns <a href="basejob.html" class="tsd-signature-type">BaseJob</a></h4>
+							<h4 class="tsd-returns-title">Returns <a href="requestcomponent.html" class="tsd-signature-type">RequestComponent</a></h4>
 						</li>
 					</ul>
 				</section>
 			</section>
 			<section class="tsd-panel-group tsd-member-group tsd-is-external">
 				<h2>Properties</h2>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-external">
-					<a name="name" class="tsd-anchor"></a>
-					<h3>name</h3>
-					<div class="tsd-signature tsd-kind-icon">name<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">String</span></div>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-protected tsd-is-external">
+					<a name="logger" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagProtected">Protected</span> logger</h3>
+					<div class="tsd-signature tsd-kind-icon">logger<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Logger</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/nxtep-io/ts-framework/blob/77fa37a/lib/jobs/BaseJob.ts#L4">jobs/BaseJob.ts:4</a></li>
+							<li>Defined in <a href="https://github.com/nxtep-io/ts-framework/blob/1da61c3/lib/components/RequestComponent.ts#L23">components/RequestComponent.ts:23</a></li>
 						</ul>
 					</aside>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-external">
 					<a name="options" class="tsd-anchor"></a>
 					<h3>options</h3>
-					<div class="tsd-signature tsd-kind-icon">options<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span></div>
+					<div class="tsd-signature tsd-kind-icon">options<span class="tsd-signature-symbol">:</span> <a href="../interfaces/requestcomponentoptions.html" class="tsd-signature-type">RequestComponentOptions</a></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/nxtep-io/ts-framework/blob/77fa37a/lib/jobs/BaseJob.ts#L4">jobs/BaseJob.ts:4</a></li>
+							<li>Defined in <a href="https://github.com/nxtep-io/ts-framework/blob/1da61c3/lib/components/RequestComponent.ts#L25">components/RequestComponent.ts:25</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-external">
+					<a name="type" class="tsd-anchor"></a>
+					<h3>type</h3>
+					<div class="tsd-signature tsd-kind-icon">type<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">MIDDLEWARE</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/nxtep-io/ts-framework/blob/1da61c3/lib/components/RequestComponent.ts#L22">components/RequestComponent.ts:22</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -155,16 +172,55 @@
 			<section class="tsd-panel-group tsd-member-group tsd-is-external">
 				<h2>Methods</h2>
 				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-external">
-					<a name="run" class="tsd-anchor"></a>
-					<h3>run</h3>
+					<a name="describe" class="tsd-anchor"></a>
+					<h3>describe</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-external">
-						<li class="tsd-signature tsd-kind-icon">run<span class="tsd-signature-symbol">(</span>server<span class="tsd-signature-symbol">: </span><a href="server.html" class="tsd-signature-type">Server</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></li>
+						<li class="tsd-signature tsd-kind-icon">describe<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">object</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/nxtep-io/ts-framework/blob/77fa37a/lib/jobs/BaseJob.ts#L7">jobs/BaseJob.ts:7</a></li>
+									<li>Defined in <a href="https://github.com/nxtep-io/ts-framework/blob/1da61c3/lib/components/RequestComponent.ts#L29">components/RequestComponent.ts:29</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">object</span></h4>
+							<ul class="tsd-parameters">
+								<li class="tsd-parameter">
+									<h5>name<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span></h5>
+								</li>
+							</ul>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-external">
+					<a name="oninit" class="tsd-anchor"></a>
+					<h3>on<wbr>Init</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-external">
+						<li class="tsd-signature tsd-kind-icon">on<wbr>Init<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/nxtep-io/ts-framework/blob/1da61c3/lib/components/RequestComponent.ts#L78">components/RequestComponent.ts:78</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-external">
+					<a name="onmount" class="tsd-anchor"></a>
+					<h3>on<wbr>Mount</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-external">
+						<li class="tsd-signature tsd-kind-icon">on<wbr>Mount<span class="tsd-signature-symbol">(</span>server<span class="tsd-signature-symbol">: </span><a href="server.html" class="tsd-signature-type">Server</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/nxtep-io/ts-framework/blob/1da61c3/lib/components/RequestComponent.ts#L33">components/RequestComponent.ts:33</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -173,7 +229,24 @@
 									<h5>server: <a href="server.html" class="tsd-signature-type">Server</a></h5>
 								</li>
 							</ul>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></h4>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-external">
+					<a name="onunmount" class="tsd-anchor"></a>
+					<h3>on<wbr>Unmount</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-external">
+						<li class="tsd-signature tsd-kind-icon">on<wbr>Unmount<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/nxtep-io/ts-framework/blob/1da61c3/lib/components/RequestComponent.ts#L80">components/RequestComponent.ts:80</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
 						</li>
 					</ul>
 				</section>
@@ -189,135 +262,39 @@
 			</nav>
 			<nav class="tsd-navigation secondary menu-sticky">
 				<ul class="before-current">
-					<li class=" tsd-kind-enum tsd-is-external">
-						<a href="../enums/httpclienterrors.html" class="tsd-kind-icon">Http<wbr>Client<wbr>Errors</a>
-					</li>
-					<li class=" tsd-kind-enum tsd-is-external">
-						<a href="../enums/httpredirect.html" class="tsd-kind-icon">Http<wbr>Redirect</a>
-					</li>
-					<li class=" tsd-kind-enum tsd-is-external">
-						<a href="../enums/httpservererrors.html" class="tsd-kind-icon">Http<wbr>Server<wbr>Errors</a>
-					</li>
-					<li class=" tsd-kind-enum tsd-is-external">
-						<a href="../enums/httpsuccess.html" class="tsd-kind-icon">Http<wbr>Success</a>
-					</li>
-					<li class=" tsd-kind-class tsd-is-external">
-						<a href="baseerror.html" class="tsd-kind-icon">Base<wbr>Error</a>
-					</li>
-					<li class=" tsd-kind-class tsd-is-external">
-						<a href="baseerrordetails.html" class="tsd-kind-icon">Base<wbr>Error<wbr>Details</a>
-					</li>
 				</ul>
 				<ul class="current">
 					<li class="current tsd-kind-class tsd-is-external">
-						<a href="basejob.html" class="tsd-kind-icon">Base<wbr>Job</a>
+						<a href="requestcomponent.html" class="tsd-kind-icon">Request<wbr>Component</a>
 						<ul>
 							<li class=" tsd-kind-constructor tsd-parent-kind-class tsd-is-external">
-								<a href="basejob.html#constructor" class="tsd-kind-icon">constructor</a>
+								<a href="requestcomponent.html#constructor" class="tsd-kind-icon">constructor</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-protected tsd-is-external">
+								<a href="requestcomponent.html#logger" class="tsd-kind-icon">logger</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-external">
-								<a href="basejob.html#name" class="tsd-kind-icon">name</a>
+								<a href="requestcomponent.html#options" class="tsd-kind-icon">options</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-external">
-								<a href="basejob.html#options" class="tsd-kind-icon">options</a>
+								<a href="requestcomponent.html#type" class="tsd-kind-icon">type</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-external">
-								<a href="basejob.html#run" class="tsd-kind-icon">run</a>
+								<a href="requestcomponent.html#describe" class="tsd-kind-icon">describe</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-external">
+								<a href="requestcomponent.html#oninit" class="tsd-kind-icon">on<wbr>Init</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-external">
+								<a href="requestcomponent.html#onmount" class="tsd-kind-icon">on<wbr>Mount</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-external">
+								<a href="requestcomponent.html#onunmount" class="tsd-kind-icon">on<wbr>Unmount</a>
 							</li>
 						</ul>
 					</li>
 				</ul>
 				<ul class="after-current">
-					<li class=" tsd-kind-class tsd-is-external">
-						<a href="errorreporter.html" class="tsd-kind-icon">Error<wbr>Reporter</a>
-					</li>
-					<li class=" tsd-kind-class tsd-is-external">
-						<a href="filterswrapper.html" class="tsd-kind-icon">Filters<wbr>Wrapper</a>
-					</li>
-					<li class=" tsd-kind-class tsd-is-external">
-						<a href="httperror.html" class="tsd-kind-icon">Http<wbr>Error</a>
-					</li>
-					<li class=" tsd-kind-class tsd-is-external">
-						<a href="server.html" class="tsd-kind-icon">Server</a>
-					</li>
-					<li class=" tsd-kind-class tsd-is-external">
-						<a href="serverrouter.html" class="tsd-kind-icon">Server<wbr>Router</a>
-					</li>
-					<li class=" tsd-kind-class tsd-is-external">
-						<a href="simplelogger.html" class="tsd-kind-icon">Simple<wbr>Logger</a>
-					</li>
-					<li class=" tsd-kind-interface tsd-is-external">
-						<a href="../interfaces/basecontroller.html" class="tsd-kind-icon">Base<wbr>Controller</a>
-					</li>
-					<li class=" tsd-kind-interface tsd-is-external">
-						<a href="../interfaces/baserequest.html" class="tsd-kind-icon">Base<wbr>Request</a>
-					</li>
-					<li class=" tsd-kind-interface tsd-is-external">
-						<a href="../interfaces/baseresponse.html" class="tsd-kind-icon">Base<wbr>Response</a>
-					</li>
-					<li class=" tsd-kind-interface tsd-is-external">
-						<a href="../interfaces/errordefinitions.html" class="tsd-kind-icon">Error<wbr>Definitions</a>
-					</li>
-					<li class=" tsd-kind-interface tsd-is-external">
-						<a href="../interfaces/errorreporteroptions.html" class="tsd-kind-icon">Error<wbr>Reporter<wbr>Options</a>
-					</li>
-					<li class=" tsd-kind-interface tsd-is-external">
-						<a href="../interfaces/sentrytransportoptions.html" class="tsd-kind-icon">Sentry<wbr>Transport<wbr>Options</a>
-					</li>
-					<li class=" tsd-kind-interface tsd-is-external">
-						<a href="../interfaces/serveroptions.html" class="tsd-kind-icon">Server<wbr>Options</a>
-					</li>
-					<li class=" tsd-kind-interface tsd-is-external">
-						<a href="../interfaces/serverrouteroptions.html" class="tsd-kind-icon">Server<wbr>Router<wbr>Options</a>
-					</li>
-					<li class=" tsd-kind-interface tsd-is-external">
-						<a href="../interfaces/simpleloggeroptions.html" class="tsd-kind-icon">Simple<wbr>Logger<wbr>Options</a>
-					</li>
-					<li class=" tsd-kind-type-alias tsd-is-external">
-						<a href="../globals.html#httpcode" class="tsd-kind-icon">Http<wbr>Code</a>
-					</li>
-					<li class=" tsd-kind-variable tsd-is-external tsd-is-not-exported">
-						<a href="../globals.html#base_ctrls_path" class="tsd-kind-icon">BASE_<wbr>CTRLS_<wbr>PATH</a>
-					</li>
-					<li class=" tsd-kind-variable tsd-is-external tsd-is-not-exported">
-						<a href="../globals.html#base_filters_path" class="tsd-kind-icon">BASE_<wbr>FILTERS_<wbr>PATH</a>
-					</li>
-					<li class=" tsd-kind-variable tsd-is-external">
-						<a href="../globals.html#delete" class="tsd-kind-icon">Delete</a>
-					</li>
-					<li class=" tsd-kind-variable tsd-is-external">
-						<a href="../globals.html#get" class="tsd-kind-icon">Get</a>
-					</li>
-					<li class=" tsd-kind-variable tsd-is-external tsd-is-not-exported">
-						<a href="../globals.html#logger" class="tsd-kind-icon">Logger</a>
-					</li>
-					<li class=" tsd-kind-variable tsd-is-external">
-						<a href="../globals.html#post" class="tsd-kind-icon">Post</a>
-					</li>
-					<li class=" tsd-kind-variable tsd-is-external">
-						<a href="../globals.html#put" class="tsd-kind-icon">Put</a>
-					</li>
-					<li class=" tsd-kind-variable tsd-is-external tsd-is-not-exported">
-						<a href="../globals.html#sentry_release" class="tsd-kind-icon">SENTRY_<wbr>RELEASE</a>
-					</li>
-					<li class=" tsd-kind-variable tsd-is-external tsd-is-not-exported">
-						<a href="../globals.html#ctrl_path" class="tsd-kind-icon">ctrl_<wbr>path</a>
-					</li>
-					<li class=" tsd-kind-variable tsd-is-external tsd-is-not-exported">
-						<a href="../globals.html#filter_path" class="tsd-kind-icon">filter_<wbr>path</a>
-					</li>
-					<li class=" tsd-kind-function tsd-is-external">
-						<a href="../globals.html#controller" class="tsd-kind-icon">Controller</a>
-					</li>
-					<li class=" tsd-kind-function tsd-is-external">
-						<a href="../globals.html#asyncmiddleware" class="tsd-kind-icon">async<wbr>Middleware</a>
-					</li>
-					<li class=" tsd-kind-function tsd-is-external">
-						<a href="../globals.html#legacyparams" class="tsd-kind-icon">legacy<wbr>Params</a>
-					</li>
-					<li class=" tsd-kind-function tsd-is-external tsd-is-not-exported">
-						<a href="../globals.html#routedecoratorfactory" class="tsd-kind-icon">route<wbr>Decorator<wbr>Factory</a>
-					</li>
 				</ul>
 			</nav>
 		</div>

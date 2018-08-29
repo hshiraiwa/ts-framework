@@ -1,7 +1,7 @@
-import * as express from 'express';
-import { LoggerInstance } from 'winston';
-import { BaseRequest } from '../..';
-import { BaseResponse } from '../helpers/response';
+import * as express from "express";
+import { LoggerInstance } from "winston";
+import { BaseRequest } from "../..";
+import { BaseResponse } from "../helpers/response";
 export interface RouterOptions {
     logger?: LoggerInstance;
     app?: express.Application;
@@ -10,8 +10,8 @@ export interface RouterOptions {
         filters?: string;
     };
 }
-export declare type Route = ((req: BaseRequest, res: BaseResponse) => (any | Promise<any>));
-export declare type Filter = ((req: BaseRequest, res: BaseResponse, next: Function) => (any | Promise<any>));
+export declare type Route = ((req: BaseRequest, res: BaseResponse) => any | Promise<any>);
+export declare type Filter = ((req: BaseRequest, res: BaseResponse, next: Function) => any | Promise<any>);
 export declare type RouteDefs = {
     controller: string | Route;
     filters?: (string | Filter)[];

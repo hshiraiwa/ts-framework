@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>HttpRedirect | ts-framework (v2.1.1)</title>
+	<title>RouterOptions | ts-framework (v2.1.1)</title>
 	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
@@ -56,62 +56,81 @@
 					<a href="../globals.html">Globals</a>
 				</li>
 				<li>
-					<a href="httpredirect.html">HttpRedirect</a>
+					<a href="routeroptions.html">RouterOptions</a>
 				</li>
 			</ul>
-			<h1>Enumeration HttpRedirect</h1>
+			<h1>Interface RouterOptions</h1>
 		</div>
 	</div>
 </header>
 <div class="container container-main">
 	<div class="row">
 		<div class="col-8 col-content">
+			<section class="tsd-panel tsd-hierarchy">
+				<h3>Hierarchy</h3>
+				<ul class="tsd-hierarchy">
+					<li>
+						<span class="target">RouterOptions</span>
+					</li>
+				</ul>
+			</section>
 			<section class="tsd-panel-group tsd-index-group">
 				<h2>Index</h2>
 				<section class="tsd-panel tsd-index-panel">
 					<div class="tsd-index-content">
 						<section class="tsd-index-section tsd-is-external">
-							<h3>Enumeration members</h3>
+							<h3>Properties</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-enum-member tsd-parent-kind-enum tsd-is-external"><a href="httpredirect.html#moved_permanently" class="tsd-kind-icon">MOVED_<wbr>PERMANENTLY</a></li>
-								<li class="tsd-kind-enum-member tsd-parent-kind-enum tsd-is-external"><a href="httpredirect.html#not_modified" class="tsd-kind-icon">NOT_<wbr>MODIFIED</a></li>
-								<li class="tsd-kind-enum-member tsd-parent-kind-enum tsd-is-external"><a href="httpredirect.html#temporary_redirect" class="tsd-kind-icon">TEMPORARY_<wbr>REDIRECT</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-external"><a href="routeroptions.html#app" class="tsd-kind-icon">app</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-external"><a href="routeroptions.html#logger" class="tsd-kind-icon">logger</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-external"><a href="routeroptions.html#path" class="tsd-kind-icon">path</a></li>
 							</ul>
 						</section>
 					</div>
 				</section>
 			</section>
 			<section class="tsd-panel-group tsd-member-group tsd-is-external">
-				<h2>Enumeration members</h2>
-				<section class="tsd-panel tsd-member tsd-kind-enum-member tsd-parent-kind-enum tsd-is-external">
-					<a name="moved_permanently" class="tsd-anchor"></a>
-					<h3>MOVED_<wbr>PERMANENTLY</h3>
-					<div class="tsd-signature tsd-kind-icon">MOVED_<wbr>PERMANENTLY<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol"> =&nbsp;301</span></div>
+				<h2>Properties</h2>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-external">
+					<a name="app" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> app</h3>
+					<div class="tsd-signature tsd-kind-icon">app<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">express.Application</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/nxtep-io/ts-framework/blob/1da61c3/lib/error/http/HttpCode.ts#L6">error/http/HttpCode.ts:6</a></li>
+							<li>Defined in <a href="https://github.com/nxtep-io/ts-framework/blob/1da61c3/lib/components/router/router.ts#L20">components/router/router.ts:20</a></li>
 						</ul>
 					</aside>
 				</section>
-				<section class="tsd-panel tsd-member tsd-kind-enum-member tsd-parent-kind-enum tsd-is-external">
-					<a name="not_modified" class="tsd-anchor"></a>
-					<h3>NOT_<wbr>MODIFIED</h3>
-					<div class="tsd-signature tsd-kind-icon">NOT_<wbr>MODIFIED<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol"> =&nbsp;403</span></div>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-external">
+					<a name="logger" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> logger</h3>
+					<div class="tsd-signature tsd-kind-icon">logger<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">LoggerInstance</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/nxtep-io/ts-framework/blob/1da61c3/lib/error/http/HttpCode.ts#L8">error/http/HttpCode.ts:8</a></li>
+							<li>Defined in <a href="https://github.com/nxtep-io/ts-framework/blob/1da61c3/lib/components/router/router.ts#L19">components/router/router.ts:19</a></li>
 						</ul>
 					</aside>
 				</section>
-				<section class="tsd-panel tsd-member tsd-kind-enum-member tsd-parent-kind-enum tsd-is-external">
-					<a name="temporary_redirect" class="tsd-anchor"></a>
-					<h3>TEMPORARY_<wbr>REDIRECT</h3>
-					<div class="tsd-signature tsd-kind-icon">TEMPORARY_<wbr>REDIRECT<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol"> =&nbsp;302</span></div>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-external">
+					<a name="path" class="tsd-anchor"></a>
+					<h3>path</h3>
+					<div class="tsd-signature tsd-kind-icon">path<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">object</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/nxtep-io/ts-framework/blob/1da61c3/lib/error/http/HttpCode.ts#L7">error/http/HttpCode.ts:7</a></li>
+							<li>Defined in <a href="https://github.com/nxtep-io/ts-framework/blob/1da61c3/lib/components/router/router.ts#L21">components/router/router.ts:21</a></li>
 						</ul>
 					</aside>
+					<div class="tsd-type-declaration">
+						<h4>Type declaration</h4>
+						<ul class="tsd-parameters">
+							<li class="tsd-parameter">
+								<h5><span class="tsd-flag ts-flagOptional">Optional</span> controllers<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span></h5>
+							</li>
+							<li class="tsd-parameter">
+								<h5><span class="tsd-flag ts-flagOptional">Optional</span> filters<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span></h5>
+							</li>
+						</ul>
+					</div>
 				</section>
 			</section>
 		</div>
@@ -127,17 +146,17 @@
 				<ul class="before-current">
 				</ul>
 				<ul class="current">
-					<li class="current tsd-kind-enum tsd-is-external">
-						<a href="httpredirect.html" class="tsd-kind-icon">Http<wbr>Redirect</a>
+					<li class="current tsd-kind-interface tsd-is-external">
+						<a href="routeroptions.html" class="tsd-kind-icon">Router<wbr>Options</a>
 						<ul>
-							<li class=" tsd-kind-enum-member tsd-parent-kind-enum tsd-is-external">
-								<a href="httpredirect.html#moved_permanently" class="tsd-kind-icon">MOVED_<wbr>PERMANENTLY</a>
+							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-external">
+								<a href="routeroptions.html#app" class="tsd-kind-icon">app</a>
 							</li>
-							<li class=" tsd-kind-enum-member tsd-parent-kind-enum tsd-is-external">
-								<a href="httpredirect.html#not_modified" class="tsd-kind-icon">NOT_<wbr>MODIFIED</a>
+							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-external">
+								<a href="routeroptions.html#logger" class="tsd-kind-icon">logger</a>
 							</li>
-							<li class=" tsd-kind-enum-member tsd-parent-kind-enum tsd-is-external">
-								<a href="httpredirect.html#temporary_redirect" class="tsd-kind-icon">TEMPORARY_<wbr>REDIRECT</a>
+							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-external">
+								<a href="routeroptions.html#path" class="tsd-kind-icon">path</a>
 							</li>
 						</ul>
 					</li>
