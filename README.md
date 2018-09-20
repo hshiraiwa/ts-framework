@@ -93,9 +93,12 @@ Database providers:
 
     MySQL / Postgres database layer based on Typeorm. Currently in public BETA.
 
+
+Database Utilities:
+
 - **[ts-framework-migration](https://gitlab.devnup.com/npm/ts-framework-migration)**
 
-    Advanced usage plugin for handling Schema migrations safely within production environments.
+    Agnostic plugin for handling database migrations safely within production environments.
    
 
 Other external plugins and middlewares for this framework
