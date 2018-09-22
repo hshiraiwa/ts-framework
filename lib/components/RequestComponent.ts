@@ -33,7 +33,20 @@ export default class RequestComponent implements Component {
   public onMount(server: Server) {
     // Prepare body size limit
     if (this.options.bodyLimit) {
-      server.app.use(bodyParser({ limit: this.options.bodyLimit }));
+      // JSON body
+      server.app.use(
+        bodyParser.json({
+          limit: this.options.bodyLimit
+        })
+      );
+
+      // Urlencoded body
+      server.app.use(
+        bodyParser.urlencoded({
+          limit: this.options.bodyLimit,
+          extended: true
+        })
+      );
     }
 
     // Handle multer middleware
