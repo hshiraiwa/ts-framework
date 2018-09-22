@@ -14,9 +14,9 @@ describe('api.MainServer', () => {
       .expect('Content-Type', /json/)
       .expect(200);
 
-      expect(responseWithoutListen.body.name).toBe(Package.name);
-      expect(responseWithoutListen.body.version).toBe(Package.version);
-      expect(responseWithoutListen.body.uptime).toBe(0);
+    expect(responseWithoutListen.body.name).toBe(Package.name);
+    expect(responseWithoutListen.body.version).toBe(Package.version);
+    expect(responseWithoutListen.body.uptime).toBe(0);
 
     // Starts listening on server port
     await server.listen();
@@ -31,5 +31,14 @@ describe('api.MainServer', () => {
     expect(response.body.uptime).toBeGreaterThan(0);
 
     await server.close();
+  });
+
+  it('should respond to a simple hello request with static property', async () => {
+    const server = new MainServer();
+
+    // Perform a simple request to get a 200 response
+    await request(server.app).get('/hello')
+      .expect('Content-Type', /json/)
+      .expect(200, { foo: 'bar' });
   });
 });

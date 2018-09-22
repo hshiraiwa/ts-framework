@@ -163,7 +163,6 @@ export default class ServerRouter {
         if (routes[r].filters && routes[r].filters.length) {
           // Validate all filters
           if (routes[r].filters.filter(f => !f).length > 0) {
-            console.log(routes[r].filters);
             throw new Error("Invalid filters for route: " + method.toUpperCase() + " " + r);
           }
 
