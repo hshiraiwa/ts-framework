@@ -1,7 +1,7 @@
 ts-framework
 ============
 
-[![Build Status](https://travis-ci.org/devnup/ts-framework.svg?branch=master)](https://travis-ci.org/devnup/ts-framework) &nbsp; [![Coverage Status](https://coveralls.io/repos/github/devnup/ts-framework/badge.svg?branch=master)](https://coveralls.io/github/devnup/ts-framework?branch=master)
+[![Build Status](https://travis-ci.org/nxtep-io/ts-framework.svg?branch=master)](https://travis-ci.org/nxtep-io/ts-framework) &nbsp; [![Coverage Status](https://coveralls.io/repos/github/nxtep-io/ts-framework/badge.svg?branch=master)](https://coveralls.io/github/nxtep-io/ts-framework?branch=master)
 
 A minimalistic framework for typescript based applications, with async/await and decorators support.
 
@@ -18,10 +18,10 @@ For example:
 
 ```bash
 # Install using Yarn
-yarn add git+https://github.com/devnup/ts-framework.git#GIT_REV_HASH 
+yarn add git+https://github.com/nxtep-io/ts-framework.git#GIT_REV_HASH 
 
 # Install using NPM
-npm install --save git+https://github.com/devnup/ts-framework.git#GIT_REV_HASH 
+npm install --save git+https://github.com/nxtep-io/ts-framework.git#GIT_REV_HASH 
 ``` 
 
 ### TL;DR - A single file server
@@ -85,15 +85,15 @@ External components available as built-in middlewares:
 
 Other external plugins and middlewares for this framework
 
-- **[ts-framework-versioning](https://github.com/devnup/ts-framework-versioning)**
+- **[ts-framework-versioning](https://github.com/nxtep-io/ts-framework-versioning)**
 
     Handles API versioning using HTTP Headers.
     
-- **[ts-framework-notification](https://github.com/devnup/ts-framework-notification)**
+- **[ts-framework-notification](https://github.com/nxtep-io/ts-framework-notification)**
 
     Handles transactional notifications using SMTP (email templates) and Firebase Messaging (push notifications).
 
-- **[ts-framework-migration](https://gitlab.devnup.com/npm/ts-framework-migration)**
+- **[ts-framework-migration](https://github.com/nxtep-io/ts-framework-migration)**
 
     Advanced usage plugin for handling Schema migrations safely within production environments.
 
@@ -116,7 +116,7 @@ Other external plugins and middlewares for this framework
 
 ## Documentation
 
-Checkout the rendered TS Docs in the official page: [https://devnup.github.io/ts-framework/](https://devnup.github.io/ts-framework/)
+Checkout the rendered TS Docs in the official page: [https://nxtep-io.github.io/ts-framework/](https://nxtep-io.github.io/ts-framework/)
 
 To generate the Typedoc reference of the available modules directly from source, run the following command:
 
