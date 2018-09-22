@@ -67,9 +67,11 @@ describe("lib.Server", () => {
   it("GET /decorated (200)", async () => {
     @Controller("/test")
     class TestController {
+      static foo = "bar";
+
       @Get("/status")
       static status(req, res) {
-        return res.success({ status: "ok" });
+        return res.success({ status: "ok", foo: this.foo });
       }
     }
 
@@ -87,7 +89,8 @@ describe("lib.Server", () => {
       .get("/test/status")
       .expect("Content-Type", /json/)
       .expect(200, {
-        status: "ok"
+        status: "ok",
+        foo: "bar"
       });
   });
 

@@ -1,4 +1,4 @@
-import { BaseController } from './controller';
+import { BaseController } from "./controller";
 
 /* Simple factory for generating the routes decorators */
 const routeDecoratorFactory = (method): Function => {
@@ -8,7 +8,7 @@ const routeDecoratorFactory = (method): Function => {
       target.routes[method] = target.routes[method] || {};
       target.routes[method][route] = {
         filters,
-        controller: target[key],
+        controller: target[key].bind(target)
       };
       return descriptor;
     };
@@ -42,7 +42,7 @@ export const Controller = (route?: string, filters: Function[] = []) => {
  * @param {string} route The route to be assigned to the decorated method.
  * @param {Function[]} filters The filters to be called before the decorated method.
  */
-export const Get = routeDecoratorFactory('get');
+export const Get = routeDecoratorFactory("get");
 
 /**
  * The @Post route decorator.
@@ -52,7 +52,7 @@ export const Get = routeDecoratorFactory('get');
  * @param {string} route The route to be assigned to the decorated method.
  * @param {Function[]} filters The filters to be called before the decorated method.
  */
-export const Post = routeDecoratorFactory('post');
+export const Post = routeDecoratorFactory("post");
 
 /**
  * The @Put route decorator.
@@ -62,7 +62,7 @@ export const Post = routeDecoratorFactory('post');
  * @param {string} route The route to be assigned to the decorated method.
  * @param {Function[]} filters The filters to be called before the decorated method.
  */
-export const Put = routeDecoratorFactory('put');
+export const Put = routeDecoratorFactory("put");
 
 /**
  * The @Delete route decorator.
@@ -72,4 +72,4 @@ export const Put = routeDecoratorFactory('put');
  * @param {string} route The route to be assigned to the decorated method.
  * @param {Function[]} filters The filters to be called before the decorated method.
  */
-export const Delete = routeDecoratorFactory('delete');
+export const Delete = routeDecoratorFactory("delete");
