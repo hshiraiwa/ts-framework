@@ -17,11 +17,17 @@ describe("lib.server.helpers.response", () => {
   });
 
   it("should send successful responses", async () => {
-    expect.assertions(1);
+    expect.assertions(2);
+
+    function circular() {
+      this.payload = "test";
+      this.circular = this;
+    }
 
     app.get("/empty", (req, res) => res.success());
     app.get("/test", (req, res) => res.success({ test: "ok" }));
     app.get("/tests", (req, res) => res.success([{ test: "ok" }, { toJSON: () => ({ test: "ok" }) }]));
+    app.get("/circular-test", (req, res) => res.success(new circular()));
 
     // Perform a simple empty request to get a 200 response
     await request(app)
@@ -41,6 +47,13 @@ describe("lib.server.helpers.response", () => {
       .expect("Content-Type", /json/)
       .expect(200)
       .then(response => expect(response.body).toHaveProperty("length", 2));
+
+    // Perform a request to get a 200 response with a circular reference
+    await request(app)
+      .get("/circular-test")
+      .expect("Content-Type", /json/)
+      .expect(200)
+      .then(response => expect(response.body).toHaveProperty("payload", "test"));
   });
 
   it("should send error responses", async () => {
