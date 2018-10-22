@@ -9,6 +9,8 @@ export interface ServerOptions extends BaseServerOptions {
 
   /* Logger options */
   logger?: Logger;
+
+  /* Sentry options */
   sentry?: {
     dsn: string;
   };

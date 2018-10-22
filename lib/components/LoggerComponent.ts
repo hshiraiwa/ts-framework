@@ -1,4 +1,4 @@
-import * as Raven from "raven";
+import * as Sentry from "@sentry/node";
 import * as Git from "git-rev-sync";
 import { Logger, ComponentOptions, Component, ComponentType } from "ts-framework-common";
 import Server from "../server";
@@ -37,14 +37,13 @@ export default class LoggerComponent implements Component {
       this.logger.silly("Initializing server middleware: Sentry");
 
       // Prepare raven instance configuration
-      server.raven = Raven.config(this.options.sentry.dsn, {
-        autoBreadcrumbs: true,
-        logger: "ts-framework-logger",
+      Sentry.init({
+        ...this.options.sentry,
         release: SENTRY_RELEASE
-      }).install();
+      });
 
       // Registers the Raven express middleware
-      server.app.use(Raven.requestHandler());
+      server.app.use(Sentry.Handlers.requestHandler());
     }
 
     // Enable the logger middleware

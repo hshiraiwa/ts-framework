@@ -1,26 +1,31 @@
-import * as Raven from "raven";
+import * as Sentry from "@sentry/node";
 import * as express from "express";
-import { BaseServer, Component, Logger } from "ts-framework-common";
+import { BaseServer, Logger } from "ts-framework-common";
 import { BaseRequest } from "../base/BaseRequest";
 import { BaseResponse } from "../base/BaseResponse";
+import { LoggerComponent, RequestComponent, RouterComponent, SecurityComponent } from "../components";
 import { Controller, Delete, Get, Post, Put } from "../components/router";
 import HttpCode from "../error/http/HttpCode";
 import HttpError from "../error/http/HttpError";
 import { ServerOptions } from "./config";
-import { LoggerComponent, RequestComponent, RouterComponent, SecurityComponent } from "../components";
 
 export { BaseRequest, BaseResponse, Controller, Get, Post, Put, Delete, HttpCode, HttpError, ServerOptions };
 
 export default class Server extends BaseServer {
   public app: express.Application;
-  public raven?: Raven.Client;
   public logger: Logger;
   protected server?: any;
+  public sentry?: Sentry.NodeClient;
 
   constructor(public options: ServerOptions, app?: express.Application) {
     super(options);
     this.app = app || express();
     this.logger = options.logger || Logger.getInstance();
+
+    if (options.sentry) {
+      Sentry.init(options.sentry);
+    }
+
     this.component(
       new LoggerComponent({
         logger: this.options.logger,

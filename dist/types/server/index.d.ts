@@ -1,4 +1,4 @@
-import * as Raven from "raven";
+import * as Sentry from "@sentry/node";
 import * as express from "express";
 import { BaseServer, Logger } from "ts-framework-common";
 import { BaseRequest } from "../base/BaseRequest";
@@ -11,9 +11,9 @@ export { BaseRequest, BaseResponse, Controller, Get, Post, Put, Delete, HttpCode
 export default class Server extends BaseServer {
     options: ServerOptions;
     app: express.Application;
-    raven?: Raven.Client;
     logger: Logger;
     protected server?: any;
+    sentry?: Sentry.NodeClient;
     constructor(options: ServerOptions, app?: express.Application);
     onMount(): void;
     onInit(): Promise<void>;

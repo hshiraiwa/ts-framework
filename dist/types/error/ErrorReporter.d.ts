@@ -1,8 +1,8 @@
-import * as Raven from 'raven';
+import * as Sentry from '@sentry/node';
 import { BaseRequest, BaseResponse } from '../components/helpers/response';
 import { Logger } from 'ts-framework-common';
 export interface ErrorReporterOptions {
-    raven?: Raven.Client;
+    sentry?: Sentry.NodeClient;
     logger?: Logger;
 }
 export interface ErrorDefinitions {

@@ -86,7 +86,7 @@ export default class RouterComponent implements Component {
 
     errorMiddleware(this.options.errors, {
       logger: this.logger,
-      raven: this.options.sentry ? server.raven : undefined
+      sentry: this.options.sentry ? server.sentry : undefined
     })(server.app);
   }
 

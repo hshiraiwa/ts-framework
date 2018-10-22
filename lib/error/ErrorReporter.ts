@@ -1,11 +1,11 @@
-import * as Raven from 'raven';
-import { BaseRequest, BaseResponse } from '../components/helpers/response';
-import { Logger } from 'ts-framework-common';
-import { HttpServerErrors } from './http/HttpCode';
-import HttpError from './http/HttpError';
+import * as Sentry from "@sentry/node";
+import { BaseRequest, BaseResponse } from "../components/helpers/response";
+import { Logger } from "ts-framework-common";
+import { HttpServerErrors } from "./http/HttpCode";
+import HttpError from "./http/HttpError";
 
 export interface ErrorReporterOptions {
-  raven?: Raven.Client;
+  sentry?: Sentry.NodeClient;
   logger?: Logger;
 }
 
@@ -39,15 +39,15 @@ export class ErrorReporter {
     // Build error instance
     const error = new HttpError(`The resource was not found: ${req.method.toUpperCase()} ${req.originalUrl}`, 404, {
       method: req.method,
-      originalUrl: req.originalUrl,
+      originalUrl: req.originalUrl
     });
 
     // Send to Sentry if available
-    if (this.options.raven) {
-      this.options.raven.captureException(error, {
+    if (this.options.sentry) {
+      this.options.sentry.captureException(error, {
         req,
-        level: 'warning',
-        tags: { stackId: error.stackId },
+        level: "warning",
+        tags: { stackId: error.stackId }
       } as any);
     }
 
@@ -69,17 +69,17 @@ export class ErrorReporter {
       serverError = error as HttpError;
     } else {
       serverError = new HttpError(error.message, error.status || HttpServerErrors.INTERNAL_SERVER_ERROR, {
-        code: error.code ? error.code : undefined,
+        code: error.code ? error.code : undefined
       });
       serverError.stack = error.stack || serverError.stack;
     }
 
     // Send to Sentry if available
-    if (this.options.raven) {
-      this.options.raven.captureException(serverError, {
+    if (this.options.sentry) {
+      this.options.sentry.captureException(serverError, {
         req,
-        level: serverError.status >= 500 ? 'error' : 'warning',
-        tags: { stackId: serverError.stackId },
+        level: serverError.status >= 500 ? "error" : "warning",
+        tags: { stackId: serverError.stackId }
       } as any);
     }
 
