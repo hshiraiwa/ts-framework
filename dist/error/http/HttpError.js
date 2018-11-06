@@ -1,0 +1,14 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+const ts_framework_common_1 = require("ts-framework-common");
+class HttpError extends ts_framework_common_1.BaseError {
+    constructor(message, status, details = {}) {
+        super(`[${status}] ${message}`, details);
+        this.status = status;
+    }
+    toObject() {
+        return Object.assign({ status: this.status }, super.toObject());
+    }
+}
+exports.default = HttpError;
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiSHR0cEVycm9yLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsiLi4vLi4vLi4vbGliL2Vycm9yL2h0dHAvSHR0cEVycm9yLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7O0FBQUEsNkRBQWdEO0FBSWhELE1BQXFCLFNBQVUsU0FBUSwrQkFBUztJQUc5QyxZQUFZLE9BQU8sRUFBRSxNQUFnQixFQUFFLFVBQWtCLEVBQUU7UUFDekQsS0FBSyxDQUFDLElBQUksTUFBTSxLQUFLLE9BQU8sRUFBRSxFQUFFLE9BQU8sQ0FBQyxDQUFDO1FBQ3pDLElBQUksQ0FBQyxNQUFNLEdBQUcsTUFBTSxDQUFDO0lBQ3ZCLENBQUM7SUFFTSxRQUFRO1FBQ2IsdUJBQ0UsTUFBTSxFQUFFLElBQUksQ0FBQyxNQUFNLElBQ2hCLEtBQUssQ0FBQyxRQUFRLEVBQUUsRUFDbkI7SUFDSixDQUFDO0NBQ0Y7QUFkRCw0QkFjQyIsInNvdXJjZXNDb250ZW50IjpbImltcG9ydCB7IEJhc2VFcnJvciB9IGZyb20gJ3RzLWZyYW1ld29yay1jb21tb24nO1xuaW1wb3J0IHsgSHR0cENvZGUgfSBmcm9tICcuL0h0dHBDb2RlJztcblxuXG5leHBvcnQgZGVmYXVsdCBjbGFzcyBIdHRwRXJyb3IgZXh0ZW5kcyBCYXNlRXJyb3Ige1xuICBzdGF0dXM6IEh0dHBDb2RlO1xuXG4gIGNvbnN0cnVjdG9yKG1lc3NhZ2UsIHN0YXR1czogSHR0cENvZGUsIGRldGFpbHM6IG9iamVjdCA9IHt9KSB7XG4gICAgc3VwZXIoYFske3N0YXR1c31dICR7bWVzc2FnZX1gLCBkZXRhaWxzKTtcbiAgICB0aGlzLnN0YXR1cyA9IHN0YXR1cztcbiAgfVxuXG4gIHB1YmxpYyB0b09iamVjdCgpOiBhbnkge1xuICAgIHJldHVybiB7XG4gICAgICBzdGF0dXM6IHRoaXMuc3RhdHVzLFxuICAgICAgLi4uc3VwZXIudG9PYmplY3QoKSxcbiAgICB9O1xuICB9XG59XG4iXX0=

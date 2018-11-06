@@ -1,0 +1,23 @@
+
+
+TS Framework Console
+====================
+
+Usage: 
+
+  - help()            Displays the REPL help
+  - clear()           Clears the REPL console
+
+
+  # Server
+
+  server              The current server instance
+
+
+  # Database (If available)
+
+  MainDatabase        The current database instance
+
+  All registered models will be available in the global scope.
+
+  

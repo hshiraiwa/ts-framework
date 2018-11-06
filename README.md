@@ -8,10 +8,10 @@ A minimalistic framework for typescript based applications, with async/await and
 
 ## Getting Started
 
-### Release Candidate Disclaimer
+### Alpha Disclaimer
 
-The current API is considered to be a "Release Candidate". That means that small, potentially breaking 
-changes may still occur. Be sure to use a specific GIT_REV_HASH and a lock file in your project, so you
+The current API is considered to be an "Alpha Release" of the v2 branch. That means that big, probably breaking 
+changes are expected. Be sure to use a specific GIT_REV_HASH and a lock file in your project, so you
 won't be immediately affected by such a change.
 
 For example:
@@ -66,7 +66,6 @@ Database and user authentication samples.
 Internal components:
 
 - Logger (backed by [winston](https://npmjs.org/package/winston))
-- Database (backed by [Mongoose](https://npmjs.org/package/mongoose))
 - Router (backed by [Express](https://npmjs.org/package/express))
   - **Controllers:** Classes for handling API calls with decorators and async/await support
   - **Filters:** Middlewares for body validation, permission handling and other interception routines
@@ -83,6 +82,25 @@ External components available as built-in middlewares:
 - Method Override (express/method-override)
 - Cookie Parser (express/cookie-parser)
 
+
+Database providers:
+
+- **[ts-framework-mongo](https://github.com/nxtep-io/ts-framework-mongo)**
+
+    MongoDB layer based on MongooseJS.
+
+- **[ts-framework-sql](https://github.com/nxtep-io/ts-framework-sql)**
+
+    MySQL / Postgres database layer based on Typeorm. Currently in public BETA.
+
+
+Database Utilities:
+
+- **[ts-framework-migration](https://gitlab.devnup.com/npm/ts-framework-migration)**
+
+    Agnostic plugin for handling database migrations safely within production environments.
+   
+
 Other external plugins and middlewares for this framework
 
 - **[ts-framework-versioning](https://github.com/nxtep-io/ts-framework-versioning)**
@@ -93,25 +111,17 @@ Other external plugins and middlewares for this framework
 
     Handles transactional notifications using SMTP (email templates) and Firebase Messaging (push notifications).
 
-- **[ts-framework-migration](https://github.com/nxtep-io/ts-framework-migration)**
-
-    Advanced usage plugin for handling Schema migrations safely within production environments.
-
 - **[ts-framework-sockets](https://github.com/nxtep-io/ts-framework-sockets)**
 
-    Socket.io layer over the TS-Framework. Currently in public alpha.
+    Socket.io layer over the TS-Framework. Currently in public BETA.
 
 - **ts-framework-queue (coming soon)**
 
-    Redis based task rotation queue services. Currently in closed alpha.
+    RabbitMQ based task rotation queue services. Currently in closed alpha.
 
 - **ts-framework-cache (coming soon)**
 
     Redis based cache services for performance. Currently in closed alpha.
-
-- **[ts-framework-sql](https://github.com/nxtep-io/ts-framework-sql)**
-
-    MySQL / Postgres database layer based on TypeORM. Currently in  alpha.
 
 
 ## Documentation
@@ -125,6 +135,14 @@ yarn run docs
 ```
 
 Then check the documentation at `./docs/index.html`.
+
+## Migration Guide
+
+This migration is a draft.
+
+The v2 breaking changes are listed below:
+
+- Database layer moved to its own package
 
 
 ## License

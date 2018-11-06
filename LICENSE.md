@@ -1,6 +1,6 @@
 MIT License
 
-Copyright (c) 2017 - Devnup Consultoria em Tecnologia e Informação LTDA.
+Copyright (c) 2017 - Nxtep Consultoria em Tecnologia e Informação LTDA.
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
