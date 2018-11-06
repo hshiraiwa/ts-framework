@@ -87,11 +87,11 @@ Database providers:
 
 - **[ts-framework-mongo](https://github.com/nxtep-io/ts-framework-mongo)**
 
-    MongoDB layer based on MongooseJS.
+    MongoDB database mapping layer based on MongooseJS.
 
 - **[ts-framework-sql](https://github.com/nxtep-io/ts-framework-sql)**
 
-    MySQL / Postgres database layer based on Typeorm. Currently in public BETA.
+    MySQL / Postgres database mapping layer based on Typeorm.
 
 
 Database Utilities:
@@ -101,15 +101,27 @@ Database Utilities:
     Agnostic plugin for handling database migrations safely within production environments.
    
 
-Other external plugins and middlewares for this framework
+Other external plugins and middlewares for this framework:
+
+- **[ts-framework-validation](https://github.com/nxtep-io/ts-framework-validation)**
+
+    Minimalistic request body and param validator framework.
+
+- **[ts-framework-notification](https://github.com/nxtep-io/ts-framework-notification)**
+
+    Handles transactional notifications using SMTP (email templates), SMS (Twilio) and Firebase Messaging (push notifications).
+
+- **[ts-framework-maintenance](https://github.com/nxtep-io/ts-framework-maintenance)**
+
+    Maintenance mode middleware for blocking API requests temporarily.
 
 - **[ts-framework-versioning](https://github.com/nxtep-io/ts-framework-versioning)**
 
     Handles API versioning using HTTP Headers.
-    
-- **[ts-framework-notification](https://github.com/nxtep-io/ts-framework-notification)**
+ 
+- **[ts-framework-signing](https://github.com/nxtep-io/ts-framework-signing)**
 
-    Handles transactional notifications using SMTP (email templates) and Firebase Messaging (push notifications).
+    Handles API request signing based on HMAC SHA256 using HTTP Headers.
 
 - **[ts-framework-sockets](https://github.com/nxtep-io/ts-framework-sockets)**
 
@@ -117,7 +129,7 @@ Other external plugins and middlewares for this framework
 
 - **ts-framework-queue (coming soon)**
 
-    RabbitMQ based task rotation queue services. Currently in closed alpha.
+    RabbitMQ based queue worker services. Currently in closed alpha.
 
 - **ts-framework-cache (coming soon)**
 
