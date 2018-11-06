@@ -96,7 +96,7 @@ Database providers:
 
 Database Utilities:
 
-- **[ts-framework-migration](https://gitlab.devnup.com/npm/ts-framework-migration)**
+- **[ts-framework-migration](https://github.com/nxtep-io/ts-framework-migration)**
 
     Agnostic plugin for handling database migrations safely within production environments.
    
