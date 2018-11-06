@@ -8,10 +8,10 @@ A minimalistic framework for typescript based applications, with async/await and
 
 ## Getting Started
 
-### Alpha Disclaimer
+### Beta Disclaimer
 
-The current API is considered to be an "Alpha Release" of the v2 branch. That means that big, probably breaking 
-changes are expected. Be sure to use a specific GIT_REV_HASH and a lock file in your project, so you
+The current API is considered to be a "Beta Release" of the v2 branch. That means that small breaking changes 
+changes are still expected. Be sure to use a specific GIT_REV_HASH and a lock file in your project, so you
 won't be immediately affected by such a change.
 
 For example:
