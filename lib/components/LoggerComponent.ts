@@ -16,6 +16,7 @@ export interface LoggerComponentOptions extends ComponentOptions {
   logger?: Logger;
   sentry?: {
     dsn: string;
+    logLevel?: number;
   };
 }
 
@@ -24,7 +25,14 @@ export default class LoggerComponent implements Component {
   protected logger: Logger;
 
   constructor(public options: LoggerComponentOptions = {}) {
-    this.logger = options.logger || Logger.getInstance();
+    this.logger = options.logger || Logger.getInstance({ ...options });
+
+    // Prepare raven instance configuration
+    Sentry.init({
+      ...this.options.sentry,
+      logLevel: options.sentry.logLevel,
+      release: SENTRY_RELEASE
+    });
   }
 
   public describe() {
@@ -36,18 +44,13 @@ export default class LoggerComponent implements Component {
     if (this.logger && this.options.sentry) {
       this.logger.silly("Initializing server middleware: Sentry");
 
-      // Prepare raven instance configuration
-      Sentry.init({
-        ...this.options.sentry,
-        release: SENTRY_RELEASE
-      });
-
       // Registers the Raven express middleware
       server.app.use(Sentry.Handlers.requestHandler());
     }
 
     // Enable the logger middleware
     if (this.logger) {
+      server.logger = this.logger;
       server.app.use((req: any, res, next) => {
         req.logger = this.logger;
         next();

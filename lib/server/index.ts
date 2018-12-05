@@ -22,11 +22,8 @@ export default class Server extends BaseServer {
     this.app = app || express();
     this.logger = options.logger || Logger.getInstance();
 
-    if (options.sentry) {
-      Sentry.init(options.sentry);
-    }
-
     this.component(
+      // Sentry will be initalized in logger component
       new LoggerComponent({
         logger: this.options.logger,
         sentry: this.options.sentry
@@ -39,12 +36,27 @@ export default class Server extends BaseServer {
 
     // Adds security server components conditionally
     if (this.options.security) {
-      this.component(new SecurityComponent(this.options.security));
+      this.component(
+        new SecurityComponent({
+          logger: this.logger,
+          ...this.options.security
+        })
+      );
     }
 
     // Adds base server components
-    this.component(new RequestComponent(this.options.request));
-    this.component(new RouterComponent(this.options.router));
+    this.component(
+      new RequestComponent({
+        logger: this.logger,
+        ...this.options.request
+      })
+    );
+    this.component(
+      new RouterComponent({
+        logger: this.logger,
+        ...this.options.router
+      })
+    );
 
     // Continue with server initialization
     this.onMount();

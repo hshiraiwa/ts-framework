@@ -1,6 +1,6 @@
-import * as Sentry from '@sentry/node';
-import { BaseRequest, BaseResponse } from '../components/helpers/response';
-import { Logger } from 'ts-framework-common';
+import * as Sentry from "@sentry/node";
+import { BaseRequest, BaseResponse } from "../components/helpers/response";
+import { Logger } from "ts-framework-common";
 export interface ErrorReporterOptions {
     sentry?: Sentry.NodeClient;
     logger?: Logger;

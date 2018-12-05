@@ -1,5 +1,5 @@
 import * as Package from 'pjson';
-import { Controller, Get } from '../../../lib';
+import { Controller, Get, HttpError, HttpCode } from '../../../lib';
 import UptimeService from '../services/UptimeService';
 
 @Controller()
@@ -8,18 +8,19 @@ export default class StatusController {
 
   @Get('/')
   static async getStatus(req, res) {
+    throw new HttpError('opa', HttpCode.Server.INTERNAL_SERVER_ERROR);
     const service = UptimeService.getInstance();
     res.success({
-      name: Package.name,
-      version: Package.version,
-      environment: 'development',
+      environment: process.env.NODE_ENV || 'development',
       uptime: service.uptime(),
+      version: Package.version,
+      name: Package.name,
     });
   }
 
-  @Get('/hello')
+  @Get('/foo')
   public static hello(req, res) {
-    // Sampel of static properties
+    // Sample of static properties
     res.json({ foo: this.foo });
   }
 }
