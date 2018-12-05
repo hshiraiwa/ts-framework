@@ -28,11 +28,7 @@ export default class LoggerComponent implements Component {
     this.logger = options.logger || Logger.getInstance({ ...options });
 
     // Prepare raven instance configuration
-    Sentry.init({
-      ...this.options.sentry,
-      logLevel: options.sentry.logLevel,
-      release: SENTRY_RELEASE
-    });
+    Sentry.init({ release: SENTRY_RELEASE, ...this.options.sentry });
   }
 
   public describe() {
