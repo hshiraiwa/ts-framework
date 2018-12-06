@@ -1,22 +1,11 @@
 import * as Sentry from "@sentry/node";
-import * as Git from "git-rev-sync";
 import { Logger, ComponentOptions, Component, ComponentType } from "ts-framework-common";
 import Server from "../server";
-
-/* Generates Sentry release version based on Git repository, if available */
-const SENTRY_RELEASE = process.env.SENTRY_RELEASE
-  ? process.env.SENTRY_RELEASE
-  : (() => {
-      try {
-        return Git.long();
-      } catch (error) {}
-    })();
 
 export interface LoggerComponentOptions extends ComponentOptions {
   logger?: Logger;
   sentry?: {
     dsn: string;
-    logLevel?: number;
   };
 }
 
@@ -26,9 +15,6 @@ export default class LoggerComponent implements Component {
 
   constructor(public options: LoggerComponentOptions = {}) {
     this.logger = options.logger || Logger.getInstance({ ...options });
-
-    // Prepare raven instance configuration
-    Sentry.init({ release: SENTRY_RELEASE, ...this.options.sentry });
   }
 
   public describe() {
