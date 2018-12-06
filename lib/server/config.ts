@@ -1,4 +1,4 @@
-import { BaseServerOptions, Job, Logger } from "ts-framework-common";
+import { BaseServerOptions, Job, Logger, LoggerInstance } from "ts-framework-common";
 import { RequestComponentOptions, RouterComponentOptions, SecurityComponentOptions } from "../components";
 import ReplServer from "../repl";
 
@@ -8,7 +8,7 @@ export interface ServerOptions extends BaseServerOptions {
   repl?: ReplServer;
 
   /* Logger options */
-  logger?: Logger;
+  logger?: LoggerInstance;
 
   /* Sentry options */
   sentry?: {

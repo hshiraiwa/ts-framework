@@ -1,9 +1,10 @@
 import * as Sentry from "@sentry/node";
-import { Logger, ComponentOptions, Component, ComponentType } from "ts-framework-common";
+import { Component, ComponentOptions, ComponentType, Logger, LoggerInstance } from "ts-framework-common";
+import { SimpleLoggerOptions } from "../../node_modules/ts-framework-common/dist/types/logger/logger";
 import Server from "../server";
 
 export interface LoggerComponentOptions extends ComponentOptions {
-  logger?: Logger;
+  logger?: LoggerInstance;
   sentry?: {
     dsn: string;
   };
@@ -11,10 +12,10 @@ export interface LoggerComponentOptions extends ComponentOptions {
 
 export default class LoggerComponent implements Component {
   public type = ComponentType.MIDDLEWARE;
-  protected logger: Logger;
+  public logger: LoggerInstance;
 
   constructor(public options: LoggerComponentOptions = {}) {
-    this.logger = options.logger || Logger.getInstance({ ...options });
+    this.logger = options.logger || Logger.getInstance({ ...options } as SimpleLoggerOptions);
   }
 
   public describe() {

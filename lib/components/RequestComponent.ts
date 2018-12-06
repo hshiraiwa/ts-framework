@@ -3,11 +3,11 @@ import * as bodyParser from "body-parser";
 import * as cookieParser from "cookie-parser";
 import * as methodOverride from "method-override";
 import { legacyParams, responseBinder } from "./middlewares";
-import { Logger, Component, ComponentType, ComponentOptions } from "ts-framework-common";
+import { Logger, Component, ComponentType, ComponentOptions, LoggerInstance } from "ts-framework-common";
 import Server from "../server";
 
 export interface RequestComponentOptions extends ComponentOptions {
-  logger?: Logger;
+  logger?: LoggerInstance;
   bodyLimit?: string;
   secret?: string;
   multer?: {
@@ -20,7 +20,7 @@ export interface RequestComponentOptions extends ComponentOptions {
 
 export default class RequestComponent implements Component {
   public type: ComponentType.MIDDLEWARE;
-  protected logger: Logger;
+  public logger: LoggerInstance;
 
   constructor(public options: RequestComponentOptions = {}) {
     this.logger = options.logger || Logger.getInstance();

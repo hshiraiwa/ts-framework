@@ -1,6 +1,6 @@
 import * as Sentry from "@sentry/node";
 import * as express from "express";
-import { BaseServer, Logger } from "ts-framework-common";
+import { BaseServer, Logger, LoggerInstance } from "ts-framework-common";
 import { BaseRequest } from "../base/BaseRequest";
 import { BaseResponse } from "../base/BaseResponse";
 import { LoggerComponent, RequestComponent, RouterComponent, SecurityComponent } from "../components";
@@ -13,7 +13,7 @@ export { BaseRequest, BaseResponse, Controller, Get, Post, Put, Delete, HttpCode
 
 export default class Server extends BaseServer {
   public app: express.Application;
-  public logger: Logger;
+  public logger: LoggerInstance;
   protected server?: any;
   public sentry?: Sentry.NodeClient;
 

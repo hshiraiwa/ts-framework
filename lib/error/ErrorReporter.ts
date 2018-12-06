@@ -1,12 +1,12 @@
 import * as Sentry from "@sentry/node";
 import { BaseRequest, BaseResponse } from "../components/helpers/response";
-import { Logger } from "ts-framework-common";
+import { Logger, LoggerInstance } from "ts-framework-common";
 import { HttpServerErrors } from "./http/HttpCode";
 import HttpError from "./http/HttpError";
 
 export interface ErrorReporterOptions {
   sentry?: Sentry.NodeClient;
-  logger?: Logger;
+  logger?: LoggerInstance;
 }
 
 export interface ErrorDefinitions {
@@ -17,7 +17,7 @@ export interface ErrorDefinitions {
 }
 
 export class ErrorReporter {
-  logger: Logger;
+  logger: LoggerInstance;
   options: ErrorReporterOptions;
   errorDefinitions: ErrorDefinitions;
 
