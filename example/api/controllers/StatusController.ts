@@ -8,7 +8,6 @@ export default class StatusController {
 
   @Get('/')
   static async getStatus(req, res) {
-    throw new HttpError('opa', HttpCode.Server.INTERNAL_SERVER_ERROR);
     const service = UptimeService.getInstance();
     res.success({
       environment: process.env.NODE_ENV || 'development',

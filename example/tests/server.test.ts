@@ -37,7 +37,7 @@ describe('api.MainServer', () => {
     const server = new MainServer();
 
     // Perform a simple request to get a 200 response
-    await request(server.app).get('/hello')
+    await request(server.app).get('/foo')
       .expect('Content-Type', /json/)
       .expect(200, { foo: 'bar' });
   });
