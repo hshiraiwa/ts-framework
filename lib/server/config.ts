@@ -4,7 +4,7 @@ import ReplServer from "../repl";
 
 export interface ServerOptions extends BaseServerOptions {
   /* Base server options */
-  port: number;
+  port: string | number;
   repl?: ReplServer;
 
   /* Logger options */
