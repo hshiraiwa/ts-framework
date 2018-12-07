@@ -1,7 +1,7 @@
-import { Logger, ComponentOptions, Component, ComponentType } from "ts-framework-common";
+import { Component, ComponentOptions, ComponentType, LoggerInstance } from "ts-framework-common";
 import Server from "../server";
 export interface LoggerComponentOptions extends ComponentOptions {
-    logger?: Logger;
+    logger?: LoggerInstance;
     sentry?: {
         dsn: string;
     };
@@ -9,7 +9,7 @@ export interface LoggerComponentOptions extends ComponentOptions {
 export default class LoggerComponent implements Component {
     options: LoggerComponentOptions;
     type: ComponentType;
-    protected logger: Logger;
+    logger: LoggerInstance;
     constructor(options?: LoggerComponentOptions);
     describe(): {
         name: string;

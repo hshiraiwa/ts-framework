@@ -1,12 +1,12 @@
 import * as OAuthServer from "express-oauth-server";
-import { Logger, ComponentType, Component, ComponentOptions } from "ts-framework-common";
+import { Logger, ComponentType, Component, ComponentOptions, LoggerInstance } from "ts-framework-common";
 import { default as errorMiddleware, ErrorDefinitions } from "../error/ErrorReporter";
 import { Router, RouteMap } from "./router";
 import { BaseController } from "./router/controller";
 import Server from "../server";
 
 export interface RouterComponentOptions extends ComponentOptions {
-  logger?: Logger;
+  logger?: LoggerInstance;
   routes?: RouteMap;
   sentry?: {
     dsn: string;
@@ -37,7 +37,7 @@ export interface RouterComponentOptions extends ComponentOptions {
 
 export default class RouterComponent implements Component {
   public type: ComponentType.MIDDLEWARE;
-  protected logger: Logger;
+  public logger: LoggerInstance;
 
   constructor(public options: RouterComponentOptions = {}) {
     this.logger = options.logger || Logger.getInstance();
@@ -86,7 +86,7 @@ export default class RouterComponent implements Component {
 
     errorMiddleware(this.options.errors, {
       logger: this.logger,
-      raven: this.options.sentry ? server.raven : undefined
+      sentry: this.options.sentry ? server.sentry : undefined
     })(server.app);
   }
 

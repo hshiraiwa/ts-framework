@@ -1,5 +1,5 @@
-import { Request } from 'express';
-import { LoggerInstance } from 'winston';
+import { Request } from "express";
+import { LoggerInstance } from "ts-framework-common";
 export interface BaseRequest extends Request {
     user?: any;
     logger: LoggerInstance;

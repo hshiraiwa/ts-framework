@@ -10,7 +10,7 @@
   "dependencies": {
     "pjson": "^1.0.9",
     "ts-framework": "../",
-    "ts-framework-common": "nxtep-io/ts-framework-common#v2",
+    "ts-framework-common": "nxtep-io/ts-framework-common#feat/winston-3",
     "ts-node": "^3.3.0"
   },
   "devDependencies": {

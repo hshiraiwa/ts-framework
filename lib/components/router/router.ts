@@ -1,13 +1,13 @@
-import * as path from "path";
-import * as util from "util";
-import * as express from "express";
 import * as cleanStack from "clean-stack";
-import asyncMiddleware from "../middlewares/async";
-import FiltersWrapper from "../helpers/filter";
-import { LoggerInstance } from "winston";
-import { BaseRequest } from "../..";
-import { BaseResponse } from "../helpers/response";
+import * as express from "express";
+import * as path from "path";
+import { LoggerInstance } from "ts-framework-common";
 import * as urljoin from "url-join";
+import * as util from "util";
+import { BaseRequest } from "../..";
+import FiltersWrapper from "../helpers/filter";
+import { BaseResponse } from "../helpers/response";
+import asyncMiddleware from "../middlewares/async";
 
 // TODO: Inject this constants from outside
 // Prepare static full paths, relative to project root

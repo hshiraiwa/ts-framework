@@ -1,19 +1,9 @@
-import * as Raven from "raven";
-import * as Git from "git-rev-sync";
-import { Logger, ComponentOptions, Component, ComponentType } from "ts-framework-common";
+import * as Sentry from "@sentry/node";
+import { Component, ComponentOptions, ComponentType, Logger, LoggerInstance, LoggerOptions } from "ts-framework-common";
 import Server from "../server";
 
-/* Generates Sentry release version based on Git repository, if available */
-const SENTRY_RELEASE = process.env.SENTRY_RELEASE
-  ? process.env.SENTRY_RELEASE
-  : (() => {
-      try {
-        return Git.long();
-      } catch (error) {}
-    })();
-
 export interface LoggerComponentOptions extends ComponentOptions {
-  logger?: Logger;
+  logger?: LoggerInstance;
   sentry?: {
     dsn: string;
   };
@@ -21,10 +11,10 @@ export interface LoggerComponentOptions extends ComponentOptions {
 
 export default class LoggerComponent implements Component {
   public type = ComponentType.MIDDLEWARE;
-  protected logger: Logger;
+  public logger: LoggerInstance;
 
   constructor(public options: LoggerComponentOptions = {}) {
-    this.logger = options.logger || Logger.getInstance();
+    this.logger = options.logger || Logger.getInstance({ ...options } as LoggerOptions);
   }
 
   public describe() {
@@ -36,19 +26,13 @@ export default class LoggerComponent implements Component {
     if (this.logger && this.options.sentry) {
       this.logger.silly("Initializing server middleware: Sentry");
 
-      // Prepare raven instance configuration
-      server.raven = Raven.config(this.options.sentry.dsn, {
-        autoBreadcrumbs: true,
-        logger: "ts-framework-logger",
-        release: SENTRY_RELEASE
-      }).install();
-
       // Registers the Raven express middleware
-      server.app.use(Raven.requestHandler());
+      server.app.use(Sentry.Handlers.requestHandler());
     }
 
     // Enable the logger middleware
     if (this.logger) {
+      server.logger = this.logger;
       server.app.use((req: any, res, next) => {
         req.logger = this.logger;
         next();
