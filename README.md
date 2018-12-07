@@ -8,10 +8,10 @@ A minimalistic framework for typescript based applications, with async/await and
 
 ## Getting Started
 
-### Alpha Disclaimer
+### Beta Disclaimer
 
-The current API is considered to be an "Alpha Release" of the v2 branch. That means that big, probably breaking 
-changes are expected. Be sure to use a specific GIT_REV_HASH and a lock file in your project, so you
+The current API is considered to be a "Beta Release" of the v2 branch. That means that small breaking changes 
+changes are still expected. Be sure to use a specific GIT_REV_HASH and a lock file in your project, so you
 won't be immediately affected by such a change.
 
 For example:
@@ -87,29 +87,41 @@ Database providers:
 
 - **[ts-framework-mongo](https://github.com/nxtep-io/ts-framework-mongo)**
 
-    MongoDB layer based on MongooseJS.
+    MongoDB database mapping layer based on MongooseJS.
 
 - **[ts-framework-sql](https://github.com/nxtep-io/ts-framework-sql)**
 
-    MySQL / Postgres database layer based on Typeorm. Currently in public BETA.
+    MySQL / Postgres database mapping layer based on Typeorm.
 
 
 Database Utilities:
 
-- **[ts-framework-migration](https://gitlab.devnup.com/npm/ts-framework-migration)**
+- **[ts-framework-migration](https://github.com/nxtep-io/ts-framework-migration)**
 
     Agnostic plugin for handling database migrations safely within production environments.
    
 
-Other external plugins and middlewares for this framework
+Other external plugins and middlewares for this framework:
+
+- **[ts-framework-validation](https://github.com/nxtep-io/ts-framework-validation)**
+
+    Minimalistic request body and param validator framework.
+
+- **[ts-framework-notification](https://github.com/nxtep-io/ts-framework-notification)**
+
+    Handles transactional notifications using SMTP (email templates), SMS (Twilio) and Firebase Messaging (push notifications).
+
+- **[ts-framework-maintenance](https://github.com/nxtep-io/ts-framework-maintenance)**
+
+    Maintenance mode middleware for blocking API requests temporarily.
 
 - **[ts-framework-versioning](https://github.com/nxtep-io/ts-framework-versioning)**
 
     Handles API versioning using HTTP Headers.
-    
-- **[ts-framework-notification](https://github.com/nxtep-io/ts-framework-notification)**
+ 
+- **[ts-framework-signing](https://github.com/nxtep-io/ts-framework-signing)**
 
-    Handles transactional notifications using SMTP (email templates) and Firebase Messaging (push notifications).
+    Handles API request signing based on HMAC SHA256 using HTTP Headers.
 
 - **[ts-framework-sockets](https://github.com/nxtep-io/ts-framework-sockets)**
 
@@ -117,7 +129,7 @@ Other external plugins and middlewares for this framework
 
 - **ts-framework-queue (coming soon)**
 
-    RabbitMQ based task rotation queue services. Currently in closed alpha.
+    RabbitMQ based queue worker services. Currently in closed alpha.
 
 - **ts-framework-cache (coming soon)**
 
