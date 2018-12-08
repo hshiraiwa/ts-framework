@@ -65,19 +65,19 @@
 		<div class="col-8 col-content">
 			<div class="tsd-panel tsd-typography">
 				<h1 id="ts-framework">ts-framework</h1>
-				<p><a href="https://travis-ci.org/devnup/ts-framework"><img src="https://travis-ci.org/devnup/ts-framework.svg?branch=master" alt="Build Status"></a> &nbsp; <a href="https://coveralls.io/github/devnup/ts-framework?branch=master"><img src="https://coveralls.io/repos/github/devnup/ts-framework/badge.svg?branch=master" alt="Coverage Status"></a></p>
+				<p><a href="https://travis-ci.org/nxtep-io/ts-framework"><img src="https://travis-ci.org/nxtep-io/ts-framework.svg?branch=master" alt="Build Status"></a> &nbsp; <a href="https://coveralls.io/github/nxtep-io/ts-framework?branch=master"><img src="https://coveralls.io/repos/github/nxtep-io/ts-framework/badge.svg?branch=master" alt="Coverage Status"></a></p>
 				<p>A minimalistic framework for typescript based applications, with async/await and decorators support.</p>
 				<h2 id="getting-started">Getting Started</h2>
-				<h3 id="alpha-disclaimer">Alpha Disclaimer</h3>
-				<p>The current API is considered to be an &quot;Alpha Release&quot; of the v2 branch. That means that big, probably breaking
-					changes are expected. Be sure to use a specific GIT_REV_HASH and a lock file in your project, so you
+				<h3 id="beta-disclaimer">Beta Disclaimer</h3>
+				<p>The current API is considered to be a &quot;Beta Release&quot; of the v2 branch. That means that small breaking changes
+					changes are still expected. Be sure to use a specific GIT_REV_HASH and a lock file in your project, so you
 				won&#39;t be immediately affected by such a change.</p>
 				<p>For example:</p>
 				<pre><code class="lang-bash"><span class="hljs-comment"># Install using Yarn</span>
-yarn add git+https://github.com/devnup/ts-framework.git<span class="hljs-comment">#GIT_REV_HASH </span>
+yarn add git+https://github.com/nxtep-io/ts-framework.git<span class="hljs-comment">#GIT_REV_HASH </span>
 
 <span class="hljs-comment"># Install using NPM</span>
-npm install --save git+https://github.com/devnup/ts-framework.git<span class="hljs-comment">#GIT_REV_HASH </span>
+npm install --save git+https://github.com/nxtep-io/ts-framework.git<span class="hljs-comment">#GIT_REV_HASH </span>
 </code></pre>
 				<h3 id="tl-dr-a-single-file-server">TL;DR - A single file server</h3>
 				<p>Configure a new Server instance and start listening on desired port. </p>
@@ -135,38 +135,47 @@ server.listen()
 				<p>Database providers:</p>
 				<ul>
 					<li><p><strong><a href="https://github.com/nxtep-io/ts-framework-mongo">ts-framework-mongo</a></strong></p>
-						<p>  MongoDB layer based on MongooseJS.</p>
+						<p>  MongoDB database mapping layer based on MongooseJS.</p>
 					</li>
 					<li><p><strong><a href="https://github.com/nxtep-io/ts-framework-sql">ts-framework-sql</a></strong></p>
-						<p>  MySQL / Postgres database layer based on Typeorm. Currently in public BETA.</p>
+						<p>  MySQL / Postgres database mapping layer based on Typeorm.</p>
 					</li>
 				</ul>
 				<p>Database Utilities:</p>
 				<ul>
-					<li><p><strong><a href="https://gitlab.devnup.com/npm/ts-framework-migration">ts-framework-migration</a></strong></p>
+					<li><p><strong><a href="https://github.com/nxtep-io/ts-framework-migration">ts-framework-migration</a></strong></p>
 						<p>  Agnostic plugin for handling database migrations safely within production environments.</p>
 					</li>
 				</ul>
-				<p>Other external plugins and middlewares for this framework</p>
+				<p>Other external plugins and middlewares for this framework:</p>
 				<ul>
-					<li><p><strong><a href="https://github.com/devnup/ts-framework-versioning">ts-framework-versioning</a></strong></p>
+					<li><p><strong><a href="https://github.com/nxtep-io/ts-framework-validation">ts-framework-validation</a></strong></p>
+						<p>  Minimalistic request body and param validator framework.</p>
+					</li>
+					<li><p><strong><a href="https://github.com/nxtep-io/ts-framework-notification">ts-framework-notification</a></strong></p>
+						<p>  Handles transactional notifications using SMTP (email templates), SMS (Twilio) and Firebase Messaging (push notifications).</p>
+					</li>
+					<li><p><strong><a href="https://github.com/nxtep-io/ts-framework-maintenance">ts-framework-maintenance</a></strong></p>
+						<p>  Maintenance mode middleware for blocking API requests temporarily.</p>
+					</li>
+					<li><p><strong><a href="https://github.com/nxtep-io/ts-framework-versioning">ts-framework-versioning</a></strong></p>
 						<p>  Handles API versioning using HTTP Headers.</p>
 					</li>
-					<li><p><strong><a href="https://github.com/devnup/ts-framework-notification">ts-framework-notification</a></strong></p>
-						<p>  Handles transactional notifications using SMTP (email templates) and Firebase Messaging (push notifications).</p>
+					<li><p><strong><a href="https://github.com/nxtep-io/ts-framework-signing">ts-framework-signing</a></strong></p>
+						<p>  Handles API request signing based on HMAC SHA256 using HTTP Headers.</p>
 					</li>
 					<li><p><strong><a href="https://github.com/nxtep-io/ts-framework-sockets">ts-framework-sockets</a></strong></p>
 						<p>  Socket.io layer over the TS-Framework. Currently in public BETA.</p>
 					</li>
 					<li><p><strong>ts-framework-queue (coming soon)</strong></p>
-						<p>  Redis based task rotation queue services. Currently in closed alpha.</p>
+						<p>  RabbitMQ based queue worker services. Currently in closed alpha.</p>
 					</li>
 					<li><p><strong>ts-framework-cache (coming soon)</strong></p>
 						<p>  Redis based cache services for performance. Currently in closed alpha.</p>
 					</li>
 				</ul>
 				<h2 id="documentation">Documentation</h2>
-				<p>Checkout the rendered TS Docs in the official page: <a href="https://devnup.github.io/ts-framework/">https://devnup.github.io/ts-framework/</a></p>
+				<p>Checkout the rendered TS Docs in the official page: <a href="https://nxtep-io.github.io/ts-framework/">https://nxtep-io.github.io/ts-framework/</a></p>
 				<p>To generate the Typedoc reference of the available modules directly from source, run the following command:</p>
 				<pre><code class="lang-sh">yarn run docs
 </code></pre>
