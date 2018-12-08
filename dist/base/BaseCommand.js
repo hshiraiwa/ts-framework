@@ -1,0 +1,9 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+class BaseCommand {
+    constructor() {
+        this.run = this.run.bind(this);
+    }
+}
+exports.default = BaseCommand;
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiQmFzZUNvbW1hbmQuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyIuLi8uLi9saWIvYmFzZS9CYXNlQ29tbWFuZC50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiOztBQUFBLE1BQThCLFdBQVc7SUFDdkM7UUFDRSxJQUFJLENBQUMsR0FBRyxHQUFHLElBQUksQ0FBQyxHQUFHLENBQUMsSUFBSSxDQUFDLElBQUksQ0FBQyxDQUFDO0lBQ2pDLENBQUM7Q0FHRjtBQU5ELDhCQU1DIiwic291cmNlc0NvbnRlbnQiOlsiZXhwb3J0IGRlZmF1bHQgYWJzdHJhY3QgY2xhc3MgQmFzZUNvbW1hbmQge1xuICBjb25zdHJ1Y3RvcigpIHtcbiAgICB0aGlzLnJ1biA9IHRoaXMucnVuLmJpbmQodGhpcyk7XG4gIH1cblxuICBwdWJsaWMgYWJzdHJhY3QgYXN5bmMgcnVuKCk6IFByb21pc2U8dm9pZD47XG59Il19

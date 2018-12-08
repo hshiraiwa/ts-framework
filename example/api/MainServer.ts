@@ -1,7 +1,7 @@
-import Server, { ServerOptions } from '../../lib';
+import { Logger } from 'ts-framework-common';
+import Server, { ServerOptions } from 'ts-framework';
 import StatusController from './controllers/StatusController';
 import UptimeService from './services/UptimeService';
-import { Logger } from 'ts-framework-common';
 
 // Prepare server port
 const port = process.env.PORT as any || 3000;
