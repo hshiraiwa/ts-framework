@@ -3,28 +3,33 @@ import { RequestComponentOptions, RouterComponentOptions, SecurityComponentOptio
 import ReplServer from "../repl";
 
 export interface ServerOptions extends BaseServerOptions {
-  /* Base server options */
+  /** The port to bind to server instance and listen to HTTP requests */
   port: string | number;
+
+  /** The REPL console instance to bind to the server instance */
   repl?: ReplServer;
+
+  /** Enables process event binding for graceful shutdown in SIGINT and SIGTERM interruptions */
+  bindToProcess?: boolean;
 
   /* Logger options */
   logger?: LoggerInstance;
 
-  /* Sentry options */
+  /* Sentry options for logging and request exception handling */
   sentry?: {
     dsn: string;
   };
 
-  /* Security options */
+  /* Security component options */
   security?: SecurityComponentOptions;
 
-  /* Request options */
+  /* Request component options */
   request?: RequestComponentOptions;
 
-  /* Router options */
+  /* Router component options */
   router?: RouterComponentOptions;
 
-  /* Startup options */
+  /* Startup job options */
   startup?: {
     pipeline: Job[];
   };

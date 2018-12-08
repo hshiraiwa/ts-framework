@@ -1,4 +1,4 @@
-import Server, { ReplConsole, ServerOptions } from '../../lib';
+import Server, { ServerOptions } from '../../lib';
 import StatusController from './controllers/StatusController';
 import UptimeService from './services/UptimeService';
 import { Logger } from 'ts-framework-common';
