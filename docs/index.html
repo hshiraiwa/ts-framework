@@ -180,6 +180,36 @@ server.listen()
 				<pre><code class="lang-sh">yarn run docs
 </code></pre>
 				<p>Then check the documentation at <code>./docs/index.html</code>.</p>
+				<h2 id="command-line">Command Line</h2>
+				<p>The framework provides a set of command line tools for a enhanced development experience.</p>
+				<p><strong>Console</strong></p>
+				<p>Start the interactive console in the current folder.</p>
+				<pre><code class="lang-bash">$ ts-framework console
+</code></pre>
+				<p><strong>Process manager</strong></p>
+				<p>Start the development server based on Nodemon with typescript support and live reload.</p>
+				<pre><code class="lang-bash">$ ts-framework watch
+</code></pre>
+				<p>Start the workers without exposing the server port.</p>
+				<pre><code class="lang-bash">$ ts-framework run
+</code></pre>
+				<p>Start the server in production mode</p>
+				<pre><code class="lang-bash">$ ts-framework listen
+</code></pre>
+				<p><strong>Generator</strong></p>
+				<p>Built upon a Yeoman generator, it helps scaffoldling new project directories and single components (controllers, jobs, services etc).</p>
+				<pre><code class="lang-bash"><span class="hljs-comment"># Generates a new Application interactively</span>
+$ ts-framework new app
+
+<span class="hljs-comment"># Generates a new application in a new ./example folder</span>
+$ ts-framework new app <span class="hljs-string">"example"</span>
+
+<span class="hljs-comment"># Generates a new TestController in ./api/controllers/TestController.ts</span>
+$ ts-framework new controller <span class="hljs-string">"test"</span>
+
+<span class="hljs-comment"># Generates a new UptimeService in ./api/services/UptimeService.ts</span>
+$ ts-framework new service <span class="hljs-string">"uptime"</span>
+</code></pre>
 				<h2 id="migration-guide">Migration Guide</h2>
 				<p>This migration is a draft.</p>
 				<p>The v2 breaking changes are listed below:</p>

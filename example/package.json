@@ -10,6 +10,8 @@
     "postinstall": "rimraf node_modules/ts-framework/example"
   },
   "dependencies": {
+    "generator-ts-framework": "nxtep-io/generator-ts-framework",
+    "nodemon": "^1.18.7",
     "pjson": "^1.0.9",
     "ts-framework": "../",
     "ts-framework-common": "nxtep-io/ts-framework-common#2.2.0",

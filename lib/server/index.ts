@@ -73,14 +73,12 @@ export default class Server extends BaseServer {
       process.on("SIGTERM", async () => {
         this.logger.debug("Received SIGTERM interruption from process");
         await this.close();
-        process.exit(0);
       });
 
       process.on("SIGINT", async () => {
         console.log(""); // This jumps a line and improves console readability
         this.logger.debug("Received SIGINT interruption from process");
         await this.close();
-        process.exit(0);
       });
     }
 
@@ -135,6 +133,5 @@ export default class Server extends BaseServer {
    */
   public async onUnmount() {
     this.logger.info("Unmounted server instance and its components successfully");
-    return super.onUnmount(this);
   }
 }

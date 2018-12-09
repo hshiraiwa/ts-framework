@@ -7,6 +7,6 @@ export interface GenerateCommandOptions {
 export default class GenerateCommand extends BaseCommand<GenerateCommandOptions> {
     env: any;
     static AVAILABLE_COMPOENENTS: string[];
-    constructor();
+    constructor(options?: {});
     run({ name, component, skipInstall }: GenerateCommandOptions): Promise<void>;
 }

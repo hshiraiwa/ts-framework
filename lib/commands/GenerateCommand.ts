@@ -12,8 +12,8 @@ export default class GenerateCommand extends BaseCommand<GenerateCommandOptions>
 
   public static AVAILABLE_COMPOENENTS = ["app", "controller"];
 
-  constructor() {
-    super();
+  constructor(options = {}) {
+    super(options);
     this.env = yeoman.createEnv();
   }
 
