@@ -1,4 +1,4 @@
-import { LoggerInstance } from 'ts-framework-common';
+import { LoggerInstance } from "ts-framework-common";
 export interface BaseCommandOptions {
     logger?: LoggerInstance;
 }

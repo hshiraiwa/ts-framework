@@ -4,7 +4,7 @@ import BaseCommand from "../base/BaseCommand";
 import Server, { ServerOptions } from "../server";
 import ReplConsole from "../repl";
 
-export default class ConsoleCommand extends BaseCommand<{}> {
+export default class ConsoleCommand extends BaseCommand<{ entrypoint: string }> {
   /**
    * Loads a new Server module and initialize its instance from relative path.
    */
@@ -26,9 +26,9 @@ export default class ConsoleCommand extends BaseCommand<{}> {
   /**
    * Runs the REPL console in the supplied Server instance.
    */
-  public async run({}) {
+  public async run({ entrypoint }) {
     const options = { port: process.env.PORT || 3000 };
-    const instance = await this.load("./api/MainServer", { ...options, repl: new ReplConsole({}) });
+    const instance = await this.load(entrypoint, { ...options, repl: new ReplConsole({}) });
     await instance.listen();
   }
 }

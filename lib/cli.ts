@@ -3,7 +3,7 @@
 import * as Commander from "commander";
 import * as Package from "pjson";
 import { LoggerInstance } from "ts-framework-common";
-import { ConsoleCommand, GenerateCommand, WatchCommand } from "./commands";
+import { ConsoleCommand, GenerateCommand, ListenCommand, WatchCommand } from "./commands";
 
 export default class CommandLine {
   public logger: LoggerInstance;
@@ -47,14 +47,19 @@ export default class CommandLine {
     });
 
     this.program
-      .command("console")
+      .command("listen [entrypoint]")
+      .description("Runs the server in production mode")
+      .action((entrypoint = "./api/server.ts") => new ListenCommand().run({ entrypoint }));
+
+    this.program
+      .command("console [entrypoint]")
       .description("Run interactive console")
-      .action(() => new ConsoleCommand().run({}));
+      .action((entrypoint = "./api/server.ts") => new ConsoleCommand().run({ entrypoint }));
 
     this.program
       .command("watch [entrypoint]")
       .description("Run the development server with live reload")
-      .action(entrypoint => new WatchCommand().run({ entrypoint }));
+      .action((entrypoint = "./api/server.ts") => new WatchCommand().run({ entrypoint }));
 
     this.program
       .command("new <component> [name]")

@@ -10,7 +10,7 @@ export interface GenerateCommandOptions {
 export default class GenerateCommand extends BaseCommand<GenerateCommandOptions> {
   env: any;
 
-  public static AVAILABLE_COMPOENENTS = ["app", "controller"];
+  public static AVAILABLE_COMPOENENTS = ["app", "controller", "service", "job"];
 
   constructor(options = {}) {
     super(options);
