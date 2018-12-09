@@ -133,5 +133,6 @@ export default class Server extends BaseServer {
    */
   public async onUnmount() {
     this.logger.info("Unmounted server instance and its components successfully");
+    setTimeout(() => process.exit(1), 1000);
   }
 }

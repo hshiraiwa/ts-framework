@@ -1,20 +1,22 @@
+import * as Path from "path";
 import * as Package from "pjson";
 import * as Nodemon from "nodemon";
 import BaseCommand from "../base/BaseCommand";
 
-export default class WatchCommandCommand extends BaseCommand<{ entrypoint: string }> {
+export default class WatchCommand extends BaseCommand<{ entrypoint: string }> {
   public async run({ entrypoint }) {
     this.logger.debug(`[ts-framework] ${Package.version}`);
-    this.logger.debug(`[ts-framework] starting server from \`start.ts\´`);
+    this.logger.debug(`[ts-framework] starting server from \`${entrypoint}\´`);
+    this.logger.debug(`[ts-framework] watching files from  \`./**/*\´`);
     this.logger.debug(`[ts-framework] to restart at any time, enter \`rs\``);
 
     Nodemon({
       delay: "1000",
-      debug: true,
-      ext: "ts js",
+      ext: "ts,js",
+      cwd: process.cwd(),
       watch: ["./**/*"],
-      exec: `node -r ts-node/register ${entrypoint || "start.ts"}`,
-      ignore: ["dist/*", "./tests/*"]
+      ignore: ["./dist", "./build", "./docs", "./coverage"],
+      exec: `ts-framework listen --development ${entrypoint}`
     });
 
     Nodemon.on("restart", files => {
@@ -26,8 +28,8 @@ export default class WatchCommandCommand extends BaseCommand<{ entrypoint: strin
       process.exit(1);
     });
 
-    Nodemon.on("crash", () => {
-      this.logger.warn("[ts-framework] instance crashed unexpectedly");
+    Nodemon.on("crash", error => {
+      this.logger.warn("[ts-framework] instance crashed unexpectedly", error);
       this.logger.debug("[ts-framework] waiting for files changes before restarting...");
     });
   }

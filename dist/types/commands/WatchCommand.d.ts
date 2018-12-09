@@ -1,5 +1,5 @@
 import BaseCommand from "../base/BaseCommand";
-export default class WatchCommandCommand extends BaseCommand<{
+export default class WatchCommand extends BaseCommand<{
     entrypoint: string;
 }> {
     run({ entrypoint }: {
