@@ -1,7 +1,7 @@
 import * as hat from 'hat';
 import * as Package from 'pjson';
 import * as request from 'supertest';
-import MainServer from '../api/MainServer';
+import MainServer from '../api/server';
 
 jest.setTimeout(30000);
 
