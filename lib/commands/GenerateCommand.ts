@@ -1,7 +1,7 @@
 import * as yeoman from "yeoman-environment";
 import BaseCommand from "../base/BaseCommand";
 
-export default class GenerateCommand extends BaseCommand {
+export default class GenerateCommand extends BaseCommand<{ name: string }> {
   env: any;
 
   constructor() {
@@ -9,13 +9,13 @@ export default class GenerateCommand extends BaseCommand {
     this.env = yeoman.createEnv();
   }
 
-  public async run() {
+  public async run({ name, skipInstall }) {
     // Here we register a generator based on its path. Providing the namespace is optional.
     this.env.register(require.resolve("generator-ts-framework"), "ts-framework:app");
 
     // Or passing arguments and options
     return new Promise<void>((resolve, reject) =>
-      this.env.run("ts-framework:app", {}, error => {
+      this.env.run(`ts-framework:app ${name}`, { skipInstall }, error => {
         if (error) {
           reject(error);
         } else {

@@ -49,12 +49,13 @@ export default class CommandLine {
     this.program
       .command("console")
       .description("Run interactive console")
-      .action(() => new ConsoleCommand().run());
+      .action(() => new ConsoleCommand().run({}));
 
     this.program
-      .command("generate")
+      .command("generate [name]")
+      .option("-s, --skip-install", "Skips yarn installation and post generation routines")
       .description("Generates a new TS Framework project")
-      .action(() => new GenerateCommand().run());
+      .action((name, options = {}) => new GenerateCommand().run({ name, skipInstall: options.skipInstall }));
   }
 
   parse() {
