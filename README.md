@@ -152,14 +152,6 @@ Then check the documentation at `./docs/index.html`.
 
 The framework provides a set of command line tools for a enhanced development experience.
 
-**Console**
-
-Start the interactive console in the current folder.
-
-```bash
-$ ts-framework console
-```
-
 **Process manager**
 
 Start the development server based on Nodemon with typescript support and live reload.
@@ -180,6 +172,13 @@ Start the server in production mode
 $ ts-framework listen
 ```
 
+**REPL Console**
+
+Start the interactive console in the current folder.
+
+```bash
+$ ts-framework console
+```
 
 **Generator**
 
