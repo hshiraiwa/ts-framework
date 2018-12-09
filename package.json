@@ -56,6 +56,7 @@
     "express-useragent": "^1.0.8",
     "fclone": "^1.0.11",
     "fs-extra": "^7.0.1",
+    "generator-ts-framework": "nxtep-io/generator-ts-framework",
     "git-rev-sync": "^1.9.1",
     "hat": "^0.0.3",
     "helmet": "^3.13.0",
@@ -70,7 +71,8 @@
     "typescript": "^3.0.1",
     "urijs": "^1.19.0",
     "url-join": "^4.0.0",
-    "winston-raven-sentry": "^1.0.1"
+    "winston-raven-sentry": "^1.0.1",
+    "yeoman-environment": "^2.3.4"
   },
   "devDependencies": {
     "@types/async": "^2.0.49",

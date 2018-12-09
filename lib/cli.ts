@@ -1,9 +1,9 @@
 #!/usr/bin/env node --harmony
 
-import * as Package from "pjson";
 import * as Commander from "commander";
-import { Logger, LoggerInstance } from "ts-framework-common";
-import { ConsoleCommand } from "./commands";
+import * as Package from "pjson";
+import { LoggerInstance } from "ts-framework-common";
+import { ConsoleCommand, GenerateCommand } from "./commands";
 
 export default class CommandLine {
   public logger: LoggerInstance;
@@ -49,7 +49,12 @@ export default class CommandLine {
     this.program
       .command("console")
       .description("Run interactive console")
-      .action(new ConsoleCommand().run);
+      .action(() => new ConsoleCommand().run());
+
+    this.program
+      .command("generate")
+      .description("Generates a new TS Framework project")
+      .action(() => new GenerateCommand().run());
   }
 
   parse() {
