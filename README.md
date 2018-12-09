@@ -24,36 +24,20 @@ yarn add git+https://github.com/nxtep-io/ts-framework.git#GIT_REV_HASH
 npm install --save git+https://github.com/nxtep-io/ts-framework.git#GIT_REV_HASH 
 ``` 
 
-### TL;DR - A single file server
+### TL;DR - Using the command line generator
 
 Configure a new Server instance and start listening on desired port. 
 
-```typescript
-import Server, { Logger, BaseRequest, BaseResponse } from 'ts-framework';
+```bash
+# Install command line tools from Github
+$ yarn global add "nxtep-io/ts-framework#VERSION_TAG"
 
-// Define a sample hello world route
-const SampleRoutes {
-  '/': async (req: BaseRequest, res: BaseResponse) => {
-    res.success({ message: 'Hello world!' });
-  }
-}
+# Generate a new project
+$ ts-framework new app "example/"
 
-// Define the server configuration
-const server = new Server({
-  port: process.env.PORT as any || 3000,
-  routes: {
-    get: SampleRoutes,
-  },
-});
-
-
-// Startup the simple server
-server.listen()
-  .then(() => Logger.info(`Server listening on port: ${server.config.port}`))
-  .catch(error => {
-    console.error(error);
-    process.exit(1);
-  });
+# Start project
+$ cd example/
+$ yarn start
 ```
 
 You can also check a full project seed in the [Examples directory](./example) of this repository.
