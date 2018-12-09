@@ -1,6 +1,6 @@
-import BaseCommand from '../base/BaseCommand';
-import Server, { ServerOptions } from '../server';
-export default class ConsoleCommand extends BaseCommand {
+import BaseCommand from "../base/BaseCommand";
+import Server, { ServerOptions } from "../server";
+export default class ConsoleCommand extends BaseCommand<{}> {
     /**
      * Loads a new Server module and initialize its instance from relative path.
      */
@@ -8,5 +8,5 @@ export default class ConsoleCommand extends BaseCommand {
     /**
      * Runs the REPL console in the supplied Server instance.
      */
-    run(): Promise<void>;
+    run({}: {}): Promise<void>;
 }

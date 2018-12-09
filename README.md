@@ -148,6 +148,58 @@ yarn run docs
 
 Then check the documentation at `./docs/index.html`.
 
+## Command Line
+
+The framework provides a set of command line tools for a enhanced development experience.
+
+**Console**
+
+Start the interactive console in the current folder.
+
+```bash
+$ ts-framework console
+```
+
+**Process manager**
+
+Start the development server based on Nodemon with typescript support and live reload.
+
+```bash
+$ ts-framework watch
+```
+
+Start the workers without exposing the server port.
+
+```bash
+$ ts-framework run
+```
+
+Start the server in production mode
+
+```bash
+$ ts-framework listen
+```
+
+
+**Generator**
+
+Built upon a Yeoman generator, it helps scaffoldling new project directories and single components (controllers, jobs, services etc).
+
+```bash
+# Generates a new Application interactively
+$ ts-framework new app
+
+# Generates a new application in a new ./example folder
+$ ts-framework new app "example"
+
+# Generates a new TestController in ./api/controllers/TestController.ts
+$ ts-framework new controller "test"
+
+# Generates a new UptimeService in ./api/services/UptimeService.ts
+$ ts-framework new service "uptime"
+```
+
+
 ## Migration Guide
 
 This migration is a draft.

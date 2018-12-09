@@ -52,10 +52,16 @@ export default class CommandLine {
       .action(() => new ConsoleCommand().run({}));
 
     this.program
-      .command("generate [name]")
+      .command("new <component> [name]")
       .option("-s, --skip-install", "Skips yarn installation and post generation routines")
       .description("Generates a new TS Framework project")
-      .action((name, options = {}) => new GenerateCommand().run({ name, skipInstall: options.skipInstall }));
+      .action((component, name, options = {}) =>
+        new GenerateCommand().run({
+          name,
+          component,
+          skipInstall: options.skipInstall
+        })
+      );
   }
 
   parse() {

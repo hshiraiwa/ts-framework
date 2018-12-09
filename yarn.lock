@@ -2600,9 +2600,10 @@ gauge@~2.7.3:
 
 generator-ts-framework@nxtep-io/generator-ts-framework:
   version "0.0.0"
-  resolved "https://codeload.github.com/nxtep-io/generator-ts-framework/tar.gz/7fd35119ab38a04fd6b47f285e983f7e4094e495"
+  resolved "https://codeload.github.com/nxtep-io/generator-ts-framework/tar.gz/0d3175c491ea8a3d50c8b5afaac34b95593b8f28"
   dependencies:
     chalk "^2.1.0"
+    merge ">=1.2.1"
     mkdirp "^0.5.1"
     underscore.string "^3.3.5"
     yeoman-generator "^2.0.1"
@@ -4490,6 +4491,11 @@ merge2@^1.2.3:
   version "1.2.3"
   resolved "https://registry.yarnpkg.com/merge2/-/merge2-1.2.3.tgz#7ee99dbd69bb6481689253f018488a1b902b0ed5"
   integrity sha512-gdUU1Fwj5ep4kplwcmftruWofEFt6lfpkkr3h860CXbAB9c3hGb55EOL2ali0Td5oebvW0E1+3Sr+Ur7XfKpRA==
+
+merge@>=1.2.1:
+  version "1.2.1"
+  resolved "https://registry.yarnpkg.com/merge/-/merge-1.2.1.tgz#38bebf80c3220a8a487b6fcfb3941bb11720c145"
+  integrity sha512-VjFo4P5Whtj4vsLzsYBu5ayHhoHJ0UqNm7ibvShmbmoz7tGi0vXaoJbGdB+GmDMLUdg8DpQXEIeVDAe8MaABvQ==
 
 merge@^1.2.0:
   version "1.2.0"
