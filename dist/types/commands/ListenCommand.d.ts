@@ -1,12 +1,5 @@
-import BaseCommand from "../base/BaseCommand";
-import Server, { ServerOptions } from "../server";
-export default class ListenCommand extends BaseCommand<{
-    entrypoint: string;
-}> {
-    /**
-     * Loads a new Server module and initialize its instance from relative path.
-     */
-    load(relativePath: string, options?: ServerOptions): Promise<Server>;
+import RunCommand from "./RunCommand";
+export default class ListenCommand extends RunCommand {
     run({ entrypoint, env }: {
         entrypoint: any;
         env: any;

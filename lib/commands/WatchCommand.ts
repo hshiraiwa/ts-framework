@@ -1,4 +1,3 @@
-import * as Path from "path";
 import * as Package from "pjson";
 import * as Nodemon from "nodemon";
 import BaseCommand from "../base/BaseCommand";

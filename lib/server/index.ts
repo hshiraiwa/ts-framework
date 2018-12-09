@@ -112,7 +112,7 @@ export default class Server extends BaseServer {
    * @returns {Promise<void>}
    */
   public async close(): Promise<void> {
-    this.logger.debug(`Closing and unmounting server instance and its components`);
+    this.logger.debug(`Closing server instance and unmounting child components`);
 
     if (this.server) {
       await this.server.close();

@@ -66,7 +66,12 @@ export default class CommandLine {
       .command("run [entrypoint]")
       .option("-d, --development", "Starts server without production flags")
       .description("Runs the server components without lifting express")
-      .action((entrypoint = "./api/server.ts") => new RunCommand().run({ entrypoint }));
+      .action((entrypoint = "./api/server.ts", options = {}) =>
+        new RunCommand().run({
+          entrypoint,
+          env: options.development ? "development" : "production"
+        })
+      );
 
     this.program
       .command("watch [entrypoint]")
