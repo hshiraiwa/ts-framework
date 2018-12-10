@@ -2582,7 +2582,7 @@ gauge@~2.7.3:
 
 generator-ts-framework@nxtep-io/generator-ts-framework:
   version "0.0.0"
-  resolved "https://codeload.github.com/nxtep-io/generator-ts-framework/tar.gz/9e724e9d3bb0a14b708b813d6aa89071a84f0c4a"
+  resolved "https://codeload.github.com/nxtep-io/generator-ts-framework/tar.gz/628206910d99dc86eef7c38ad68cdbef0e06da66"
   dependencies:
     chalk "^2.1.0"
     merge ">=1.2.1"
