@@ -1,4 +1,4 @@
-#!/usr/bin/env node --harmony
+#!/usr/bin/env node
 import * as Commander from "commander";
 import { LoggerInstance } from "ts-framework-common";
 export default class CommandLine {
