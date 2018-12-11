@@ -14,6 +14,9 @@ export default class RunCommand extends BaseCommand {
      * Loads a new Server module and initialize its instance from relative path.
      */
     load(relativePath: string, options?: ServerOptions): Promise<Server>;
+    prepareDevelopment({ entrypoint }: {
+        entrypoint: any;
+    }): Promise<string>;
     prepare({ entrypoint, env }: {
         entrypoint: any;
         env: any;

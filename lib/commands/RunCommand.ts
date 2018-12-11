@@ -1,6 +1,6 @@
+import { exec } from "child_process";
 import * as fs from "fs";
 import * as Path from "path";
-import { exec } from "child_process";
 import { BaseError } from "ts-framework-common";
 import BaseCommand from "../base/BaseCommand";
 import Server, { ServerOptions } from "../server";
@@ -43,54 +43,63 @@ export default class RunCommand extends BaseCommand {
 
       return new Module.default(options);
     } catch (exception) {
-      throw new BaseError("Could not load Server instance: " + exception.message, exception);
+      console.error(exception);
+      throw new BaseError("Could not load Server instance: " + exception.message);
     }
   }
 
+  public async prepareDevelopment({ entrypoint }): Promise<string> {
+    return Path.resolve(process.cwd(), entrypoint);
+  }
+
   public async prepare({ entrypoint, env }): Promise<string> {
-    let distributionFile;
     const sourceFile = Path.resolve(process.cwd(), entrypoint);
 
+    // Load directly from file in development mode
+    if (env === "development") {
+      return this.prepareDevelopment({ entrypoint });
+    }
+
+    // In production, we need to handle TS files
     if (Path.extname(sourceFile) === ".ts") {
       // Try to find transpiled directory using tsconfig
       const tsConfigPath = Path.resolve(process.cwd(), "tsconfig.json");
-      const relativePath = Path.relative(process.cwd(), sourceFile);
-      const tsConfig = require(tsConfigPath);
+      const tsConfig = require(tsConfigPath); // TODO: Handle exceptions here
       const distributionPath = Path.resolve(process.cwd(), tsConfig.compilerOptions.outDir);
 
-      if (env !== "development" && !fs.existsSync(distributionPath)) {
+      // Check if the transpiled sources directory already exists
+      if (!fs.existsSync(distributionPath)) {
         this.logger.debug("Building typescript source into plain javascript files...", { distributionPath });
         await this.exec("yarn tsc");
       }
 
-      if (env === "development") {
-        distributionFile = sourceFile;
-      } else {
-        distributionFile = Path.resolve(distributionPath, relativePath);
-      }
+      // Try to find transpiled file from specified source
+      const fileName = Path.basename(sourceFile, ".ts");
+      const relativePath = Path.relative(process.cwd(), Path.dirname(sourceFile));
+      let distributionFile = Path.join(distributionPath, relativePath, fileName + ".js");
 
       if (!fs.existsSync(distributionFile)) {
-        // Try to find in root, as a last attempt to make it work
+        this.logger.verbose(`Could not find transpiled file at: "${distributionFile}"`);
+
+        // Try to find in distribution root, as a last attempt to make it work
         const fileName = Path.basename(sourceFile, ".ts");
         distributionFile = Path.join(distributionPath, fileName + ".js");
 
         if (fs.existsSync(distributionFile)) {
           // Runs from transpiled file
           this.logger.verbose(`Found transpiled server in "${distributionFile}"`);
+        } else {
+          this.logger.verbose(`Could not find transpiled file at: "${distributionFile}"`);
         }
-      } else if (Path.extname(distributionFile) === ".ts") {
-        // Runs directly from typescript file
-        this.logger.verbose(`Found typescript source file in "${distributionFile}"`);
       } else {
         // Runs from transpiled file
         this.logger.verbose(`Found transpiled server in "${distributionFile}"`);
       }
-    } else {
-      distributionFile = sourceFile;
-      this.logger.verbose(`Found transpiled server in "${distributionFile}", skipping compilation`);
+
+      return distributionFile;
     }
 
-    return distributionFile;
+    return sourceFile;
   }
 
   public async run(entrypoint = this.options.entrypoint, options) {
