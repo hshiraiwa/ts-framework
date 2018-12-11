@@ -66,19 +66,22 @@ export default class CommandLine {
       process.exit(1);
     });
 
-    this.commands.map(cmd => {
-      // Prepare command syntax
-      const p = this.program.command(cmd.command.syntax).description(cmd.command.description);
+    // Bind all commands to current program
+    this.commands.map(cmd => cmd.onProgram(this.program));
 
-      // Bind command arguments
-      if (cmd.command.options) {
-        cmd.command.options.map(options => {
-          p.option.apply(p, options);
-        });
-      }
-
-      // Bind command action
-      p.action((...args) => cmd.run.apply(cmd, args));
+    // Prepare additional info in help
+    this.program.on("--help", () => {
+      console.log("");
+      console.log("Environment variables:");
+      console.log("");
+      console.log('  NODE_ENV\tSets the environment to run the server. Defaults to: "development"');
+      console.log('  PORT\t\tSets the port to listen to. Defaults to: "3000"');
+      console.log("");
+      console.log("Getting started:");
+      console.log("");
+      console.log("  $ ts-framework new app");
+      console.log("  $ cd app/");
+      console.log("  $ yarn start");
     });
   }
 

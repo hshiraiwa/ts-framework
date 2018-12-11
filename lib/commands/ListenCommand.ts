@@ -4,10 +4,10 @@ export default class ListenCommand extends RunCommand {
   command = {
     // Override specific configiurations
     syntax: "listen [entrypoint]",
-    description: "Starts the server",
+    description: "Starts the standalone server",
     options: [
-      ["-d, --development", "Starts server without production flags"],
-      ["-p, --port", "The PORT to listen to, can be overriden with PORT env variable."]
+      ["-d, --development", "starts server without production flags"],
+      ["-p, --port", "the PORT to listen to, can be overriden with PORT env variable."]
     ]
   };
 

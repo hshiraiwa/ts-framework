@@ -1,6 +1,7 @@
 import BaseCommand from "../base/BaseCommand";
 export interface GenerateCommandOptions {
     name?: string;
+    path?: string;
     component: string;
     skipInstall?: boolean;
 }
@@ -13,5 +14,5 @@ export default class GenerateCommand extends BaseCommand {
     };
     static AVAILABLE_COMPOENENTS: string[];
     constructor(options?: {});
-    run(component: any, name: any, { skipInstall }: GenerateCommandOptions): Promise<void>;
+    run(component: any, name: any, { path, skipInstall }: GenerateCommandOptions): Promise<void>;
 }

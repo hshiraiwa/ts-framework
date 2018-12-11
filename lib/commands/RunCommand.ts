@@ -9,7 +9,7 @@ export default class RunCommand extends BaseCommand {
   command = {
     syntax: "run [entrypoint]",
     description: "Runs the server components without lifting express",
-    options: [["-d, --development", "Starts server without production flags"]]
+    options: [["-d, --development", "starts server without production flags"]]
   };
 
   /**

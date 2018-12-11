@@ -7,7 +7,7 @@ import ReplConsole from "../repl";
 export default class ConsoleCommand extends BaseCommand {
   command = {
     syntax: "console [entrypoint]",
-    description: "Starts the interactive console"
+    description: "starts the interactive console"
   };
 
   /**

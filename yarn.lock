@@ -2582,11 +2582,12 @@ gauge@~2.7.3:
 
 generator-ts-framework@nxtep-io/generator-ts-framework:
   version "0.0.0"
-  resolved "https://codeload.github.com/nxtep-io/generator-ts-framework/tar.gz/628206910d99dc86eef7c38ad68cdbef0e06da66"
+  resolved "https://codeload.github.com/nxtep-io/generator-ts-framework/tar.gz/78f07238d64c7dc6ab8dc28901ea196fdd65852c"
   dependencies:
     chalk "^2.1.0"
     merge ">=1.2.1"
     mkdirp "^0.5.1"
+    pluralize "^7.0.0"
     underscore.string "^3.3.5"
     yeoman-generator "^2.0.1"
     yosay "^2.0.1"
@@ -5261,6 +5262,11 @@ please-upgrade-node@^3.0.2, please-upgrade-node@^3.1.1:
   integrity sha512-KY1uHnQ2NlQHqIJQpnh/i54rKkuxCEBx+voJIS/Mvb+L2iYd2NMotwduhKTMjfC1uKoX3VXOxLjIYG66dfJTVQ==
   dependencies:
     semver-compare "^1.0.0"
+
+pluralize@^7.0.0:
+  version "7.0.0"
+  resolved "https://registry.yarnpkg.com/pluralize/-/pluralize-7.0.0.tgz#298b89df8b93b0221dbf421ad2b1b1ea23fc6777"
+  integrity sha512-ARhBOdzS3e41FbkW/XWrTEtukqqLoK5+Z/4UeDaLuSW+39JPeFgs4gCGqsrJHVZX0fUrx//4OF0K1CUGwlIFow==
 
 pn@^1.1.0:
   version "1.1.0"

@@ -1,3 +1,4 @@
+import { Command } from "commander";
 import { LoggerInstance } from "ts-framework-common";
 export interface BaseCommandOptions {
     logger?: LoggerInstance;
@@ -12,5 +13,6 @@ export default abstract class BaseCommand {
     logger: LoggerInstance;
     abstract command: CommanderDefs;
     constructor(options?: BaseCommandOptions);
+    onProgram(program: Command): Promise<Command>;
     abstract run(...args: any[]): Promise<void>;
 }
