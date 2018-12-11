@@ -11,7 +11,7 @@ export default class ListenCommand extends RunCommand {
     ]
   };
 
-  public async run(entrypoint, { port, env }) {
+  public async run(entrypoint = this.options.entrypoint, { port, env }) {
     const distributionFile = await this.prepare({ entrypoint, env });
     this.logger.debug(`Starting server in "${env}" environment from ${distributionFile}`);
 

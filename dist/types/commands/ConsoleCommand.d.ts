@@ -12,5 +12,5 @@ export default class ConsoleCommand extends BaseCommand {
     /**
      * Runs the REPL console in the supplied Server instance.
      */
-    run(entrypoint: any): Promise<void>;
+    run(entrypoint?: string): Promise<void>;
 }

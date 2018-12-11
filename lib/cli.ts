@@ -10,6 +10,8 @@ export interface CommandLineOptions {
   logger?: LoggerInstance;
 }
 
+export const DEFAULT_ENTRYPOINT = "./api/server";
+
 export default class CommandLine {
   public logger: LoggerInstance;
   public commands: BaseCommand[];
@@ -26,12 +28,13 @@ export default class CommandLine {
     this.logger = Logger.getInstance();
 
     // Initialize default commands
+    const commandOpts = { entrypoint: DEFAULT_ENTRYPOINT };
     this.commands = commands || [
-      new ListenCommand(),
-      new GenerateCommand(),
-      new ConsoleCommand(),
-      new RunCommand(),
-      new WatchCommand()
+      new ListenCommand(commandOpts),
+      new GenerateCommand(commandOpts),
+      new ConsoleCommand(commandOpts),
+      new RunCommand(commandOpts),
+      new WatchCommand(commandOpts)
     ];
 
     this.onMount().catch(this.onError.bind(this));

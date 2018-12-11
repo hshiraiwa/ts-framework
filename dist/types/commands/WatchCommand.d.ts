@@ -4,7 +4,5 @@ export default class WatchCommand extends BaseCommand {
         syntax: string;
         description: string;
     };
-    run({ entrypoint }: {
-        entrypoint: any;
-    }): Promise<void>;
+    run(entrypoint?: string): Promise<void>;
 }

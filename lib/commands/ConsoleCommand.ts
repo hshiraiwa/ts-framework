@@ -31,7 +31,7 @@ export default class ConsoleCommand extends BaseCommand {
   /**
    * Runs the REPL console in the supplied Server instance.
    */
-  public async run(entrypoint) {
+  public async run(entrypoint = this.options.entrypoint) {
     const options = { port: process.env.PORT || 3000 };
     const instance = await this.load(entrypoint, { ...options, repl: new ReplConsole({}) });
     await instance.listen();

@@ -93,7 +93,7 @@ export default class RunCommand extends BaseCommand {
     return distributionFile;
   }
 
-  public async run(entrypoint, { env }) {
+  public async run(entrypoint = this.options.entrypoint, { env }) {
     const distributionFile = await this.prepare({ entrypoint, env });
     this.logger.debug(`Starting workers in "${env}" environment from ${distributionFile}`);
 

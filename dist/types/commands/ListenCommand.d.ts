@@ -5,7 +5,7 @@ export default class ListenCommand extends RunCommand {
         description: string;
         options: string[][];
     };
-    run(entrypoint: any, { port, env }: {
+    run(entrypoint: string, { port, env }: {
         port: any;
         env: any;
     }): Promise<void>;

@@ -18,7 +18,7 @@ export default class RunCommand extends BaseCommand {
         entrypoint: any;
         env: any;
     }): Promise<string>;
-    run(entrypoint: any, { env }: {
+    run(entrypoint: string, { env }: {
         env: any;
     }): Promise<void>;
 }
