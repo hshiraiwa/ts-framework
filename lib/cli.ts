@@ -4,7 +4,7 @@ import * as Commander from "commander";
 import * as Package from "pjson";
 import { LoggerInstance, Logger } from "ts-framework-common";
 import BaseCommand from "./base/BaseCommand";
-import { ConsoleCommand, GenerateCommand, ListenCommand, RunCommand } from "./commands";
+import { ConsoleCommand, GenerateCommand, ListenCommand, RunCommand, WatchCommand } from "./commands";
 
 export interface CommandLineOptions {
   logger?: LoggerInstance;
@@ -26,7 +26,13 @@ export default class CommandLine {
     this.logger = Logger.getInstance();
 
     // Initialize default commands
-    this.commands = commands || [new ListenCommand(), new GenerateCommand(), new ConsoleCommand(), new RunCommand()];
+    this.commands = commands || [
+      new ListenCommand(),
+      new GenerateCommand(),
+      new ConsoleCommand(),
+      new RunCommand(),
+      new WatchCommand()
+    ];
 
     this.onMount().catch(this.onError.bind(this));
   }
