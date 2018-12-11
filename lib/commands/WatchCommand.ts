@@ -9,7 +9,7 @@ export default class WatchCommand extends BaseCommand {
   };
 
   public async run(entrypoint = this.options.entrypoint) {
-    this.logger.debug(`[ts-framework] ${Package.version}`);
+    this.logger.debug(`[ts-framework] ${Package.name}@${Package.version}`);
     this.logger.debug(`[ts-framework] starting server from \`${entrypoint}\´`);
     this.logger.debug(`[ts-framework] watching files from  \`./**/*\´`);
     this.logger.debug(`[ts-framework] to restart at any time, enter \`rs\``);

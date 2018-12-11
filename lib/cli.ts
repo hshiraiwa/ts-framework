@@ -1,7 +1,6 @@
 #!/usr/bin/env node
 
 import * as Commander from "commander";
-import * as Package from "pjson";
 import { Logger, LoggerInstance } from "ts-framework-common";
 import BaseCommand from "./base/BaseCommand";
 import { ConsoleCommand, GenerateCommand, ListenCommand, RunCommand, WatchCommand } from "./commands";
@@ -20,6 +19,8 @@ export default class CommandLine {
   protected program: Commander.Command;
 
   constructor(commands?: BaseCommand[], options?: CommandLineOptions) {
+    const Package = require("../package.json");
+
     // Initialize Commander instance
     this.program = Commander.name(Package.name)
       .version(Package.version)
