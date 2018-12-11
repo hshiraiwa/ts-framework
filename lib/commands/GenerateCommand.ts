@@ -7,8 +7,13 @@ export interface GenerateCommandOptions {
   skipInstall?: boolean;
 }
 
-export default class GenerateCommand extends BaseCommand<GenerateCommandOptions> {
+export default class GenerateCommand extends BaseCommand {
   env: any;
+  command = {
+    syntax: "new <component> [name]",
+    description: "Generates a new TS Framework application or component",
+    options: [["-s, --skip-install", "Skips yarn installation and post generation routines"]]
+  };
 
   public static AVAILABLE_COMPOENENTS = ["app", "controller", "service", "job"];
 
@@ -17,7 +22,7 @@ export default class GenerateCommand extends BaseCommand<GenerateCommandOptions>
     this.env = yeoman.createEnv();
   }
 
-  public async run({ name, component, skipInstall }: GenerateCommandOptions) {
+  public async run(component, name, { skipInstall }: GenerateCommandOptions) {
     if (GenerateCommand.AVAILABLE_COMPOENENTS.indexOf(component) < 0) {
       throw new Error(`Could not generate unknown component: "${component}"`);
     }

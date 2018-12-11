@@ -2,7 +2,12 @@ import * as Package from "pjson";
 import * as Nodemon from "nodemon";
 import BaseCommand from "../base/BaseCommand";
 
-export default class WatchCommand extends BaseCommand<{ entrypoint: string }> {
+export default class WatchCommand extends BaseCommand {
+  command = {
+    syntax: "watch [entrypoint]",
+    description: "Starts the development server with live reload"
+  };
+
   public async run({ entrypoint }) {
     this.logger.debug(`[ts-framework] ${Package.version}`);
     this.logger.debug(`[ts-framework] starting server from \`${entrypoint}\´`);

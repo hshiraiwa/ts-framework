@@ -1,8 +1,14 @@
 import BaseCommand from "../base/BaseCommand";
 import Server, { ServerOptions } from "../server";
-export default class RunCommand extends BaseCommand<{
-    entrypoint: string;
-}> {
+export default class RunCommand extends BaseCommand {
+    command: {
+        syntax: string;
+        description: string;
+        options: string[][];
+    };
+    /**
+     * Simple method for executing child processes.
+     */
     exec(cmd: any): Promise<void>;
     /**
      * Loads a new Server module and initialize its instance from relative path.
@@ -12,8 +18,7 @@ export default class RunCommand extends BaseCommand<{
         entrypoint: any;
         env: any;
     }): Promise<string>;
-    run({ entrypoint, env }: {
-        entrypoint: any;
+    run(entrypoint: any, { env }: {
         env: any;
     }): Promise<void>;
 }

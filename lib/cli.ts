@@ -2,28 +2,44 @@
 
 import * as Commander from "commander";
 import * as Package from "pjson";
-import { LoggerInstance } from "ts-framework-common";
-import { ConsoleCommand, GenerateCommand, ListenCommand, WatchCommand, RunCommand } from "./commands";
+import { LoggerInstance, Logger } from "ts-framework-common";
+import BaseCommand from "./base/BaseCommand";
+import { ConsoleCommand, GenerateCommand, ListenCommand, RunCommand } from "./commands";
+
+export interface CommandLineOptions {
+  logger?: LoggerInstance;
+}
 
 export default class CommandLine {
   public logger: LoggerInstance;
+  public commands: BaseCommand[];
   protected program: Commander.Command;
 
-  constructor() {
+  constructor(commands?: BaseCommand[], options?: CommandLineOptions) {
+    // Initialize Commander instance
     this.program = Commander.name(Package.name)
       .version(Package.version)
-      .description(Package.description);
+      .description(Package.description)
+      .option("-v, --verbose", "enables verbose mode");
+
+    // Prepare logger
+    this.logger = Logger.getInstance();
+
+    // Initialize default commands
+    this.commands = commands || [new ListenCommand(), new GenerateCommand(), new ConsoleCommand(), new RunCommand()];
 
     this.onMount().catch(this.onError.bind(this));
   }
 
-  public static initialize() {
-    new CommandLine().parse();
+  public static initialize(commands?: BaseCommand[]) {
+    return new CommandLine(commands).parse();
   }
 
   public onError(error) {
-    console.error(error);
-    process.exit(1);
+    this.logger.error(error);
+
+    // Async exit for log processing to occur before crashing
+    setTimeout(() => process.exit(1), 500);
   }
 
   public async onMount() {
@@ -34,65 +50,41 @@ export default class CommandLine {
 
     // Check TS Node is available
     try {
-      const tsNode = require("ts-node/register/transpile-only");
+      require("ts-node/register/transpile-only");
     } catch (exception) {
-      console.warn(exception);
-      console.warn("\n\nWARN: TS Node is not available, typescript files won't be supported");
+      this.logger.warn(exception);
+      this.logger.warn("\n\nWARN: TS Node is not available, typescript files won't be supported");
     }
 
     // Handle unknown commands
-    this.program.on("command:*", () => {
-      console.error("Invalid syntax for command line" + "\nSee --help for a list of available commands.");
+    this.program.on("command:*", args => {
+      if (args && args.length && args[0] === "help") {
+        this.program.outputHelp();
+      } else {
+        this.logger.error("Unknown syntax for command line" + "\n\nSee --help for a list of available commands.");
+      }
       process.exit(1);
     });
 
-    this.program
-      .command("listen [entrypoint]")
-      .description("Runs the server in a single process")
-      .option("-d, --development", "Starts server without production flags")
-      .action((entrypoint = "./api/server.ts", options = {}) =>
-        new ListenCommand().run({
-          entrypoint,
-          env: options.development ? "development" : "production"
-        })
-      );
+    this.commands.map(cmd => {
+      // Prepare command syntax
+      const p = this.program.command(cmd.command.syntax).description(cmd.command.description);
 
-    this.program
-      .command("console [entrypoint]")
-      .description("Run interactive console")
-      .action((entrypoint = "./api/server.ts") => new ConsoleCommand().run({ entrypoint }));
+      // Bind command arguments
+      if (cmd.command.options) {
+        cmd.command.options.map(options => {
+          p.option.apply(p, options);
+        });
+      }
 
-    this.program
-      .command("run [entrypoint]")
-      .option("-d, --development", "Starts server without production flags")
-      .description("Runs the server components without lifting express")
-      .action((entrypoint = "./api/server.ts", options = {}) =>
-        new RunCommand().run({
-          entrypoint,
-          env: options.development ? "development" : "production"
-        })
-      );
-
-    this.program
-      .command("watch [entrypoint]")
-      .description("Run the development server with live reload")
-      .action((entrypoint = "./api/server.ts") => new WatchCommand().run({ entrypoint }));
-
-    this.program
-      .command("new <component> [name]")
-      .option("-s, --skip-install", "Skips yarn installation and post generation routines")
-      .description("Generates a new TS Framework project")
-      .action((component, name, options = {}) =>
-        new GenerateCommand().run({
-          name,
-          component,
-          skipInstall: options.skipInstall
-        })
-      );
+      // Bind command action
+      p.action((...args) => cmd.run.apply(cmd, args));
+    });
   }
 
   parse() {
     this.program.parse(process.argv);
+    return this;
   }
 }
 

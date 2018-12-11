@@ -5,7 +5,16 @@ import { BaseError } from "ts-framework-common";
 import BaseCommand from "../base/BaseCommand";
 import Server, { ServerOptions } from "../server";
 
-export default class RunCommand extends BaseCommand<{ entrypoint: string }> {
+export default class RunCommand extends BaseCommand {
+  command = {
+    syntax: "run [entrypoint]",
+    description: "Runs the server components without lifting express",
+    options: [["-d, --development", "Starts server without production flags"]]
+  };
+
+  /**
+   * Simple method for executing child processes.
+   */
   public async exec(cmd) {
     return new Promise<void>((resolve, reject) => {
       exec(cmd, (error, stdout, stderr) => {
@@ -84,7 +93,7 @@ export default class RunCommand extends BaseCommand<{ entrypoint: string }> {
     return distributionFile;
   }
 
-  public async run({ entrypoint, env }) {
+  public async run(entrypoint, { env }) {
     const distributionFile = await this.prepare({ entrypoint, env });
     this.logger.debug(`Starting workers in "${env}" environment from ${distributionFile}`);
 

@@ -4,9 +4,14 @@ export interface GenerateCommandOptions {
     component: string;
     skipInstall?: boolean;
 }
-export default class GenerateCommand extends BaseCommand<GenerateCommandOptions> {
+export default class GenerateCommand extends BaseCommand {
     env: any;
+    command: {
+        syntax: string;
+        description: string;
+        options: string[][];
+    };
     static AVAILABLE_COMPOENENTS: string[];
     constructor(options?: {});
-    run({ name, component, skipInstall }: GenerateCommandOptions): Promise<void>;
+    run(component: any, name: any, { skipInstall }: GenerateCommandOptions): Promise<void>;
 }
