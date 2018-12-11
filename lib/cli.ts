@@ -74,8 +74,8 @@ export default class CommandLine {
       console.log("");
       console.log("Environment variables:");
       console.log("");
-      console.log('  NODE_ENV\tSets the environment to run the server. Defaults to: "development"');
-      console.log('  PORT\t\tSets the port to listen to. Defaults to: "3000"');
+      console.log('  - NODE_ENV\tSets the environment to run the server. Defaults to: "development"');
+      console.log('  - PORT\t\tSets the port to listen to. Defaults to: "3000"');
       console.log("");
       console.log("Getting started:");
       console.log("");

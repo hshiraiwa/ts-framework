@@ -2581,8 +2581,8 @@ gauge@~2.7.3:
     wide-align "^1.1.0"
 
 generator-ts-framework@nxtep-io/generator-ts-framework:
-  version "0.0.0"
-  resolved "https://codeload.github.com/nxtep-io/generator-ts-framework/tar.gz/78f07238d64c7dc6ab8dc28901ea196fdd65852c"
+  version "1.0.0"
+  resolved "https://codeload.github.com/nxtep-io/generator-ts-framework/tar.gz/664f3273f3907c1f2bf4960253da993d3098ea4a"
   dependencies:
     chalk "^2.1.0"
     merge ">=1.2.1"
