@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>ts-framework (v2.2.0)</title>
+	<title>ts-framework (v2.3.0)</title>
 	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="assets/css/main.css">
@@ -22,7 +22,7 @@
 						<li class="state loading">Preparing search index...</li>
 						<li class="state failure">The search index is not available</li>
 					</ul>
-					<a href="index.html" class="title">ts-framework (v2.2.0)</a>
+					<a href="index.html" class="title">ts-framework (v2.3.0)</a>
 				</div>
 				<div class="table-cell" id="tsd-widgets">
 					<div id="tsd-filter">
@@ -56,7 +56,7 @@
 					<a href="globals.html">Globals</a>
 				</li>
 			</ul>
-			<h1> ts-framework (v2.2.0)</h1>
+			<h1> ts-framework (v2.3.0)</h1>
 		</div>
 	</div>
 </header>
@@ -65,47 +65,31 @@
 		<div class="col-8 col-content">
 			<div class="tsd-panel tsd-typography">
 				<h1 id="ts-framework">ts-framework</h1>
-				<p><a href="https://travis-ci.org/devnup/ts-framework"><img src="https://travis-ci.org/devnup/ts-framework.svg?branch=master" alt="Build Status"></a> &nbsp; <a href="https://coveralls.io/github/devnup/ts-framework?branch=master"><img src="https://coveralls.io/repos/github/devnup/ts-framework/badge.svg?branch=master" alt="Coverage Status"></a></p>
+				<p><a href="https://travis-ci.org/nxtep-io/ts-framework"><img src="https://travis-ci.org/nxtep-io/ts-framework.svg?branch=master" alt="Build Status"></a> &nbsp; <a href="https://coveralls.io/github/nxtep-io/ts-framework?branch=master"><img src="https://coveralls.io/repos/github/nxtep-io/ts-framework/badge.svg?branch=master" alt="Coverage Status"></a></p>
 				<p>A minimalistic framework for typescript based applications, with async/await and decorators support.</p>
 				<h2 id="getting-started">Getting Started</h2>
-				<h3 id="alpha-disclaimer">Alpha Disclaimer</h3>
-				<p>The current API is considered to be an &quot;Alpha Release&quot; of the v2 branch. That means that big, probably breaking
-					changes are expected. Be sure to use a specific GIT_REV_HASH and a lock file in your project, so you
+				<h3 id="beta-disclaimer">Beta Disclaimer</h3>
+				<p>The current API is considered to be a &quot;Beta Release&quot; of the v2 branch. That means that small breaking changes
+					changes are still expected. Be sure to use a specific GIT_REV_HASH and a lock file in your project, so you
 				won&#39;t be immediately affected by such a change.</p>
 				<p>For example:</p>
 				<pre><code class="lang-bash"><span class="hljs-comment"># Install using Yarn</span>
-yarn add git+https://github.com/devnup/ts-framework.git<span class="hljs-comment">#GIT_REV_HASH </span>
+yarn add git+https://github.com/nxtep-io/ts-framework.git<span class="hljs-comment">#GIT_REV_HASH </span>
 
 <span class="hljs-comment"># Install using NPM</span>
-npm install --save git+https://github.com/devnup/ts-framework.git<span class="hljs-comment">#GIT_REV_HASH </span>
+npm install --save git+https://github.com/nxtep-io/ts-framework.git<span class="hljs-comment">#GIT_REV_HASH </span>
 </code></pre>
-				<h3 id="tl-dr-a-single-file-server">TL;DR - A single file server</h3>
+				<h3 id="tl-dr-using-the-command-line-generator">TL;DR - Using the command line generator</h3>
 				<p>Configure a new Server instance and start listening on desired port. </p>
-				<pre><code class="lang-typescript"><span class="hljs-keyword">import</span> Server, { Logger, BaseRequest, BaseResponse } <span class="hljs-keyword">from</span> <span class="hljs-string">'ts-framework'</span>;
+				<pre><code class="lang-bash"><span class="hljs-comment"># Install command line tools from Github</span>
+$ yarn global add <span class="hljs-string">"nxtep-io/ts-framework#VERSION_TAG"</span>
 
-<span class="hljs-comment">// Define a sample hello world route</span>
-<span class="hljs-keyword">const</span> SampleRoutes {
-  <span class="hljs-string">'/'</span>: <span class="hljs-keyword">async</span> (req: BaseRequest, res: BaseResponse) =&gt; {
-    res.success({ message: <span class="hljs-string">'Hello world!'</span> });
-  }
-}
+<span class="hljs-comment"># Generate a new project</span>
+$ ts-framework new app <span class="hljs-string">"example/"</span>
 
-<span class="hljs-comment">// Define the server configuration</span>
-<span class="hljs-keyword">const</span> server = <span class="hljs-keyword">new</span> Server({
-  port: process.env.PORT <span class="hljs-keyword">as</span> <span class="hljs-built_in">any</span> || <span class="hljs-number">3000</span>,
-  routes: {
-    <span class="hljs-keyword">get</span>: SampleRoutes,
-  },
-});
-
-
-<span class="hljs-comment">// Startup the simple server</span>
-server.listen()
-  .then(<span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> Logger.info(<span class="hljs-string">`Server listening on port: <span class="hljs-subst">${server.config.port}</span>`</span>))
-  .catch(<span class="hljs-function"><span class="hljs-params">error</span> =&gt;</span> {
-    <span class="hljs-built_in">console</span>.error(error);
-    process.exit(<span class="hljs-number">1</span>);
-  });
+<span class="hljs-comment"># Start project</span>
+$ <span class="hljs-built_in">cd</span> example/
+$ yarn start
 </code></pre>
 				<p>You can also check a full project seed in the <a href="./example">Examples directory</a> of this repository.</p>
 				<h3 id="usage-guide">Usage Guide</h3>
@@ -113,13 +97,14 @@ server.listen()
 				Database and user authentication samples.</p>
 				<p>Internal components:</p>
 				<ul>
-					<li>Logger (backed by <a href="https://npmjs.org/package/winston">winston</a>)</li>
 					<li>Router (backed by <a href="https://npmjs.org/package/express">Express</a>)<ul>
 							<li><strong>Controllers:</strong> Classes for handling API calls with decorators and async/await support</li>
 							<li><strong>Filters:</strong> Middlewares for body validation, permission handling and other interception routines</li>
 							<li><strong>Responses:</strong>: Simple wrappers over <code>res.status(code).json(result)</code> for success and error responses.</li>
 						</ul>
 					</li>
+					<li>Enhanced error handling in controllers, filters and middlewares</li>
+					<li>Logger (backed by <a href="https://npmjs.org/package/winston">winston</a>)</li>
 				</ul>
 				<p>External components available as built-in middlewares: </p>
 				<ul>
@@ -132,51 +117,84 @@ server.listen()
 					<li>Method Override (express/method-override)</li>
 					<li>Cookie Parser (express/cookie-parser)</li>
 				</ul>
-				<p>Database providers:</p>
+				<p>Database providers (as external plugins):</p>
 				<ul>
 					<li><p><strong><a href="https://github.com/nxtep-io/ts-framework-mongo">ts-framework-mongo</a></strong></p>
-						<p>  MongoDB layer based on MongooseJS.</p>
+						<p>  MongoDB database mapping layer based on MongooseJS.</p>
 					</li>
 					<li><p><strong><a href="https://github.com/nxtep-io/ts-framework-sql">ts-framework-sql</a></strong></p>
-						<p>  MySQL / Postgres database layer based on Typeorm. Currently in public BETA.</p>
+						<p>  MySQL / Postgres database mapping layer based on Typeorm.</p>
 					</li>
 				</ul>
-				<p>Database Utilities:</p>
+				<p>Database Utilities (as external plugins):</p>
 				<ul>
-					<li><p><strong><a href="https://gitlab.devnup.com/npm/ts-framework-migration">ts-framework-migration</a></strong></p>
+					<li><p><strong><a href="https://github.com/nxtep-io/ts-framework-migration">ts-framework-migration</a></strong></p>
 						<p>  Agnostic plugin for handling database migrations safely within production environments.</p>
 					</li>
 				</ul>
-				<p>Other external plugins and middlewares for this framework</p>
+				<p>Other external plugins and middlewares for this framework:</p>
 				<ul>
-					<li><p><strong><a href="https://github.com/devnup/ts-framework-versioning">ts-framework-versioning</a></strong></p>
+					<li><p><strong><a href="https://github.com/nxtep-io/ts-framework-validation">ts-framework-validation</a></strong></p>
+						<p>  Minimalistic request body and param validator framework.</p>
+					</li>
+					<li><p><strong><a href="https://github.com/nxtep-io/ts-framework-notification">ts-framework-notification</a></strong></p>
+						<p>  Handles transactional notifications using SMTP (email templates), SMS (Twilio) and Firebase Messaging (push notifications).</p>
+					</li>
+					<li><p><strong><a href="https://github.com/nxtep-io/ts-framework-maintenance">ts-framework-maintenance</a></strong></p>
+						<p>  Maintenance mode middleware for blocking API requests temporarily.</p>
+					</li>
+					<li><p><strong><a href="https://github.com/nxtep-io/ts-framework-versioning">ts-framework-versioning</a></strong></p>
 						<p>  Handles API versioning using HTTP Headers.</p>
 					</li>
-					<li><p><strong><a href="https://github.com/devnup/ts-framework-notification">ts-framework-notification</a></strong></p>
-						<p>  Handles transactional notifications using SMTP (email templates) and Firebase Messaging (push notifications).</p>
+					<li><p><strong><a href="https://github.com/nxtep-io/ts-framework-signing">ts-framework-signing</a></strong></p>
+						<p>  Handles API request signing based on HMAC SHA256 using HTTP Headers.</p>
 					</li>
 					<li><p><strong><a href="https://github.com/nxtep-io/ts-framework-sockets">ts-framework-sockets</a></strong></p>
 						<p>  Socket.io layer over the TS-Framework. Currently in public BETA.</p>
 					</li>
-					<li><p><strong>ts-framework-queue (coming soon)</strong></p>
-						<p>  Redis based task rotation queue services. Currently in closed alpha.</p>
+					<li><p><strong><a href="https://github.com/nxtep-io/ts-framework-queue">ts-framework-queue</a></strong></p>
+						<p>  RabbitMQ based queue worker services based on RabbitMQ. Currently in public alpha.</p>
 					</li>
 					<li><p><strong>ts-framework-cache (coming soon)</strong></p>
 						<p>  Redis based cache services for performance. Currently in closed alpha.</p>
 					</li>
 				</ul>
 				<h2 id="documentation">Documentation</h2>
-				<p>Checkout the rendered TS Docs in the official page: <a href="https://devnup.github.io/ts-framework/">https://devnup.github.io/ts-framework/</a></p>
+				<p>Checkout the rendered TS Docs in the official page: <a href="https://nxtep-io.github.io/ts-framework/">https://nxtep-io.github.io/ts-framework/</a></p>
 				<p>To generate the Typedoc reference of the available modules directly from source, run the following command:</p>
 				<pre><code class="lang-sh">yarn run docs
 </code></pre>
 				<p>Then check the documentation at <code>./docs/index.html</code>.</p>
-				<h2 id="migration-guide">Migration Guide</h2>
-				<p>This migration is a draft.</p>
-				<p>The v2 breaking changes are listed below:</p>
-				<ul>
-					<li>Database layer moved to its own package</li>
-				</ul>
+				<h2 id="command-line">Command Line</h2>
+				<p>The framework provides a set of command line tools for a enhanced development experience.</p>
+				<p><strong>Process manager</strong></p>
+				<p>Start the development server based on Nodemon with typescript support and live reload.</p>
+				<pre><code class="lang-bash">$ ts-framework watch
+</code></pre>
+				<p>Start the workers without exposing the server port.</p>
+				<pre><code class="lang-bash">$ ts-framework run
+</code></pre>
+				<p>Start the server in production mode</p>
+				<pre><code class="lang-bash">$ ts-framework listen
+</code></pre>
+				<p><strong>REPL Console</strong></p>
+				<p>Start the interactive console in the current folder.</p>
+				<pre><code class="lang-bash">$ ts-framework console
+</code></pre>
+				<p><strong>Generator</strong></p>
+				<p>Built upon a Yeoman generator, it helps scaffoldling new project directories and single components (controllers, jobs, services etc).</p>
+				<pre><code class="lang-bash"><span class="hljs-comment"># Generates a new Application interactively</span>
+$ ts-framework new app
+
+<span class="hljs-comment"># Generates a new application in a new ./example folder</span>
+$ ts-framework new app <span class="hljs-string">"example"</span>
+
+<span class="hljs-comment"># Generates a new TestController in ./api/controllers/TestController.ts</span>
+$ ts-framework new controller <span class="hljs-string">"test"</span>
+
+<span class="hljs-comment"># Generates a new UptimeService in ./api/services/UptimeService.ts</span>
+$ ts-framework new service <span class="hljs-string">"uptime"</span>
+</code></pre>
 				<h2 id="license">License</h2>
 				<p>The project is licensed under the <a href="./LICENSE.md">MIT License</a>.</p>
 			</div>

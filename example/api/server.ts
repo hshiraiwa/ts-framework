@@ -1,7 +1,8 @@
-import Server, { ReplConsole } from '../../lib';
+import { Logger } from 'ts-framework-common';
+import Server, { ServerOptions } from 'ts-framework';
 import StatusController from './controllers/StatusController';
 import UptimeService from './services/UptimeService';
-import { Logger } from 'ts-framework-common';
+import WelcomeJob from './jobs/WelcomeJob';
 
 // Prepare server port
 const port = process.env.PORT as any || 3000;
@@ -11,7 +12,7 @@ const sentry = process.env.SENTRY_DSN ? { dsn: process.env.SENTRY_DSN } : undefi
 const logger = Logger.getInstance({ sentry });
 
 export default class MainServer extends Server {
-  constructor() {
+  constructor(options?: ServerOptions) {
     super({
       port,
       logger,
@@ -20,8 +21,10 @@ export default class MainServer extends Server {
         controllers: { StatusController } 
       },
       children: [
-        UptimeService.getInstance()
+        UptimeService.getInstance(),
+        new WelcomeJob({}),
       ],
+      ...options,
     });
   }
 }

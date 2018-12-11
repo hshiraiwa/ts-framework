@@ -14,8 +14,8 @@ export interface ReplConsoleOptions extends ServiceOptions {
 }
 
 export default class ReplConsole extends Service {
-  protected server?: Server;
-  protected repl?: repl.REPLServer;
+  public server?: Server;
+  public repl?: repl.REPLServer;
   public options: ReplConsoleOptions;
 
   constructor(options: ReplConsoleOptions) {
