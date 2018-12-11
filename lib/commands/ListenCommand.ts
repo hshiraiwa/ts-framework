@@ -12,8 +12,9 @@ export default class ListenCommand extends RunCommand {
   };
 
   public async run(entrypoint = this.options.entrypoint, options) {
-    const env = options.env || this.options.env;
+    // Force production unless flag was supplied
     const port = options.port || this.options.port;
+    const env = options.development ? "development" : options.env || "production";
 
     const distributionFile = await this.prepare({ entrypoint, env });
     this.logger.debug(`Starting server in "${env}" environment from ${distributionFile}`);

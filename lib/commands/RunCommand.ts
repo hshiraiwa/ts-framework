@@ -94,8 +94,11 @@ export default class RunCommand extends BaseCommand {
   }
 
   public async run(entrypoint = this.options.entrypoint, options) {
-    const env = options.env || this.options.env;
+    // Force production unless flag was supplied
     const port = options.port || this.options.port;
+    const env = options.development ? "development" : options.env || "production";
+
+    // Prepare distribution file
     const distributionFile = await this.prepare({ entrypoint, env });
     this.logger.debug(`Starting workers in "${env}" environment from ${distributionFile}`);
 
