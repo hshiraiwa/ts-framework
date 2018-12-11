@@ -93,7 +93,9 @@ export default class RunCommand extends BaseCommand {
     return distributionFile;
   }
 
-  public async run(entrypoint = this.options.entrypoint, { env }) {
+  public async run(entrypoint = this.options.entrypoint, options) {
+    const env = options.env || this.options.env;
+    const port = options.port || this.options.port;
     const distributionFile = await this.prepare({ entrypoint, env });
     this.logger.debug(`Starting workers in "${env}" environment from ${distributionFile}`);
 
@@ -102,11 +104,7 @@ export default class RunCommand extends BaseCommand {
       process.env.NODE_ENV = "production";
     }
 
-    const options = { port: process.env.PORT || 3000 };
-    const instance = await this.load(distributionFile, {
-      ...options
-    });
-
+    const instance = await this.load(distributionFile, { ...options, env, port });
     await instance.onInit();
     await instance.onReady();
   }

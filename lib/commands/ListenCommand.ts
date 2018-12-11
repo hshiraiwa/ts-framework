@@ -11,7 +11,10 @@ export default class ListenCommand extends RunCommand {
     ]
   };
 
-  public async run(entrypoint = this.options.entrypoint, { port, env }) {
+  public async run(entrypoint = this.options.entrypoint, options) {
+    const env = options.env || this.options.env;
+    const port = options.port || this.options.port;
+
     const distributionFile = await this.prepare({ entrypoint, env });
     this.logger.debug(`Starting server in "${env}" environment from ${distributionFile}`);
 
@@ -20,11 +23,7 @@ export default class ListenCommand extends RunCommand {
       process.env.NODE_ENV = "production";
     }
 
-    const options = { port: process.env.PORT || port || 3000 };
-    const instance = await this.load(distributionFile, {
-      ...options
-    });
-
+    const instance = await this.load(distributionFile, { ...options, env, port });
     await instance.listen();
   }
 }

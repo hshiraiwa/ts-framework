@@ -2,7 +2,7 @@
 
 import * as Commander from "commander";
 import * as Package from "pjson";
-import { LoggerInstance, Logger } from "ts-framework-common";
+import { Logger, LoggerInstance } from "ts-framework-common";
 import BaseCommand from "./base/BaseCommand";
 import { ConsoleCommand, GenerateCommand, ListenCommand, RunCommand, WatchCommand } from "./commands";
 
@@ -10,7 +10,9 @@ export interface CommandLineOptions {
   logger?: LoggerInstance;
 }
 
-export const DEFAULT_ENTRYPOINT = "./api/server";
+export const DEFAULT_ENTRYPOINT = process.env.ENTRYPOINT || "./api/server";
+export const DEFAULT_ENV = process.env.NODE_ENV || "development";
+export const DEFAULT_PORT = process.env.PORT || 3000;
 
 export default class CommandLine {
   public logger: LoggerInstance;
@@ -27,8 +29,14 @@ export default class CommandLine {
     // Prepare logger
     this.logger = Logger.getInstance();
 
+    // Prepare command options
+    const commandOpts = {
+      entrypoint: DEFAULT_ENTRYPOINT,
+      port: DEFAULT_PORT,
+      env: DEFAULT_ENV
+    };
+
     // Initialize default commands
-    const commandOpts = { entrypoint: DEFAULT_ENTRYPOINT };
     this.commands = commands || [
       new ListenCommand(commandOpts),
       new GenerateCommand(commandOpts),
@@ -37,6 +45,7 @@ export default class CommandLine {
       new WatchCommand(commandOpts)
     ];
 
+    // Starts command mounting
     this.onMount().catch(this.onError.bind(this));
   }
 
@@ -83,8 +92,9 @@ export default class CommandLine {
       console.log("");
       console.log("Environment variables:");
       console.log("");
-      console.log('  - NODE_ENV\tSets the environment to run the server. Defaults to: "development"');
-      console.log('  - PORT\t\tSets the port to listen to. Defaults to: "3000"');
+      console.log('  - ENTRYPOINT\t\t\tSets server entrypoint for execution. Defaults to: "./api/server.ts"');
+      console.log('  - NODE_ENV\t\t\tSets the environment to run the server. Defaults to: "development"');
+      console.log('  - PORT\t\t\tSets the port to listen to. Defaults to: "3000"');
       console.log("");
       console.log("Getting started:");
       console.log("");

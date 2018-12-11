@@ -3,6 +3,8 @@ import { LoggerInstance } from "ts-framework-common";
 export interface BaseCommandOptions {
     logger?: LoggerInstance;
     entrypoint?: string;
+    port?: string | number;
+    env?: string;
 }
 export interface CommanderDefs {
     syntax: string;

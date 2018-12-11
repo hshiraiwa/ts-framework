@@ -5,7 +5,9 @@ import BaseCommand from "./base/BaseCommand";
 export interface CommandLineOptions {
     logger?: LoggerInstance;
 }
-export declare const DEFAULT_ENTRYPOINT = "./api/server";
+export declare const DEFAULT_ENTRYPOINT: string;
+export declare const DEFAULT_ENV: string;
+export declare const DEFAULT_PORT: string | number;
 export default class CommandLine {
     logger: LoggerInstance;
     commands: BaseCommand[];
