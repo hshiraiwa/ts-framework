@@ -9,7 +9,7 @@ Start by extending the base Server. It's easy to control its behaviour by passin
 a configuration object or importing it from a config file.
 
 ```typescript
-import { Server, ServerOptions } from 'ts-framework/server';
+import { Server, ServerOptions } from 'ts-framework';
 import { StatusController } from './controllers';
 
 export default class MainServer extends Server {
