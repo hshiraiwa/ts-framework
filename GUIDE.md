@@ -10,65 +10,63 @@ extending the **Server** base class.
 
 ```typescript
 import { Server, ServerOptions } from 'ts-framework/server';
+import { StatusController } from './controllers';
 
 export default class MainServer extends Server {
-
   constructor(options?: ServerOptions) {
     super({
-      port: process.env.PORT || 3000
-      routes: {
-        get: {
-          '/': (req, res) => this.helloWorld(req, res)
-        }
+      // Recommended: Start with the SimpleLogger to ease the debug process
+      logger: Logger,
+      port: process.env.PORT || 3000,
+      router: {
+        controllers: { status: StatusController },
       },
-      ...options,
+      ...options
     });
-  }
-  helloWorld(req, res) {
-    res.json({ message: 'HelloWorld!' })
-  }
-
-  /** For example, extend the onStartup method to handle post-listen routines */
-  async onStartup() {
-    // This method will be called right after the server.listen() has been called.
-    console.log(`Server listening on port: ${this.config.port}`);
   }
 } 
 ```
 
-The main entrypoint for your application should be a **Server** instance. For 
-instance, inside a ```start.ts``` file, initialize and listen in the supplied 
-port.
+The main entrypoint for your application should be a **Server** instance exported as 
+default. This enables the Server to be managed by the command line interface.
 
-```typescript
-import MainServer from './server';
-
-const server = new MainServer();
-
-// Start listening for requests...
-server.listen().catch(error => {
-  console.error(error);
-  process.exit(1);
-});
+```bash
+# Starts the development server
+$ ts-framework watch ./api/server.ts
 ```
+
 
 
 ### Configuring the Database
 
+The framework comes with a thin abstraction layer over some great database libraries:
 
-The framework comes with a thin abstraction layer over the great 
-[Mongoose ODM](https://npmjs.org/package/mongoose). The goal of this layer is to
-provide a simple and consistent base class, that can be extended in the same way 
-as the **Server** was done in the last section. 
+#### [TypeORM](https://npmjs.org/package/typeorm)
 
 ```typescript
-import { Database } from 'ts-framework/database';
+import Config from '../config';
+import { Database } from 'ts-framework-sql';
 
 export default class MainDatabase extends Database {
-  async connect() {
-    // Do some pre-connection routines...
-    await super.connect();
-    // Do some post-connection routines...
+  constructor() {
+    super({
+      type: "postgres",
+      logging: ["error"],
+      host: process.env.DATABASE_HOST || "localhost",
+      port: process.env.DATABASE_PORT || "5432",
+      username: process.env.DATABASE_USER || "postgres",
+      password: process.env.DATABASE_PASSWORD || "postgres",
+      database: process.env.DATABASE_NAME || "test",
+
+      // IMPORTANT: Path should be relative to root
+      entities: ["./api/models/**/*.ts"],
+      migrations: ["./api/migrations/**/*.ts"],
+      cli: {
+        // IMPORTANT: Path should be relative to root
+        entitiesDir: "./api/models",
+        migrationsDir: "./api/migrations"
+      }
+    })
   }
 }
 ```
@@ -80,6 +78,51 @@ import { Server, ServerOptions, Logger } from 'ts-framework/server';
 import { StatusController } from './controllers/StatusController'
 import MainDatabase from './database';
 
+// Prepare the database to be connected later
+const database = new MainDatabase();
+
+export default class MainServer extends Server {
+  constructor(options: ServerOptions) {
+    super({
+      // Recommended: Start with the SimpleLogger to ease the debug process
+      logger: Logger,
+      port: process.env.PORT || 3000,
+      controllers: { status: StatusController },
+      // Database will be initialized in the Server lifecycle
+      children: [database],
+      ...options
+    });
+  }
+} 
+```
+
+<br />
+
+#### [Mongoose ODM](https://npmjs.org/package/mongoose)
+
+The goal of this layer is to provide a simple and consistent base class, that can be 
+extended in the same way  as the **Server** was done in the last section. 
+
+```typescript
+import { Database } from 'ts-framework-mongo';
+
+export default class MainDatabase extends Database {
+  constructor() {
+    super({ url: process.env.MONGO_URL || 'mongodb://localhost:27017/example' });
+  }
+}
+```
+
+Now, you can bind the database initialization to the MainServer instance.
+
+```typescript
+import { Server, ServerOptions, Logger } from 'ts-framework/server';
+import { StatusController } from './controllers/StatusController'
+import MainDatabase from './database';
+
+// Prepare the database to be connected later
+const database = new MainDatabase();
+
 export default class MainServer extends Server {
   database: MainDatabase;
 
@@ -89,24 +132,15 @@ export default class MainServer extends Server {
       logger: Logger,
       port: process.env.PORT || 3000,
       controllers: { status: StatusController },
+      // Database will be initialized in the Server lifecycle
+      children: [database],
       ...options
     });
-    
-    // Prepare the database to be connected later
-    this.database = new MainDatabase({
-      logger: Logger,
-      url: process.env.MONGO_URL || 'mongodb://localhost:27017/example'
-    })
-  }
-
-  /** For example, extend the onStartup method to handle pre-listen routines */
-  async onStartup() {
-    // Connect to database instance
-    await this.database.connect();
-    this.logger.info(`Server listening on port: ${this.config.port}`);
   }
 } 
 ```
+
+<br />
 
 ## Writing your Application
 
@@ -122,7 +156,6 @@ import { Controller, Get } from "ts-framework";
 
 @Controller('/status')
 export default class StatusController {
-
   static STARTED_AT = Date.now();
 
   @Get('/')
@@ -138,72 +171,79 @@ export default class StatusController {
 }
 ```
 
-For example, this status controller would produce this response when requested:
+This status controller example would produce this response when requested:
 
 ```
 GET /status
 
 {
-    "name": "example",
-    "version": "0.0.1",
-    "environment": "production",
-    "uptime": 1445563
+  "name": "example",
+  "version": "0.0.1",
+  "environment": "production",
+  "uptime": 1445563
 }
 ```
 
-### Model
+### Middlewares
 
-The framework is based on the [Mongoose Advanced Schemas](http://mongoosejs.com/docs/advanced_schemas.html) for ES6. The 
-idea is to wrap your model in a class-oriented approach.
+All requests can be intercepted using plain old Express middlewares. It provides
+access to the application's request-response cycle.
 
 ```typescript
-import { Model, BaseModel } from "ts-framework/database";
+const requestLogger = (req: BaseRequest, res: BaseResponse, next: Function) => {
+  // Logs a simple message every request
+  console.log('New request!');
+  console.log(req.originalUrl);
 
-/**
- * A simple user schema definition. 
- */
-const UserSchema =  new Schema({
-  name: {
-    type: String
-  },
-  email: {
-    type: String,
-    required: true,
-  },
-  password: {
-    type: String,
-    required: true,
-  },
-  status: {
-    type: String,
-    enum: ['active', 'inactive'],
-    default: 'active',
-  }
-});
-
-@Model("Users")
-class UserModel extends BaseModel {
-  
-  /**
-   * The schema definition is required and must be static. 
-   */
-  static Schema = UserSchema;
-  
-  /**
-   * Example static method: finds an user with specified email.
-   */
-  static findByEmail(email: string): Promise<UserModel> {
-    return this.findOne({ email, status: 'active'});
-  }
-  
-  /**
-   * Example instance method: sets user instance name.
-   */
-  async setName(name: string) {
-    return this.update({ $set: { name }});
-  }
+  // Continues with the request pipeline
+  return next();
 }
+```
 
-// Register in a Database isntance
-export default database.model(UserModel);
+You can apply it in the controllers methods individually.
+
+```typescript
+import * as Package from 'pjson';
+import { Controller, Get } from "ts-framework";
+
+@Controller('/status')
+export default class StatusController {
+  static STARTED_AT = Date.now();
+
+  // A list of middlewares for this method
+  @Get('/', [requestLogger])
+  static getStatus(req, res) {
+    res.success({
+      name: Package.name,
+      version: Package.version,
+      environment: process.env.NODE_ENV || 'development',
+      uptime: Date.now() - StatusController.STARTED_AT
+    });
+  }
+
+}
+```
+
+It can also be applied globally to the controller.
+
+```typescript
+import * as Package from 'pjson';
+import { Controller, Get } from "ts-framework";
+
+// A list of middlewares for this controller
+@Controller('/status', [requestLogger])
+export default class StatusController {
+  static STARTED_AT = Date.now();
+
+  @Get('/')
+  static getStatus(req, res) {
+    res.success({
+      name: Package.name,
+      version: Package.version,
+      environment: process.env.NODE_ENV || 'development',
+      uptime: Date.now() - StatusController.STARTED_AT
+    });
+  }
+
+}
 ```
