@@ -71,6 +71,7 @@
     "source-map-support": "^0.5.0",
     "ts-framework-common": "nxtep-io/ts-framework-common#2.2.0",
     "typescript": "^3.0.1",
+    "upath": "^1.1.0",
     "urijs": "^1.19.0",
     "url-join": "^4.0.0",
     "winston-raven-sentry": "^1.0.1",

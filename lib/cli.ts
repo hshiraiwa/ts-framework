@@ -9,7 +9,7 @@ export interface CommandLineOptions {
   logger?: LoggerInstance;
 }
 
-export const DEFAULT_ENTRYPOINT = process.env.ENTRYPOINT || "./api/server";
+export const DEFAULT_ENTRYPOINT = process.env.ENTRYPOINT || "./api/server.ts";
 export const DEFAULT_ENV = process.env.NODE_ENV || "development";
 export const DEFAULT_PORT = process.env.PORT || 3000;
 
