@@ -5,11 +5,11 @@ Configuration guide for the ts-framework.
 
 ### Configuring the Server
 
-Start by extending the default server. It's easier to control its behaviour by
-extending the **Server** base class.
+Start by extending the base Server. It's easy to control its behaviour by passing
+a configuration object or importing it from a config file.
 
 ```typescript
-import { Server, ServerOptions } from 'ts-framework/server';
+import { Server, ServerOptions } from 'ts-framework';
 import { StatusController } from './controllers';
 
 export default class MainServer extends Server {
