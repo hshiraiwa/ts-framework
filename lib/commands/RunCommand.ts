@@ -79,21 +79,19 @@ export default class RunCommand extends BaseCommand {
       let distributionFile = Path.join(distributionPath, relativePath, fileName + ".js");
 
       if (!fs.existsSync(distributionFile)) {
-        this.logger.silly(`Could not find transpiled file at: "${distributionFile}"`);
-
         // Try to find in distribution root, as a last attempt to make it work
         const fileName = Path.basename(sourceFile, ".ts");
         distributionFile = Path.join(distributionPath, fileName + ".js");
 
         if (fs.existsSync(distributionFile)) {
           // Runs from transpiled file
-          this.logger.silly(`Found transpiled server in "${distributionFile}"`);
+          this.logger.verbose(`Found transpiled server in "${distributionFile}"`);
         } else {
-          this.logger.silly(`Could not find transpiled file at: "${distributionFile}"`);
+          this.logger.verbose(`Could not find transpiled file"`);
         }
       } else {
         // Runs from transpiled file
-        this.logger.silly(`Found transpiled server in "${distributionFile}"`);
+        this.logger.verbose(`Found transpiled server in "${distributionFile}"`);
       }
 
       return distributionFile;
