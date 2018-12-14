@@ -13,7 +13,7 @@ export default class GenerateCommand extends BaseCommand {
   env: any;
   command = {
     syntax: "new <component> [name]",
-    description: "Generates a new TS Framework application or component",
+    description: "Generates a new TS Framework application or component.",
     options: [
       ["-s, --skip-install", "skips yarn installation and post generation routines"],
       ["-p, --path <path>", "the base path to create the file, relative to current working dir"],
@@ -30,8 +30,6 @@ export default class GenerateCommand extends BaseCommand {
   }
 
   public async run(component, name, { path = "", skipInstall }: GenerateCommandOptions) {
-    console.log(arguments);
-
     if (GenerateCommand.AVAILABLE_COMPOENENTS.indexOf(component) < 0) {
       throw new Error(`Could not generate unknown component: "${component}"`);
     }
