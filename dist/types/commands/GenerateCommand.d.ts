@@ -12,6 +12,7 @@ export default class GenerateCommand extends BaseCommand {
         description: string;
         options: string[][];
     };
+    static APP_COMPONENT: string;
     static AVAILABLE_COMPOENENTS: string[];
     constructor(options?: {});
     run(component: any, name: any, { path, skipInstall }: GenerateCommandOptions): Promise<void>;

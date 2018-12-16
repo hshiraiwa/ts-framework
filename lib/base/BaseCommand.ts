@@ -35,9 +35,9 @@ export default abstract class BaseCommand {
     }
 
     // Bind command action
-    p.action((...args) => {
+    p.action(async (...args) => {
       try {
-        return this.run.apply(this, args);
+        return await this.run.apply(this, args);
       } catch (exception) {
         this.logger.error(exception);
         setTimeout(() => process.exit(1), 1000);

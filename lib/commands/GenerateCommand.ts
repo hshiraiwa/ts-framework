@@ -1,6 +1,6 @@
 import * as yeoman from "yeoman-environment";
+import { BaseError } from "ts-framework-common";
 import BaseCommand from "../base/BaseCommand";
-import { Command } from "../../node_modules/commander";
 
 export interface GenerateCommandOptions {
   name?: string;
@@ -22,7 +22,8 @@ export default class GenerateCommand extends BaseCommand {
     ]
   };
 
-  public static AVAILABLE_COMPOENENTS = ["app", "controller", "service", "job", "model"];
+  public static APP_COMPONENT = "app";
+  public static AVAILABLE_COMPOENENTS = [GenerateCommand.APP_COMPONENT, "controller", "service", "job", "model"];
 
   constructor(options = {}) {
     super(options);
@@ -31,7 +32,12 @@ export default class GenerateCommand extends BaseCommand {
 
   public async run(component, name, { path = "", skipInstall }: GenerateCommandOptions) {
     if (GenerateCommand.AVAILABLE_COMPOENENTS.indexOf(component) < 0) {
-      throw new Error(`Could not generate unknown component: "${component}"`);
+      throw new BaseError(`Could not generate unknown component: "${component}"`);
+    }
+
+    // Ensure entity name was provided for components
+    if (!name && component !== "app") {
+      throw new BaseError(`Could not generate ${component} without a name`);
     }
 
     const generatorName =
@@ -46,7 +52,7 @@ export default class GenerateCommand extends BaseCommand {
     }
 
     return new Promise<void>((resolve, reject) =>
-      this.env.run(`ts-framework ${name}`, opts, error => {
+      this.env.run(`ts-framework ${name ? name : ""}`, opts, error => {
         if (error) {
           reject(error);
         } else {
