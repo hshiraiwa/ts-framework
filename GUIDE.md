@@ -179,8 +179,11 @@ export default class StatusController {
 }
 ```
 
-This status controller example would produce this response when requested:
+This status controller example would produce a simple health check response.
 
+<details><summary>View response</summary>
+<p>
+  
 ```
 GET /status
 
@@ -191,6 +194,10 @@ GET /status
   "uptime": 1445563
 }
 ```
+
+</p>
+</details>
+
 
 ### Middlewares
 
