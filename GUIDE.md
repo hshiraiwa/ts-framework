@@ -15,11 +15,9 @@ import { StatusController } from './controllers';
 export default class MainServer extends Server {
   constructor(options?: ServerOptions) {
     super({
-      // Recommended: Start with the SimpleLogger to ease the debug process
-      logger: Logger,
       port: process.env.PORT || 3000,
       router: {
-        controllers: { status: StatusController },
+        controllers: { StatusController },
       },
       ...options
     });
@@ -88,8 +86,6 @@ const database = new MainDatabase();
 export default class MainServer extends Server {
   constructor(options: ServerOptions) {
     super({
-      // Recommended: Start with the SimpleLogger to ease the debug process
-      logger: Logger,
       port: process.env.PORT || 3000,
       controllers: { status: StatusController },
       // Database will be initialized in the Server lifecycle
@@ -134,8 +130,6 @@ export default class MainServer extends Server {
 
   constructor(options: ServerOptions) {
     super({
-      // Recommended: Start with the SimpleLogger to ease the debug process
-      logger: Logger,
       port: process.env.PORT || 3000,
       controllers: { status: StatusController },
       // Database will be initialized in the Server lifecycle
