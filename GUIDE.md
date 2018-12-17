@@ -41,7 +41,7 @@ $ ts-framework watch ./api/server.ts
 
 The framework comes with a thin abstraction layer over some great database libraries:
 
-#### [TypeORM](https://npmjs.org/package/typeorm)
+#### [TypeORM](https://github.com/nxtep-io/ts-framework-sql)
 
 ```typescript
 import Config from '../config';
@@ -100,9 +100,11 @@ export default class MainServer extends Server {
 } 
 ```
 
+For more information, check the [nxtep-io/ts-framework-sql](https://github.com/nxtep-io/ts-framework-sql).
+
 <br />
 
-#### [Mongoose ODM](https://npmjs.org/package/mongoose)
+#### [Mongoose ODM](https://github.com/nxtep-io/ts-framework-mongo)
 
 The goal of this layer is to provide a simple and consistent base class, that can be 
 extended in the same way  as the **Server** was done in the last section. 
@@ -145,6 +147,8 @@ export default class MainServer extends Server {
 ```
 
 <br />
+
+For more information, check the [nxtep-io/ts-framework-mongo](https://github.com/nxtep-io/ts-framework-mongo).
 
 ## Writing your Application
 
