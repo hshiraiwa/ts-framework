@@ -42,5 +42,6 @@ describe("lib.ReplConsole", () => {
 
     expect(() => console.clear()).not.toThrow();
     await server.listen();
+    await server.close();
   });
 });
