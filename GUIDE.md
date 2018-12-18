@@ -5,8 +5,14 @@ Configuration guide for the ts-framework.
 
 ### Configuring the Server
 
-Start by extending the base Server. It's easy to control its behaviour by passing
-a configuration object or importing it from a config file.
+The main entrypoint of your application is the **Server** instance. It wraps all other components
+and exposes APIs for other modules to connect into it. The server is an abstration layer above the
+Express server, to bind all the framework together in the Express initialization routine.
+
+
+Start by extending the base Server. It's easy to control its behaviour by passing a configuration object 
+or importing it from a config file.
+
 
 ```typescript
 import { Server, ServerOptions } from 'ts-framework';
@@ -25,14 +31,20 @@ export default class MainServer extends Server {
 } 
 ```
 
-The main entrypoint for your application should be a **Server** instance exported as 
-default. This enables the Server to be managed by the command line interface.
+It's important to export the **Server** class as default, as the command line
+tools expects it as default in the building, listening and console tools.
+
 
 ```bash
-# Starts the development server
-$ ts-framework watch ./api/server.ts
-```
+# Starts the server in development mode
+$ ts-framework watch "./api/server.ts"
 
+# Starts server and binds to its console
+$ ts-framework console "./api/server.ts"
+
+# Starts server in production mode with fewer logs
+$ ts-framework listen "./api/server.ts"
+```
 
 
 ### Configuring the Database

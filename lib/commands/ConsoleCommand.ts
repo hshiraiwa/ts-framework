@@ -33,7 +33,12 @@ export default class ConsoleCommand extends BaseCommand {
    */
   public async run(entrypoint = this.options.entrypoint) {
     const options = { port: process.env.PORT || 3000 };
-    const instance = await this.load(entrypoint, { ...options, repl: new ReplConsole({}) });
+    const instance = await this.load(entrypoint, {
+      ...options,
+      repl: new ReplConsole({
+        name: require("../../package.json").name
+      })
+    });
     await instance.listen();
   }
 }

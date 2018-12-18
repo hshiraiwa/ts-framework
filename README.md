@@ -10,9 +10,9 @@ A minimalistic framework for typescript based applications, with async/await and
 
 ### Beta Disclaimer
 
-The current API is considered to be a "Beta Release" of the v2 branch. That means that small breaking changes 
-changes are still expected. Be sure to use a specific GIT_REV_HASH and a lock file in your project, so you
-won't be immediately affected by such a change.
+The current API is considered to be a "Beta Release" of the v2 branch. That means that small potentially breaking 
+changes may still occur. Be sure to use a specific GIT_REV_HASH and a lock file in your project, so you won't be 
+immediately affected by such a change.
 
 For example:
 
@@ -30,7 +30,7 @@ Configure a new Server instance and start listening on desired port.
 
 ```bash
 # Install command line tools from Github
-$ yarn global add "nxtep-io/ts-framework#VERSION_TAG"
+$ yarn global add "nxtep-io/ts-framework#GIT_REV_HASH"
 
 # Generate a new project
 $ ts-framework new app "example/"
@@ -184,6 +184,7 @@ $ ts-framework new controller "test"
 $ ts-framework new service "uptime"
 ```
 
+For more information, check the command line reference by running `ts-framework --help`.
 
 ## License
 
