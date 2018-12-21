@@ -1,4 +1,4 @@
-#!/usr/bin/env node
+#!/usr/bin/env node --experimental-repl-await
 import * as Commander from "commander";
 import { LoggerInstance } from "ts-framework-common";
 import BaseCommand from "./base/BaseCommand";
@@ -9,6 +9,7 @@ export declare const DEFAULT_ENTRYPOINT: string;
 export declare const DEFAULT_ENV: string;
 export declare const DEFAULT_PORT: string | number;
 export default class CommandLine {
+    options: CommandLineOptions;
     logger: LoggerInstance;
     commands: BaseCommand[];
     protected program: Commander.Command;

@@ -1,4 +1,6 @@
-#!/usr/bin/env node
+#!/usr/bin/env node --experimental-repl-await
+
+require("source-map-support").install();
 
 import * as Commander from "commander";
 import { Logger, LoggerInstance } from "ts-framework-common";
@@ -18,7 +20,7 @@ export default class CommandLine {
   public commands: BaseCommand[];
   protected program: Commander.Command;
 
-  constructor(commands?: BaseCommand[], options?: CommandLineOptions) {
+  constructor(commands?: BaseCommand[], public options: CommandLineOptions = {}) {
     const Package = require("../package.json");
 
     // Initialize Commander instance
@@ -28,7 +30,7 @@ export default class CommandLine {
       .option("-v, --verbose", "enables verbose mode");
 
     // Prepare logger
-    this.logger = Logger.getInstance();
+    this.logger = options.logger || Logger.getInstance();
 
     // Prepare command options
     const commandOpts = {

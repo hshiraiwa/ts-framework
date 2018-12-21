@@ -1,3 +1,4 @@
+import * as Path from "path";
 import * as Package from "pjson";
 import * as Nodemon from "nodemon";
 import BaseCommand from "../base/BaseCommand";
@@ -5,22 +6,30 @@ import BaseCommand from "../base/BaseCommand";
 export default class WatchCommand extends BaseCommand {
   command = {
     syntax: "watch [entrypoint]",
-    description: "Starts the development server with live reload"
+    description: "Starts the development server with live reload",
+    options: [["-i, --inspect <address>", "starts server with inspection flags for debug"]]
   };
 
-  public async run(entrypoint = this.options.entrypoint) {
+  public async run(entrypoint = this.options.entrypoint, options) {
     this.logger.debug(`[ts-framework] ${Package.name}@${Package.version}`);
     this.logger.debug(`[ts-framework] starting server from \`${entrypoint}\´`);
     this.logger.debug(`[ts-framework] watching files from  \`./**/*\´`);
-    this.logger.debug(`[ts-framework] to restart at any time, enter \`rs\``);
+    if (options.inspect) {
+      this.logger.debug(`[ts-framework] inspect mode:  \`${options.inspect.toString()}\``);
+    }
+    this.logger.debug(`[ts-framework] to restart at any time, enter \`rs\`\n`);
+
+    // Prepare command execution
+    const command = `node ${options.inspect ? `--inspect=${options.inspect}` : ""}`;
+    const exec = `${command} ${Path.join(__dirname, "../cli")} listen --development ${entrypoint}`;
 
     Nodemon({
+      exec,
       delay: "1000",
       ext: "ts,js",
       cwd: process.cwd(),
       watch: ["./**/*"],
-      ignore: ["./dist", "./build", "./docs", "./coverage"],
-      exec: `ts-framework listen --development ${entrypoint}`
+      ignore: ["./dist", "./build", "./docs", "./coverage"]
     });
 
     Nodemon.on("restart", files => {
