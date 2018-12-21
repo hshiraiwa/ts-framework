@@ -4816,7 +4816,7 @@ source-map-support@^0.5.0, source-map-support@^0.5.5:
     buffer-from "^1.0.0"
     source-map "^0.6.0"
 
-source-map-support@^0.5.6:
+source-map-support@^0.5.6, source-map-support@^0.5.9:
   version "0.5.9"
   resolved "https://registry.yarnpkg.com/source-map-support/-/source-map-support-0.5.9.tgz#41bc953b2534267ea2d605bccfa7bfa3111ced5f"
   integrity sha512-gR6Rw4MvUlYy83vP0vxoVNzM6t8MUXqNuRsuBmBHQDu1Fh6X015FrLdgoDKcNdkwGubozq0P4N0Q37UyFVr1EA==
@@ -5227,9 +5227,9 @@ ts-framework-common@nxtep-io/ts-framework-common#2.2.0:
     winston-elasticsearch "github:nxtep-io/winston-elasticsearch"
     winston-transport "^4.2.0"
 
-ts-framework-common@nxtep-io/ts-framework-common#2.3.0:
-  version "2.3.0"
-  resolved "https://codeload.github.com/nxtep-io/ts-framework-common/tar.gz/d581fc14971884716029aaa1163d346cd6bd007e"
+ts-framework-common@nxtep-io/ts-framework-common#2.3.1:
+  version "2.3.1"
+  resolved "https://codeload.github.com/nxtep-io/ts-framework-common/tar.gz/9a4f5b60e9f7244ca8e81260a3f9e32349ddd77c"
   dependencies:
     "@sentry/node" "^4.4.1"
     "@types/express" "^4.16.0"
@@ -5275,8 +5275,8 @@ ts-framework@../:
     pjson "^1.0.9"
     request-ip "^2.0.2"
     rimraf "^2.6.2"
-    source-map-support "^0.5.0"
-    ts-framework-common nxtep-io/ts-framework-common#2.3.0
+    source-map-support "^0.5.9"
+    ts-framework-common nxtep-io/ts-framework-common#2.3.1
     ts-node "^7.0.1"
     typescript "^3.2.2"
     upath "^1.1.0"

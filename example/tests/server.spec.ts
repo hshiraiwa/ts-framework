@@ -40,5 +40,7 @@ describe('api.MainServer', () => {
     await request(server.app).get('/foo')
       .expect('Content-Type', /json/)
       .expect(200, { foo: 'bar' });
+
+      await server.onUnmount();
   });
 });
