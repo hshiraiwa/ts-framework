@@ -46,6 +46,28 @@ $ ts-framework console "./api/server.ts"
 $ ts-framework listen "./api/server.ts"
 ```
 
+**Running in Debug**
+
+Start the development server in debug mode using the command line:
+
+```bash
+# The debugger will listen on localhost:9229
+ts-framework --inspect="0.0.0.0:9229" watch "./api/server.ts"
+```
+
+Then, you can attach to the debugger using your favorite IDE. For example, using VSCode:
+
+```json
+{
+  "type": "node",
+  "request": "attach",
+  "name": "Attach",
+  "port": 9229,
+  "restart": true,
+  "sourceMaps": true,
+}
+```
+
 
 ### Configuring the Database
 

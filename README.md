@@ -124,7 +124,9 @@ Other external plugins and middlewares for this framework:
 
 ## Documentation
 
-Checkout the rendered TS Docs in the official page: [https://nxtep-io.github.io/ts-framework/](https://nxtep-io.github.io/ts-framework/)
+Start by our [Usage Guide](./GUIDE.md), to create your first project and components.
+
+For the full reference, refer to the rendered TypeDocs: [https://nxtep-io.github.io/ts-framework/](https://nxtep-io.github.io/ts-framework/)
 
 To generate the Typedoc reference of the available modules directly from source, run the following command:
 
@@ -185,6 +187,7 @@ $ ts-framework new service "uptime"
 ```
 
 For more information, check the command line reference by running `ts-framework --help`.
+
 
 ## License
 
