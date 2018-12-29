@@ -2,8 +2,10 @@
 import { LoggerInstance } from "ts-framework-common";
 import * as yargs from "yargs";
 import BaseCommand from "./base/BaseCommand";
+import { WatchCommand } from "./commands";
 export interface CommandLineOptions {
     logger?: LoggerInstance;
+    commands?: (typeof BaseCommand)[];
 }
 export declare const DEFAULT_ENTRYPOINT: string;
 export declare const DEFAULT_ENV: string;
@@ -13,8 +15,14 @@ export default class CommandLine {
     logger: LoggerInstance;
     commands: BaseCommand[];
     yargs: yargs.Argv;
-    constructor(commands?: BaseCommand[], options?: CommandLineOptions);
-    static initialize(commands?: BaseCommand[]): {
+    static readonly DEFAULT_OPTS: {
+        entrypoint: string;
+        port: string | number;
+        env: string;
+    };
+    static readonly DEFAULT_COMMANDS: (typeof WatchCommand)[];
+    constructor(options?: CommandLineOptions);
+    static initialize(options?: CommandLineOptions): {
         [x: string]: unknown;
         _: string[];
         $0: string;

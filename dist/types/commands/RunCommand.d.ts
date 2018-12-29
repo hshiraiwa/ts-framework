@@ -7,10 +7,6 @@ export default class RunCommand extends BaseCommand {
         builder: (yargs: any) => any;
     };
     /**
-     * Simple method for executing child processes.
-     */
-    exec(cmd: any): Promise<void>;
-    /**
      * Loads a new Server module and initialize its instance from relative path.
      */
     load(relativePath: string, options?: ServerOptions): Promise<Server>;
