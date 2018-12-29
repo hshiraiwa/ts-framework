@@ -1,4 +1,4 @@
-import { Command } from "commander";
+import { Argv } from "yargs";
 import { LoggerInstance } from "ts-framework-common";
 export interface BaseCommandOptions {
     logger?: LoggerInstance;
@@ -9,13 +9,15 @@ export interface BaseCommandOptions {
 export interface CommanderDefs {
     syntax: string;
     description: string;
-    options?: string[][];
+    builder?: ((yargs: Argv) => Argv) | {
+        [label: string]: any;
+    };
 }
 export default abstract class BaseCommand {
     options: BaseCommandOptions;
     logger: LoggerInstance;
     abstract command: CommanderDefs;
     constructor(options?: BaseCommandOptions);
-    onProgram(program: Command): Promise<Command>;
-    abstract run(...args: any[]): Promise<void>;
+    onProgram(yargs: Argv): Promise<any>;
+    abstract run(argv: any): Promise<void>;
 }

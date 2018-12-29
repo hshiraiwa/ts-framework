@@ -1,8 +1,8 @@
 import * as Path from "path";
 import { BaseError } from "ts-framework-common";
 import BaseCommand from "../base/BaseCommand";
-import Server, { ServerOptions } from "../server";
 import ReplConsole from "../repl";
+import Server, { ServerOptions } from "../server";
 
 export default class ConsoleCommand extends BaseCommand {
   command = {
@@ -31,7 +31,7 @@ export default class ConsoleCommand extends BaseCommand {
   /**
    * Runs the REPL console in the supplied Server instance.
    */
-  public async run(entrypoint = this.options.entrypoint) {
+  public async run({ entrypoint = this.options.entrypoint }) {
     const options = { port: process.env.PORT || 3000 };
     const instance = await this.load(entrypoint, {
       ...options,

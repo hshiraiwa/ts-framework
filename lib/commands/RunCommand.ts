@@ -9,7 +9,19 @@ export default class RunCommand extends BaseCommand {
   command = {
     syntax: "run [entrypoint]",
     description: "Runs the server components without lifting express",
-    options: [["-d, --development", "starts server without production flags"]]
+    builder: yargs => {
+      yargs
+        .boolean("d")
+        .alias("d", "development")
+        .describe("d", "Starts server without production flags");
+
+      yargs
+        .string("p")
+        .alias("p", "port")
+        .describe("p", "The PORT to listen to, can be overriden with PORT env variable");
+
+      return yargs;
+    }
   };
 
   /**
@@ -100,7 +112,7 @@ export default class RunCommand extends BaseCommand {
     return sourceFile;
   }
 
-  public async run(entrypoint = this.options.entrypoint, options) {
+  public async run({ entrypoint = this.options.entrypoint, ...options }) {
     // Force production unless flag was supplied
     const port = options.port || this.options.port;
     const env = options.development ? "development" : options.env || "production";
@@ -114,7 +126,7 @@ export default class RunCommand extends BaseCommand {
       process.env.NODE_ENV = "production";
     }
 
-    const instance = await this.load(distributionFile, { ...options, env, port });
+    const instance = await this.load(distributionFile, { ...options, port });
     await instance.onInit();
     await instance.onReady();
   }

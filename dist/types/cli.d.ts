@@ -1,6 +1,6 @@
 #!/usr/bin/env node --experimental-repl-await
-import * as Commander from "commander";
 import { LoggerInstance } from "ts-framework-common";
+import * as yargs from 'yargs';
 import BaseCommand from "./base/BaseCommand";
 export interface CommandLineOptions {
     logger?: LoggerInstance;
@@ -12,10 +12,13 @@ export default class CommandLine {
     options: CommandLineOptions;
     logger: LoggerInstance;
     commands: BaseCommand[];
-    protected program: Commander.Command;
+    yargs: yargs.Argv;
     constructor(commands?: BaseCommand[], options?: CommandLineOptions);
-    static initialize(commands?: BaseCommand[]): CommandLine;
+    static initialize(commands?: BaseCommand[]): {
+        [x: string]: unknown;
+        _: string[];
+        $0: string;
+    };
     onError(error: any): void;
     onMount(): Promise<void>;
-    parse(): this;
 }

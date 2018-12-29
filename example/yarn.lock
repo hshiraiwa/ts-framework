@@ -186,6 +186,11 @@
   dependencies:
     "@types/superagent" "*"
 
+"@types/yargs@^12.0.4":
+  version "12.0.4"
+  resolved "https://registry.yarnpkg.com/@types/yargs/-/yargs-12.0.4.tgz#14a37542f01a1ed4d743d5f8bc3f40e63e5835d4"
+  integrity sha512-hBYcOaYPnlAPj2OZbivFFzsW61mN0L3N0Aq4KwRt/ZXlw1c25Srj8413MBu5IhFGOyOdjLi2/qOqtStDTXGs9g==
+
 abab@^1.0.4:
   version "1.0.4"
   resolved "https://registry.yarnpkg.com/abab/-/abab-1.0.4.tgz#5faad9c2c07f60dd76770f71cf025b62a63cfd4e"
@@ -1106,11 +1111,6 @@ combined-stream@1.0.6, combined-stream@~1.0.5:
   resolved "https://registry.yarnpkg.com/combined-stream/-/combined-stream-1.0.6.tgz#723e7df6e801ac5613113a7e445a9b69cb632818"
   dependencies:
     delayed-stream "~1.0.0"
-
-commander@^2.19.0:
-  version "2.19.0"
-  resolved "https://registry.yarnpkg.com/commander/-/commander-2.19.0.tgz#f6198aa84e5b83c46054b94ddedbfed5ee9ff12a"
-  integrity sha512-6tvAOO+D6OENvRAh524Dh9jcfKTYDQAqvqezbCW82xj5X0pSrcpxtvRKHLG0yBY6SD7PSDrJaj+0AiOcKVd1Xg==
 
 commondir@^1.0.1:
   version "1.0.1"
@@ -5252,11 +5252,11 @@ ts-framework@../:
     "@types/express" "^4.16.0"
     "@types/helmet" "^0.0.38"
     "@types/lodash" "^4.14.116"
+    "@types/yargs" "^12.0.4"
     async "^2.5.0"
     base64url "^2.0.0"
     body-parser "^1.18.2"
     clean-stack "^1.3.0"
-    commander "^2.19.0"
     cookie-parser "^1.4.3"
     cors "^2.8.4"
     express "^4.16.3"
@@ -5283,6 +5283,7 @@ ts-framework@../:
     urijs "^1.19.0"
     url-join "^4.0.0"
     winston-raven-sentry "^1.0.1"
+    yargs "^12.0.5"
     yeoman-environment "^2.3.4"
 
 ts-jest@^22.4.4:

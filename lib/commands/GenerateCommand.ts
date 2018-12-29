@@ -1,5 +1,5 @@
-import * as yeoman from "yeoman-environment";
 import { BaseError } from "ts-framework-common";
+import * as yeoman from "yeoman-environment";
 import BaseCommand from "../base/BaseCommand";
 
 export interface GenerateCommandOptions {
@@ -30,7 +30,7 @@ export default class GenerateCommand extends BaseCommand {
     this.env = yeoman.createEnv();
   }
 
-  public async run(component, name, { path = "", skipInstall }: GenerateCommandOptions) {
+  public async run({ component, name, path = "", skipInstall }: any) {
     if (GenerateCommand.AVAILABLE_COMPOENENTS.indexOf(component) < 0) {
       throw new BaseError(`Could not generate unknown component: "${component}"`);
     }

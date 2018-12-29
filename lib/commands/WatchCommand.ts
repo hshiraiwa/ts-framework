@@ -1,16 +1,28 @@
+import * as Nodemon from "nodemon";
 import * as Path from "path";
 import * as Package from "pjson";
-import * as Nodemon from "nodemon";
 import BaseCommand from "../base/BaseCommand";
 
 export default class WatchCommand extends BaseCommand {
   command = {
     syntax: "watch [entrypoint]",
     description: "Starts the development server with live reload",
-    options: [["-i, --inspect <address>", "starts server with inspection flags for debug"]]
+    builder: yargs => {
+      yargs
+        .string("p")
+        .alias("p", "port")
+        .describe("p", "The PORT to listen to, can be overriden with PORT env variable");
+
+      yargs
+        .boolean("i")
+        .alias("i", "inspect")
+        .describe("i", "Starts development server with inspection flags for debug");
+
+      return yargs;
+    }
   };
 
-  public async run(entrypoint = this.options.entrypoint, options) {
+  public async run({ entrypoint = this.options.entrypoint, ...options }) {
     this.logger.debug(`[ts-framework] ${Package.name}@${Package.version}`);
     this.logger.debug(`[ts-framework] starting server from \`${entrypoint}\´`);
     this.logger.debug(`[ts-framework] watching files from  \`./**/*\´`);
@@ -20,8 +32,9 @@ export default class WatchCommand extends BaseCommand {
     this.logger.debug(`[ts-framework] to restart at any time, enter \`rs\`\n`);
 
     // Prepare command execution
+    const port = process.env.PORT || options.port || 3000;
     const command = `node ${options.inspect ? `--inspect=${options.inspect}` : ""}`;
-    const exec = `${command} ${Path.join(__dirname, "../cli")} listen --development ${entrypoint}`;
+    const exec = `${command} ${Path.join(__dirname, "../cli")} listen --development ${entrypoint} --port ${port}`;
 
     Nodemon({
       exec,

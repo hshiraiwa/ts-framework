@@ -4,7 +4,7 @@ export default class RunCommand extends BaseCommand {
     command: {
         syntax: string;
         description: string;
-        options: string[][];
+        builder: (yargs: any) => any;
     };
     /**
      * Simple method for executing child processes.
@@ -21,5 +21,8 @@ export default class RunCommand extends BaseCommand {
         entrypoint: any;
         env: any;
     }): Promise<string>;
-    run(entrypoint: string, options: any): Promise<void>;
+    run({ entrypoint, ...options }: {
+        [x: string]: any;
+        entrypoint?: string;
+    }): Promise<void>;
 }

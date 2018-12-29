@@ -3,7 +3,10 @@ export default class WatchCommand extends BaseCommand {
     command: {
         syntax: string;
         description: string;
-        options: string[][];
+        builder: (yargs: any) => any;
     };
-    run(entrypoint: string, options: any): Promise<void>;
+    run({ entrypoint, ...options }: {
+        [x: string]: any;
+        entrypoint?: string;
+    }): Promise<void>;
 }

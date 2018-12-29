@@ -2,8 +2,8 @@
 
 require("source-map-support").install();
 
-import * as Commander from "commander";
 import { Logger, LoggerInstance } from "ts-framework-common";
+import * as yargs from "yargs";
 import BaseCommand from "./base/BaseCommand";
 import { ConsoleCommand, GenerateCommand, ListenCommand, RunCommand, WatchCommand } from "./commands";
 
@@ -18,19 +18,27 @@ export const DEFAULT_PORT = process.env.PORT || 3000;
 export default class CommandLine {
   public logger: LoggerInstance;
   public commands: BaseCommand[];
-  protected program: Commander.Command;
+  public yargs: yargs.Argv;
 
   constructor(commands?: BaseCommand[], public options: CommandLineOptions = {}) {
     const Package = require("../package.json");
 
-    // Initialize Commander instance
-    this.program = Commander.name(Package.name)
-      .version(Package.version)
-      .description(Package.description)
-      .option("-v, --verbose", "enables verbose mode");
-
-    // Prepare logger
+    // Prepare logger and initial yargs instance
     this.logger = options.logger || Logger.getInstance();
+    this.yargs = yargs.usage("Usage: $0 <command> [options]").wrap(Math.min(120, yargs.terminalWidth()));
+
+    // Prepare verbose option
+    this.yargs
+      .scriptName(Package.name)
+      .boolean("verbose")
+      .alias("V", "verbose")
+      .describe("verbose", "Runs command in verbose mode");
+
+    // Prepare help guide
+    this.yargs
+      .help("h")
+      .alias("h", "help")
+      .alias("v", "version");
 
     // Prepare command options
     const commandOpts = {
@@ -53,7 +61,7 @@ export default class CommandLine {
   }
 
   public static initialize(commands?: BaseCommand[]) {
-    return new CommandLine(commands).parse();
+    return new CommandLine(commands).yargs.argv;
   }
 
   public onError(error) {
@@ -64,11 +72,6 @@ export default class CommandLine {
   }
 
   public async onMount() {
-    // Handle verbnose mode
-    this.program.on("option:verbose", function() {
-      process.env.VERBOSE = this.verbose;
-    });
-
     // Check TS Node is available
     try {
       require("ts-node/register/transpile-only");
@@ -77,39 +80,44 @@ export default class CommandLine {
       this.logger.warn("\n\nWARN: TS Node is not available, typescript files won't be supported");
     }
 
-    // Handle unknown commands
-    this.program.on("command:*", args => {
-      if (args && args.length && args[0] === "help") {
-        this.program.outputHelp();
-      } else {
-        this.logger.error("Unknown syntax for command line" + "\n\nSee --help for a list of available commands.");
-      }
-      process.exit(1);
-    });
-
     // Bind all commands to current program
-    this.commands.map(cmd => cmd.onProgram(this.program));
+    this.commands.map(cmd => cmd.onProgram(this.yargs));
+
+    // this.yargs.command('new app [name]', 'Creates a new application', yargs => {
+    //   yargs.positional('name', {
+    //     type: 'string',
+    //     describe: 'The name of the project to be generated',
+    //   });
+    // });
+
+    // this.yargs.command('new <component> <name>', 'Creates a new component in current project', yargs => {
+    //   yargs.positional('component', {
+    //     type: 'string',
+    //     describe: 'The kind of component to be generated',
+    //     choices: ['controller', 'service', 'job', 'model']
+    //   });
+
+    //   yargs.positional('name', {
+    //     type: 'string',
+    //     describe: 'The name of the component to be generated',
+    //   });
+    // })
 
     // Prepare additional info in help
-    this.program.on("--help", () => {
-      console.log("");
-      console.log("Environment variables:");
-      console.log("");
-      console.log('  - ENTRYPOINT\t\t\tSets server entrypoint for execution. Defaults to: "./api/server.ts"');
-      console.log('  - NODE_ENV\t\t\tSets the environment to run the server. Defaults to: "development"');
-      console.log('  - PORT\t\t\tSets the port to listen to. Defaults to: "3000"');
-      console.log("");
-      console.log("Getting started:");
-      console.log("");
-      console.log("  $ ts-framework new app");
-      console.log("  $ cd app/");
-      console.log("  $ yarn start");
-    });
-  }
-
-  parse() {
-    this.program.parse(process.argv);
-    return this;
+    this.yargs.epilog(
+      "\n" +
+        "Environment variables:\n" +
+        "\n" +
+        '  - ENTRYPOINT: \t Sets server entrypoint for execution. Defaults to: "./api/server.ts"\n' +
+        '  - NODE_ENV: \t Sets the environment to run the server. Defaults to: "development"\n' +
+        '  - PORT: \t Sets the port to listen to. Defaults to: "3000"\n' +
+        "\n" +
+        "Getting started:\n" +
+        "\n" +
+        "  $ ts-framework new app\n" +
+        "  $ cd app/\n" +
+        "  $ yarn start\n"
+    );
   }
 }
 
