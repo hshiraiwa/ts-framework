@@ -3,12 +3,14 @@
 require("source-map-support").install();
 
 import { Logger, LoggerInstance } from "ts-framework-common";
+import * as fs from "fs";
 import * as yargs from "yargs";
 import BaseCommand from "./base/BaseCommand";
 import { ConsoleCommand, GenerateCommand, ListenCommand, RunCommand, WatchCommand } from "./commands";
 
 export interface CommandLineOptions {
   logger?: LoggerInstance;
+  commands?: (typeof BaseCommand)[];
 }
 
 export const DEFAULT_ENTRYPOINT = process.env.ENTRYPOINT || "./api/server.ts";
@@ -20,7 +22,15 @@ export default class CommandLine {
   public commands: BaseCommand[];
   public yargs: yargs.Argv;
 
-  constructor(commands?: BaseCommand[], public options: CommandLineOptions = {}) {
+  public static readonly DEFAULT_OPTS = {
+    entrypoint: DEFAULT_ENTRYPOINT,
+    port: DEFAULT_PORT,
+    env: DEFAULT_ENV
+  };
+
+  public static readonly DEFAULT_COMMANDS = [ListenCommand, GenerateCommand, ConsoleCommand, RunCommand, WatchCommand];
+
+  constructor(public options: CommandLineOptions = {}) {
     const Package = require("../package.json");
 
     // Prepare logger and initial yargs instance
@@ -42,29 +52,17 @@ export default class CommandLine {
     // Prepare logger instance
     this.logger = options.logger || Logger.getInstance();
 
-    // Prepare command options
-    const commandOpts = {
-      logger: this.logger,
-      entrypoint: DEFAULT_ENTRYPOINT,
-      port: DEFAULT_PORT,
-      env: DEFAULT_ENV
-    };
-
-    // Initialize default commands
-    this.commands = commands || [
-      new ListenCommand(commandOpts),
-      new GenerateCommand(commandOpts),
-      new ConsoleCommand(commandOpts),
-      new RunCommand(commandOpts),
-      new WatchCommand(commandOpts)
-    ];
+    // Initialize commands using current options
+    this.commands = (options.commands || CommandLine.DEFAULT_COMMANDS).map((Command: any) => {
+      return new Command({ logger: this.logger, ...CommandLine.DEFAULT_OPTS });
+    });
 
     // Starts command mounting
     this.onMount().catch(this.onError.bind(this));
   }
 
-  public static initialize(commands?: BaseCommand[]) {
-    return new CommandLine(commands).yargs.argv;
+  public static initialize(options: CommandLineOptions = {}) {
+    return new CommandLine(options).yargs.argv;
   }
 
   public onError(error) {
@@ -86,41 +84,8 @@ export default class CommandLine {
     // Bind all commands to current program
     this.commands.map(cmd => cmd.onProgram(this.yargs));
 
-    // this.yargs.command('new app [name]', 'Creates a new application', yargs => {
-    //   yargs.positional('name', {
-    //     type: 'string',
-    //     describe: 'The name of the project to be generated',
-    //   });
-    // });
-
-    // this.yargs.command('new <component> <name>', 'Creates a new component in current project', yargs => {
-    //   yargs.positional('component', {
-    //     type: 'string',
-    //     describe: 'The kind of component to be generated',
-    //     choices: ['controller', 'service', 'job', 'model']
-    //   });
-
-    //   yargs.positional('name', {
-    //     type: 'string',
-    //     describe: 'The name of the component to be generated',
-    //   });
-    // })
-
     // Prepare additional info in help
-    this.yargs.epilog(
-      "\n" +
-        "Environment variables:\n" +
-        "\n" +
-        '  - ENTRYPOINT: \t Sets server entrypoint for execution. Defaults to: "./api/server.ts"\n' +
-        '  - NODE_ENV: \t Sets the environment to run the server. Defaults to: "development"\n' +
-        '  - PORT: \t Sets the port to listen to. Defaults to: "3000"\n' +
-        "\n" +
-        "Getting started:\n" +
-        "\n" +
-        "  $ ts-framework new app\n" +
-        "  $ cd app/\n" +
-        "  $ yarn start\n"
-    );
+    this.yargs.epilog(fs.readFileSync("../raw/help").toString("utf-8"));
   }
 }
 

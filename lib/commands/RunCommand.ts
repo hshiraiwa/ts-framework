@@ -1,9 +1,9 @@
-import { exec } from "child_process";
 import * as fs from "fs";
 import * as Path from "path";
 import { BaseError } from "ts-framework-common";
 import BaseCommand from "../base/BaseCommand";
 import Server, { ServerOptions } from "../server";
+import { exec } from "../utils";
 
 export default class RunCommand extends BaseCommand {
   command = {
@@ -23,23 +23,6 @@ export default class RunCommand extends BaseCommand {
       return yargs;
     }
   };
-
-  /**
-   * Simple method for executing child processes.
-   */
-  public async exec(cmd) {
-    return new Promise<void>((resolve, reject) => {
-      exec(cmd, (error, stdout, stderr) => {
-        if (error || stderr) {
-          this.logger.error(stdout);
-          this.logger.error(stderr);
-          reject(error);
-        } else {
-          resolve();
-        }
-      });
-    });
-  }
 
   /**
    * Loads a new Server module and initialize its instance from relative path.
@@ -82,7 +65,7 @@ export default class RunCommand extends BaseCommand {
       // Check if the transpiled sources directory already exists
       if (!fs.existsSync(distributionPath)) {
         this.logger.debug("Building typescript source into plain javascript files...", { distributionPath });
-        await this.exec("yarn tsc");
+        await exec("yarn tsc");
       }
 
       // Try to find transpiled file from specified source
@@ -126,7 +109,10 @@ export default class RunCommand extends BaseCommand {
       process.env.NODE_ENV = "production";
     }
 
+    // Load server constructor from distribution file path
     const instance = await this.load(distributionFile, { ...options, port });
+
+    // Manually start the server lifecycle without listening to express port
     await instance.onInit();
     await instance.onReady();
   }
