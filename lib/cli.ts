@@ -85,7 +85,7 @@ export default class CommandLine {
     this.commands.map(cmd => cmd.onProgram(this.yargs));
 
     // Prepare additional info in help
-    this.yargs.epilog(fs.readFileSync("../raw/help").toString("utf-8"));
+    this.yargs.epilog(fs.readFileSync("../raw/cli.help.txt").toString("utf-8"));
   }
 }
 
