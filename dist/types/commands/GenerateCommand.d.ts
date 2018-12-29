@@ -10,10 +10,10 @@ export default class GenerateCommand extends BaseCommand {
     command: {
         syntax: string;
         description: string;
-        options: string[][];
+        builder: (yargs: any) => void;
     };
     static APP_COMPONENT: string;
     static AVAILABLE_COMPOENENTS: string[];
     constructor(options?: {});
-    run({ component, name, path, skipInstall }: any): Promise<void>;
+    run({ component, name, path, skipInstall, baseUrl, tableName }: any): Promise<void>;
 }

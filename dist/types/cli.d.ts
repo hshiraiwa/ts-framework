@@ -1,6 +1,6 @@
 #!/usr/bin/env node --experimental-repl-await
 import { LoggerInstance } from "ts-framework-common";
-import * as yargs from 'yargs';
+import * as yargs from "yargs";
 import BaseCommand from "./base/BaseCommand";
 export interface CommandLineOptions {
     logger?: LoggerInstance;

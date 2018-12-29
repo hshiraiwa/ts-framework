@@ -7,7 +7,13 @@ import Server, { ServerOptions } from "../server";
 export default class ConsoleCommand extends BaseCommand {
   command = {
     syntax: "console [entrypoint]",
-    description: "starts the interactive console"
+    description: "Starts the interactive console",
+    builder: yargs => {
+      return yargs
+        .string("p")
+        .alias("p", "port")
+        .describe("p", "The PORT to listen to, can be overriden with PORT env variable");
+    }
   };
 
   /**
@@ -31,8 +37,8 @@ export default class ConsoleCommand extends BaseCommand {
   /**
    * Runs the REPL console in the supplied Server instance.
    */
-  public async run({ entrypoint = this.options.entrypoint }) {
-    const options = { port: process.env.PORT || 3000 };
+  public async run({ entrypoint = this.options.entrypoint, port }) {
+    const options = { port: process.env.PORT || port || 3000 };
     const instance = await this.load(entrypoint, {
       ...options,
       repl: new ReplConsole({

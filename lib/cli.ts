@@ -24,8 +24,7 @@ export default class CommandLine {
     const Package = require("../package.json");
 
     // Prepare logger and initial yargs instance
-    this.logger = options.logger || Logger.getInstance();
-    this.yargs = yargs.usage("Usage: $0 <command> [options]").wrap(Math.min(120, yargs.terminalWidth()));
+    this.yargs = yargs.usage("Usage: $0 <command> [...args]").wrap(Math.min(120, yargs.terminalWidth()));
 
     // Prepare verbose option
     this.yargs
@@ -40,8 +39,12 @@ export default class CommandLine {
       .alias("h", "help")
       .alias("v", "version");
 
+    // Prepare logger instance
+    this.logger = options.logger || Logger.getInstance();
+
     // Prepare command options
     const commandOpts = {
+      logger: this.logger,
       entrypoint: DEFAULT_ENTRYPOINT,
       port: DEFAULT_PORT,
       env: DEFAULT_ENV

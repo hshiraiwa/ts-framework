@@ -32,9 +32,10 @@ export default class WatchCommand extends BaseCommand {
     this.logger.debug(`[ts-framework] to restart at any time, enter \`rs\`\n`);
 
     // Prepare command execution
-    const port = process.env.PORT || options.port || 3000;
-    const command = `node ${options.inspect ? `--inspect=${options.inspect}` : ""}`;
-    const exec = `${command} ${Path.join(__dirname, "../cli")} listen --development ${entrypoint} --port ${port}`;
+    const port = process.env.PORT || options.port;
+    const command = `node -r ts-node/register ${options.inspect ? `--inspect=${options.inspect}` : ""}`;
+    let exec = `${command} ${Path.join(__dirname, "../cli")} listen --development ${entrypoint}`;
+    exec += port ? ` --port ${port} ` : "";
 
     Nodemon({
       exec,
