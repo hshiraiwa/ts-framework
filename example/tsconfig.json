@@ -14,9 +14,10 @@
     "declaration": true,
     "removeComments": false,
     "declarationDir": "dist/types",
+    // Test
     "lib": [
       "es6",
-      "dom"
+      "dom",
     ]
   },
   "include": [
