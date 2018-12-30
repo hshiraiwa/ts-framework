@@ -5,7 +5,7 @@
   "author": "Luis Brito <luis@nxtep.io>",
   "license": "MIT",
   "main": "./dist/index.js",
-  "bin": "./dist/cli.js",
+  "bin": "./dist/bin.js",
   "typings": "./dist/types/index.d.ts",
   "files": [
     "dist"

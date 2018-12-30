@@ -1,9 +1,5 @@
-#!/usr/bin/env node --experimental-repl-await
-
-require("source-map-support").install();
-
-import { Logger, LoggerInstance } from "ts-framework-common";
 import * as fs from "fs";
+import { Logger, LoggerInstance } from "ts-framework-common";
 import * as yargs from "yargs";
 import BaseCommand from "./base/BaseCommand";
 import { ConsoleCommand, GenerateCommand, ListenCommand, RunCommand, WatchCommand } from "./commands";
@@ -28,7 +24,7 @@ export default class CommandLine {
     env: DEFAULT_ENV
   };
 
-  public static readonly DEFAULT_COMMANDS = [ListenCommand, GenerateCommand, ConsoleCommand, RunCommand, WatchCommand];
+  public static readonly DEFAULT_COMMANDS = [GenerateCommand, ListenCommand, ConsoleCommand, RunCommand, WatchCommand];
 
   constructor(public options: CommandLineOptions = {}) {
     const Package = require("../package.json");
@@ -88,5 +84,3 @@ export default class CommandLine {
     this.yargs.epilog(fs.readFileSync("../raw/cli.help.txt").toString("utf-8"));
   }
 }
-
-CommandLine.initialize();
