@@ -1,5 +1,6 @@
 import * as fs from "fs";
 import * as Path from "path";
+import * as JSON5 from "json5";
 import { BaseError } from "ts-framework-common";
 import BaseCommand from "../base/BaseCommand";
 import Server, { ServerOptions } from "../server";
@@ -59,7 +60,14 @@ export default class RunCommand extends BaseCommand {
     if (Path.extname(sourceFile) === ".ts") {
       // Try to find transpiled directory using tsconfig
       const tsConfigPath = Path.resolve(process.cwd(), "tsconfig.json");
-      const tsConfig = require(tsConfigPath); // TODO: Handle exceptions here
+      const tsConfigRaw = fs.readFileSync(tsConfigPath);
+
+      if (!tsConfigRaw || !tsConfigRaw.toString()) {
+        throw new BaseError(`Could not load TS Config file from: "${tsConfigPath}"`);
+      }
+
+      // TODO: Handle exceptions here
+      const tsConfig = JSON5.parse(tsConfigRaw.toString());
       const distributionPath = Path.resolve(process.cwd(), tsConfig.compilerOptions.outDir);
 
       // Check if the transpiled sources directory already exists
