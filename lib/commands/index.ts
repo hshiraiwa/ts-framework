@@ -1,3 +1,4 @@
+export { default as CleanCommand } from "./CleanCommand";
 export { default as ConsoleCommand } from "./ConsoleCommand";
 export { default as GenerateCommand } from "./GenerateCommand";
 export { default as ListenCommand } from "./ListenCommand";

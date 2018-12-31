@@ -1,10 +1,9 @@
 import * as fs from "fs";
 import * as Path from "path";
-import * as JSON5 from "json5";
 import { BaseError } from "ts-framework-common";
 import BaseCommand from "../base/BaseCommand";
 import Server, { ServerOptions } from "../server";
-import { exec } from "../utils";
+import { exec, tsConfig } from "../utils";
 
 export default class RunCommand extends BaseCommand {
   command = {
@@ -59,16 +58,8 @@ export default class RunCommand extends BaseCommand {
     // In production, we need to handle TS files
     if (Path.extname(sourceFile) === ".ts") {
       // Try to find transpiled directory using tsconfig
-      const tsConfigPath = Path.resolve(process.cwd(), "tsconfig.json");
-      const tsConfigRaw = fs.readFileSync(tsConfigPath);
-
-      if (!tsConfigRaw || !tsConfigRaw.toString()) {
-        throw new BaseError(`Could not load TS Config file from: "${tsConfigPath}"`);
-      }
-
-      // TODO: Handle exceptions here
-      const tsConfig = JSON5.parse(tsConfigRaw.toString());
-      const distributionPath = Path.resolve(process.cwd(), tsConfig.compilerOptions.outDir);
+      const config = await tsConfig();
+      const distributionPath = Path.resolve(process.cwd(), config.compilerOptions.outDir);
 
       // Check if the transpiled sources directory already exists
       if (!fs.existsSync(distributionPath)) {

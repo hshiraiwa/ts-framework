@@ -11,6 +11,11 @@ export interface BaseCommandOptions {
 export interface CommanderDefs {
   syntax: string;
   description: string;
+  handler?:
+    | ((yargs: Argv) => Argv)
+    | {
+        [label: string]: any;
+      };
   builder?:
     | ((yargs: Argv) => Argv)
     | {

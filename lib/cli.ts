@@ -2,7 +2,7 @@ import * as fs from "fs";
 import { Logger, LoggerInstance } from "ts-framework-common";
 import * as yargs from "yargs";
 import BaseCommand from "./base/BaseCommand";
-import { ConsoleCommand, GenerateCommand, ListenCommand, RunCommand, WatchCommand } from "./commands";
+import { CleanCommand, ConsoleCommand, GenerateCommand, ListenCommand, RunCommand, WatchCommand } from "./commands";
 
 export interface CommandLineOptions {
   logger?: LoggerInstance;
@@ -24,7 +24,14 @@ export default class CommandLine {
     env: DEFAULT_ENV
   };
 
-  public static readonly DEFAULT_COMMANDS = [GenerateCommand, ListenCommand, ConsoleCommand, RunCommand, WatchCommand];
+  public static readonly DEFAULT_COMMANDS = [
+    CleanCommand,
+    GenerateCommand,
+    ListenCommand,
+    ConsoleCommand,
+    RunCommand,
+    WatchCommand
+  ];
 
   constructor(public options: CommandLineOptions = {}) {
     const Package = require("../package.json");
@@ -49,7 +56,8 @@ export default class CommandLine {
     this.logger = options.logger || Logger.getInstance();
 
     // Initialize commands using current options
-    this.commands = (options.commands || CommandLine.DEFAULT_COMMANDS).map((Command: any) => {
+    const cmdArr: (typeof BaseCommand)[] = options.commands || CommandLine.DEFAULT_COMMANDS;
+    this.commands = cmdArr.map((Command: any) => {
       return new Command({ logger: this.logger, ...CommandLine.DEFAULT_OPTS });
     });
 

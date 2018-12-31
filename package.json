@@ -50,6 +50,7 @@
     "@types/helmet": "^0.0.38",
     "@types/json5": "^0.0.30",
     "@types/lodash": "^4.14.116",
+    "@types/rimraf": "^2.0.2",
     "@types/yargs": "^12.0.4",
     "async": "^2.5.0",
     "base64url": "^2.0.0",
