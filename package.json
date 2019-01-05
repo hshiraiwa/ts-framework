@@ -30,7 +30,7 @@
   "scripts": {
     "build": "tsc",
     "prebuild": "rimraf ./dist",
-    "postbuild": "./scripts/cli.sh",
+    "postbuild": "./scripts/chmod.sh",
     "test": "jest --config jest.json",
     "lint": "tslint --config tslint.json --project .",
     "docs": "./scripts/docs.sh",
