@@ -1,4 +1,3 @@
-import * as hat from "hat";
 import * as request from "supertest";
 import Server, { Controller, Get } from "../../lib";
 
@@ -42,6 +41,9 @@ describe("lib.Server", () => {
     await request(server.app)
       .get("/some_unknown_test_endpoint")
       .expect(404);
+
+    // Unmount at the end
+    await server.onUnmount();
   });
 
   it("GET / (200)", async () => {
@@ -62,6 +64,9 @@ describe("lib.Server", () => {
       .expect(200, {
         test: "ok"
       });
+
+    // Unmount at the end
+    await server.onUnmount();
   });
 
   it("GET /decorated (200)", async () => {
@@ -92,6 +97,9 @@ describe("lib.Server", () => {
         status: "ok",
         foo: "bar"
       });
+
+    // Unmount at the end
+    await server.onUnmount();
   });
 
   it("GET /decorated_filter (200)", async () => {
@@ -140,5 +148,8 @@ describe("lib.Server", () => {
       .expect(200, {
         status: "ok"
       });
+
+    // Unmount at the end
+    await server.onUnmount();
   });
 });

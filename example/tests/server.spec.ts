@@ -1,7 +1,7 @@
 import * as hat from 'hat';
 import * as Package from 'pjson';
 import * as request from 'supertest';
-import MainServer from '../api/MainServer';
+import MainServer from '../api/server';
 
 jest.setTimeout(30000);
 
@@ -40,5 +40,7 @@ describe('api.MainServer', () => {
     await request(server.app).get('/foo')
       .expect('Content-Type', /json/)
       .expect(200, { foo: 'bar' });
+
+      await server.onUnmount();
   });
 });

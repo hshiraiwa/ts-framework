@@ -1,5 +1,4 @@
 import repl = require("repl");
-import * as util from "util";
 import * as path from "path";
 import * as Package from "pjson";
 import { Service, ServiceOptions, ServiceDescription } from "ts-framework-common";
@@ -14,15 +13,15 @@ export interface ReplConsoleOptions extends ServiceOptions {
 }
 
 export default class ReplConsole extends Service {
-  protected server?: Server;
-  protected repl?: repl.REPLServer;
+  public server?: Server;
+  public repl?: repl.REPLServer;
   public options: ReplConsoleOptions;
 
   constructor(options: ReplConsoleOptions) {
     super({
       ...options,
       name: options.name || Package.name,
-      help: options.help || readFileSync(path.join(__dirname, "../../raw/help.txt"), "utf-8")
+      help: options.help || readFileSync(path.join(__dirname, "../../raw/repl.help.txt"), "utf-8")
     } as ServiceOptions);
   }
 

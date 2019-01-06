@@ -31,8 +31,10 @@ export default class Server extends BaseServer {
     close(): Promise<void>;
     /**
      * Handles post-startup routines, may be extended for initializing databases and services.
-     *
-     * @returns {Promise<void>}
      */
     onReady(): Promise<void>;
+    /**
+     * Handles pre-shutdown routines, may be extended for disconnecting from databases and services.
+     */
+    onUnmount(): Promise<void>;
 }

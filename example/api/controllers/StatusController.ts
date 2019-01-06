@@ -1,5 +1,5 @@
 import * as Package from 'pjson';
-import { Controller, Get, HttpError, HttpCode } from '../../../lib';
+import { Controller, Get, HttpError, HttpCode } from 'ts-framework';
 import UptimeService from '../services/UptimeService';
 
 @Controller()

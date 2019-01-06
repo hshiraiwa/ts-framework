@@ -9,8 +9,8 @@ export interface ReplConsoleOptions extends ServiceOptions {
     help?: string;
 }
 export default class ReplConsole extends Service {
-    protected server?: Server;
-    protected repl?: repl.REPLServer;
+    server?: Server;
+    repl?: repl.REPLServer;
     options: ReplConsoleOptions;
     constructor(options: ReplConsoleOptions);
     describe(): ServiceDescription;

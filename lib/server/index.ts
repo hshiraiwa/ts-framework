@@ -68,6 +68,20 @@ export default class Server extends BaseServer {
   }
 
   public async onInit(): Promise<void> {
+    // Bind to process exit events for graceful shutdown by default
+    if (this.options.bindToProcess !== false) {
+      process.on("SIGTERM", async () => {
+        this.logger.debug("Received SIGTERM interruption from process");
+        await this.close();
+      });
+
+      process.on("SIGINT", async () => {
+        console.log(""); // This jumps a line and improves console readability
+        this.logger.debug("Received SIGINT interruption from process");
+        await this.close();
+      });
+    }
+
     // Initialize all child components
     return super.onInit(this as BaseServer);
   }
@@ -98,18 +112,28 @@ export default class Server extends BaseServer {
    * @returns {Promise<void>}
    */
   public async close(): Promise<void> {
-    await this.onUnmount(this);
+    this.logger.debug(`Closing server instance and unmounting child components`);
+
     if (this.server) {
-      return this.server.close();
+      await this.server.close();
     }
+
+    return this.onUnmount();
   }
 
   /**
    * Handles post-startup routines, may be extended for initializing databases and services.
-   *
-   * @returns {Promise<void>}
    */
   public async onReady() {
     await super.onReady(this);
+  }
+
+  /**
+   * Handles pre-shutdown routines, may be extended for disconnecting from databases and services.
+   */
+  public async onUnmount() {
+    await super.onUnmount(this);
+    this.logger.info("Unmounted server instance and its components successfully");
+    setTimeout(() => process.exit(1), 1000);
   }
 }
