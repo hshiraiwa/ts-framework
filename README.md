@@ -30,7 +30,7 @@ Configure a new Server instance and start listening on desired port.
 
 ```bash
 # Install command line tools from Github
-$ yarn global add "nxtep-io/ts-framework#GIT_REV_HASH"
+$ yarn global add "nxtep-io/ts-framework-cli"
 
 # Generate a new project
 $ ts-framework new app "example/"
