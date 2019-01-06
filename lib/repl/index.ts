@@ -1,5 +1,4 @@
 import repl = require("repl");
-import * as util from "util";
 import * as path from "path";
 import * as Package from "pjson";
 import { Service, ServiceOptions, ServiceDescription } from "ts-framework-common";
@@ -22,7 +21,7 @@ export default class ReplConsole extends Service {
     super({
       ...options,
       name: options.name || Package.name,
-      help: options.help || readFileSync(path.join(__dirname, "../../raw/help.txt"), "utf-8")
+      help: options.help || readFileSync(path.join(__dirname, "../../raw/repl.help.txt"), "utf-8")
     } as ServiceOptions);
   }
 

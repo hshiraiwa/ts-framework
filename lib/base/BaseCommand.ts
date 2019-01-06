@@ -1,4 +1,4 @@
-import { Command } from "commander";
+import { Argv } from "yargs";
 import { Logger, LoggerInstance } from "ts-framework-common";
 
 export interface BaseCommandOptions {
@@ -11,7 +11,16 @@ export interface BaseCommandOptions {
 export interface CommanderDefs {
   syntax: string;
   description: string;
-  options?: string[][];
+  handler?:
+    | ((yargs: Argv) => Argv)
+    | {
+        [label: string]: any;
+      };
+  builder?:
+    | ((yargs: Argv) => Argv)
+    | {
+        [label: string]: any;
+      };
 }
 
 export default abstract class BaseCommand {
@@ -23,28 +32,24 @@ export default abstract class BaseCommand {
     this.logger = options.logger || Logger.getInstance();
   }
 
-  public async onProgram(program: Command): Promise<Command> {
-    // Prepare command syntax
-    const p = program.command(this.command.syntax).description(this.command.description);
-
-    // Bind command arguments
-    if (this.command.options) {
-      this.command.options.map(options => {
-        p.option.apply(p, options);
-      });
-    }
-
+  public async onProgram(yargs: Argv): Promise<any> {
     // Bind command action
-    p.action(async (...args) => {
+    const handler = async argv => {
       try {
-        return await this.run.apply(this, args);
+        return await this.run.apply(this, [argv]);
       } catch (exception) {
         this.logger.error(exception);
         setTimeout(() => process.exit(1), 1000);
       }
+    };
+
+    return yargs.command({
+      handler,
+      command: this.command.syntax,
+      describe: this.command.description,
+      builder: this.command.builder
     });
-    return p;
   }
 
-  public abstract async run(...args: any[]): Promise<void>;
+  public abstract async run(argv: any): Promise<void>;
 }

@@ -1,1 +1,0 @@
-chmod +x dist/cli.js;
