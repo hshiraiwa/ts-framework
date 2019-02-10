@@ -1,6 +1,6 @@
 {
   "name": "ts-framework",
-  "version": "2.4.0",
+  "version": "2.4.1",
   "description": "A minimalistic web framework for TS",
   "author": "Luis Brito <luis@nxtep.io>",
   "license": "MIT",
@@ -72,7 +72,7 @@
     "request-ip": "^2.0.2",
     "rimraf": "^2.6.2",
     "source-map-support": "^0.5.9",
-    "ts-framework-common": "nxtep-io/ts-framework-common#2.3.1",
+    "ts-framework-common": "nxtep-io/ts-framework-common#2.3.3",
     "ts-node": "^7.0.1",
     "typescript": "^3.2.2",
     "upath": "^1.1.0",
