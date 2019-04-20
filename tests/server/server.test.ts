@@ -27,7 +27,7 @@ describe("lib.Server", () => {
         test: "ok"
       });
 
-    await server.close();
+    await server.close(false);
   });
 
   it("GET /unknown_route (404)", async () => {
@@ -66,7 +66,7 @@ describe("lib.Server", () => {
       });
 
     // Unmount at the end
-    await server.onUnmount();
+    await server.close(false);
   });
 
   it("GET /decorated (200)", async () => {
@@ -99,7 +99,7 @@ describe("lib.Server", () => {
       });
 
     // Unmount at the end
-    await server.onUnmount();
+    await server.close(false);
   });
 
   it("GET /decorated_filter (200)", async () => {
@@ -150,6 +150,6 @@ describe("lib.Server", () => {
       });
 
     // Unmount at the end
-    await server.onUnmount();
+    await server.close(false);
   });
 });

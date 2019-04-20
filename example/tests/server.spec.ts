@@ -1,11 +1,13 @@
-import * as hat from 'hat';
 import * as Package from 'pjson';
 import * as request from 'supertest';
+import { Logger, LoggerInstance } from 'ts-framework-common';
 import MainServer from '../api/server';
 
 jest.setTimeout(30000);
 
 describe('api.MainServer', () => {
+  Logger.initialize();
+
   it('should respond to a simple status request', async () => {
     const server = new MainServer();
 
@@ -41,6 +43,6 @@ describe('api.MainServer', () => {
       .expect('Content-Type', /json/)
       .expect(200, { foo: 'bar' });
 
-      await server.onUnmount();
+    await server.onUnmount();
   });
 });

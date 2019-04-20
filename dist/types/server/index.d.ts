@@ -1,5 +1,7 @@
+/// <reference types="node" />
 import * as Sentry from "@sentry/node";
 import * as express from "express";
+import * as http from "http";
 import { BaseServer, LoggerInstance } from "ts-framework-common";
 import { BaseRequest } from "../base/BaseRequest";
 import { BaseResponse } from "../base/BaseResponse";
@@ -12,7 +14,7 @@ export default class Server extends BaseServer {
     options: ServerOptions;
     app: express.Application;
     logger: LoggerInstance;
-    protected server?: any;
+    protected server?: http.Server;
     sentry?: Sentry.NodeClient;
     constructor(options: ServerOptions, app?: express.Application);
     onMount(): void;
@@ -28,7 +30,7 @@ export default class Server extends BaseServer {
      *
      * @returns {Promise<void>}
      */
-    close(): Promise<void>;
+    close(exitOnClose?: boolean): Promise<void>;
     /**
      * Handles post-startup routines, may be extended for initializing databases and services.
      */
