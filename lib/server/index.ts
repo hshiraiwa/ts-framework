@@ -1,5 +1,6 @@
 import * as Sentry from "@sentry/node";
 import * as express from "express";
+import * as http from "http";
 import { BaseServer, Logger, LoggerInstance } from "ts-framework-common";
 import { BaseRequest } from "../base/BaseRequest";
 import { BaseResponse } from "../base/BaseResponse";
@@ -14,7 +15,7 @@ export { BaseRequest, BaseResponse, Controller, Get, Post, Put, Delete, HttpCode
 export default class Server extends BaseServer {
   public app: express.Application;
   public logger: LoggerInstance;
-  protected server?: any;
+  protected server?: http.Server;
   public sentry?: Sentry.NodeClient;
 
   constructor(public options: ServerOptions, app?: express.Application) {
@@ -64,7 +65,7 @@ export default class Server extends BaseServer {
 
   public onMount(): void {
     // Mount all child components
-    return super.onMount(this as BaseServer);
+    return super.onMount(this);
   }
 
   public async onInit(): Promise<void> {
@@ -72,18 +73,18 @@ export default class Server extends BaseServer {
     if (this.options.bindToProcess !== false) {
       process.on("SIGTERM", async () => {
         this.logger.debug("Received SIGTERM interruption from process");
-        await this.close();
+        await this.close(true);
       });
 
       process.on("SIGINT", async () => {
         console.log(""); // This jumps a line and improves console readability
         this.logger.debug("Received SIGINT interruption from process");
-        await this.close();
+        await this.close(true);
       });
     }
 
     // Initialize all child components
-    return super.onInit(this as BaseServer);
+    return super.onInit(this);
   }
 
   /**
@@ -111,14 +112,18 @@ export default class Server extends BaseServer {
    *
    * @returns {Promise<void>}
    */
-  public async close(): Promise<void> {
+  public async close(exitOnClose = false): Promise<void> {
     this.logger.debug(`Closing server instance and unmounting child components`);
 
     if (this.server) {
       await this.server.close();
     }
 
-    return this.onUnmount();
+    await this.onUnmount();
+
+    if (exitOnClose) {
+      setTimeout(() => process.exit(0), 100);
+    }
   }
 
   /**
@@ -134,6 +139,5 @@ export default class Server extends BaseServer {
   public async onUnmount() {
     await super.onUnmount(this);
     this.logger.info("Unmounted server instance and its components successfully");
-    setTimeout(() => process.exit(1), 1000);
   }
 }

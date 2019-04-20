@@ -23,5 +23,7 @@ describe("lib.server.middlewares.CookieParser", () => {
       .get("/")
       .expect("Content-Type", /json/)
       .expect(200, { test: "ok" });
+
+    await server.close();
   });
 });

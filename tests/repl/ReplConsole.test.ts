@@ -1,6 +1,4 @@
-import * as hat from "hat";
-import * as request from "supertest";
-import Server, { Controller, Get, ReplConsole } from "../../lib";
+import Server, { ReplConsole } from "../../lib";
 
 // May require additional time for downloading MongoDB binaries
 jasmine.DEFAULT_TIMEOUT_INTERVAL = 300000;
@@ -61,6 +59,6 @@ describe("lib.ReplConsole", () => {
 
     expect(() => console.clear()).not.toThrow();
     await server.onInit();
-    await server.onUnmount();
+    await server.close();
   });
 });

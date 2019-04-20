@@ -23,6 +23,8 @@ describe("lib.server.middlewares.CORS", () => {
       .get("/")
       .expect("Content-Type", /json/)
       .expect(200, { test: "ok" });
+
+    await server.close();
   });
 
   it("GET /cors_active (200)", async () => {
@@ -47,5 +49,7 @@ describe("lib.server.middlewares.CORS", () => {
       .expect("Content-Type", /json/)
       .expect("Access-Control-Allow-Origin", "*")
       .expect(200, { test: "ok" });
+
+    await server.close();
   });
 });
