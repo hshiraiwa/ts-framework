@@ -54,6 +54,8 @@ describe("lib.server.helpers.FilterWrapper", () => {
       .get("/")
       .expect("Content-Type", /json/)
       .expect(200, { test: "ok" });
+
+    await server.close();
   });
 
   it("GET /error_filter (200)", async () => {
@@ -79,6 +81,8 @@ describe("lib.server.helpers.FilterWrapper", () => {
       .get("/")
       .expect("Content-Type", /json/)
       .expect(403, { test: "forbidden" });
+
+    await server.close();
   });
 
   it("should break if filter was not found", async () => {

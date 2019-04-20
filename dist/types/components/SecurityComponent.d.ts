@@ -1,9 +1,9 @@
 import * as cors from "cors";
 import * as Helmet from "helmet";
-import { Logger, ComponentType, Component } from "ts-framework-common";
+import { ComponentType, Component, LoggerInstance } from "ts-framework-common";
 import Server from "../index";
 export interface SecurityComponentOptions {
-    logger?: Logger;
+    logger?: LoggerInstance;
     helmet?: Helmet.IHelmetConfiguration | false;
     userAgent?: boolean;
     cors?: boolean | cors.CorsOptions;
@@ -12,7 +12,7 @@ export interface SecurityComponentOptions {
 export default class SecurityComponent implements Component {
     options: SecurityComponentOptions;
     type: ComponentType.MIDDLEWARE;
-    protected logger: Logger;
+    logger: LoggerInstance;
     constructor(options?: SecurityComponentOptions);
     describe(): {
         name: string;

@@ -30,6 +30,8 @@ describe("lib.server.errors.errorReporter", () => {
         expect(response.body.stackId).toBeDefined();
         expect(response.body.message).toMatch(/TEST_ERROR/);
       });
+
+    await server.close();
   });
 
   it("GET /http_error (400)", async () => {
@@ -60,5 +62,7 @@ describe("lib.server.errors.errorReporter", () => {
         expect(response.body.stackId).toBeDefined();
         expect(response.body.message).toMatch(/BAD_PARAMS/);
       });
+
+    await server.close();
   });
 });

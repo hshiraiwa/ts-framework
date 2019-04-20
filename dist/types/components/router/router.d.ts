@@ -1,5 +1,5 @@
 import * as express from "express";
-import { LoggerInstance } from "winston";
+import { LoggerInstance } from "ts-framework-common";
 import { BaseRequest } from "../..";
 import { BaseResponse } from "../helpers/response";
 export interface RouterOptions {

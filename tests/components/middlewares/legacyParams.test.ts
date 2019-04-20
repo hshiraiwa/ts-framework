@@ -28,6 +28,8 @@ describe("lib.server.middlewares.legacyParams", () => {
       .get("/test")
       .expect("Content-Type", /json/)
       .expect(200, { test: "ok", param: "test" });
+
+    await server.close();
   });
 
   it("GET /?param=test (200)", async () => {
@@ -57,5 +59,7 @@ describe("lib.server.middlewares.legacyParams", () => {
       .query({ test: "test" })
       .expect("Content-Type", /json/)
       .expect(200, { test: "ok", param: "test" });
+
+    await server.close();
   });
 });

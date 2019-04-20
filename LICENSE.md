@@ -1,4 +1,4 @@
-MIT License
+rMIT License
 
 Copyright (c) 2017 - Nxtep Consultoria em Tecnologia e Informação LTDA.
 

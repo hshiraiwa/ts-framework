@@ -1,7 +1,6 @@
 import * as util from "util";
-import { LoggerInstance } from "winston";
 import { Request, Response } from "express";
-import { BaseError } from "ts-framework-common";
+import { BaseError, LoggerInstance } from "ts-framework-common";
 import { default as HttpError } from "../../error/http/HttpError";
 import { HttpServerErrors, HttpSuccess } from "../../error/http/HttpCode";
 import fclone from "fclone";

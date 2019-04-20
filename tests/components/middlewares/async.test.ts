@@ -18,6 +18,8 @@ describe("lib.server.middlewares.Async", () => {
       .get("/")
       .expect("Content-Type", /json/)
       .expect(500, /Async middleware cannot wrap something that is not a function/);
+
+    await server.close();
   });
 
   it("should not wrap a string", async () => {
@@ -36,6 +38,8 @@ describe("lib.server.middlewares.Async", () => {
       .get("/")
       .expect("Content-Type", /json/)
       .expect(500, /Async middleware cannot wrap something that is not a function/);
+
+    await server.close();
   });
 
   it("should wrap a valid function", async () => {
@@ -54,5 +58,7 @@ describe("lib.server.middlewares.Async", () => {
       .get("/")
       .expect("Content-Type", /json/)
       .expect(200, { test: "ok" });
+
+    await server.close();
   });
 });

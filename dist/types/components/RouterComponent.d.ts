@@ -1,10 +1,10 @@
-import { Logger, ComponentType, Component, ComponentOptions } from "ts-framework-common";
+import { ComponentType, Component, ComponentOptions, LoggerInstance } from "ts-framework-common";
 import { ErrorDefinitions } from "../error/ErrorReporter";
 import { RouteMap } from "./router";
 import { BaseController } from "./router/controller";
 import Server from "../server";
 export interface RouterComponentOptions extends ComponentOptions {
-    logger?: Logger;
+    logger?: LoggerInstance;
     routes?: RouteMap;
     sentry?: {
         dsn: string;
@@ -37,7 +37,7 @@ export interface RouterComponentOptions extends ComponentOptions {
 export default class RouterComponent implements Component {
     options: RouterComponentOptions;
     type: ComponentType.MIDDLEWARE;
-    protected logger: Logger;
+    logger: LoggerInstance;
     constructor(options?: RouterComponentOptions);
     describe(): {
         name: string;

@@ -1,8 +1,8 @@
 import * as Multer from "multer";
-import { Logger, Component, ComponentType, ComponentOptions } from "ts-framework-common";
+import { Component, ComponentType, ComponentOptions, LoggerInstance } from "ts-framework-common";
 import Server from "../server";
 export interface RequestComponentOptions extends ComponentOptions {
-    logger?: Logger;
+    logger?: LoggerInstance;
     bodyLimit?: string;
     secret?: string;
     multer?: {
@@ -21,7 +21,7 @@ export interface RequestComponentOptions extends ComponentOptions {
 export default class RequestComponent implements Component {
     options: RequestComponentOptions;
     type: ComponentType.MIDDLEWARE;
-    protected logger: Logger;
+    logger: LoggerInstance;
     constructor(options?: RequestComponentOptions);
     describe(): {
         name: string;

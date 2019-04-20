@@ -1,9 +1,9 @@
-import * as Raven from 'raven';
-import { BaseRequest, BaseResponse } from '../components/helpers/response';
-import { Logger } from 'ts-framework-common';
+import * as Sentry from "@sentry/node";
+import { BaseRequest, BaseResponse } from "../components/helpers/response";
+import { LoggerInstance } from "ts-framework-common";
 export interface ErrorReporterOptions {
-    raven?: Raven.Client;
-    logger?: Logger;
+    sentry?: Sentry.NodeClient;
+    logger?: LoggerInstance;
 }
 export interface ErrorDefinitions {
     [code: string]: {
@@ -12,7 +12,7 @@ export interface ErrorDefinitions {
     };
 }
 export declare class ErrorReporter {
-    logger: Logger;
+    logger: LoggerInstance;
     options: ErrorReporterOptions;
     errorDefinitions: ErrorDefinitions;
     constructor(errorDefinitions: ErrorDefinitions, options?: ErrorReporterOptions);

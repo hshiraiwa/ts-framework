@@ -1,12 +1,12 @@
-import * as Raven from 'raven';
-import { BaseRequest, BaseResponse } from '../components/helpers/response';
-import { Logger } from 'ts-framework-common';
-import { HttpServerErrors } from './http/HttpCode';
-import HttpError from './http/HttpError';
+import * as Sentry from "@sentry/node";
+import { BaseRequest, BaseResponse } from "../components/helpers/response";
+import { Logger, LoggerInstance } from "ts-framework-common";
+import { HttpServerErrors } from "./http/HttpCode";
+import HttpError from "./http/HttpError";
 
 export interface ErrorReporterOptions {
-  raven?: Raven.Client;
-  logger?: Logger;
+  sentry?: Sentry.NodeClient;
+  logger?: LoggerInstance;
 }
 
 export interface ErrorDefinitions {
@@ -17,7 +17,7 @@ export interface ErrorDefinitions {
 }
 
 export class ErrorReporter {
-  logger: Logger;
+  logger: LoggerInstance;
   options: ErrorReporterOptions;
   errorDefinitions: ErrorDefinitions;
 
@@ -32,6 +32,7 @@ export class ErrorReporter {
     return function errorReporterMiddleware(app) {
       app.use((req, res) => reporter.notFound(req, res));
       app.use((error, req, res, next) => reporter.unknownError(error, req, res, next));
+      app.use(Sentry.Handlers.errorHandler());
     };
   }
 
@@ -39,17 +40,8 @@ export class ErrorReporter {
     // Build error instance
     const error = new HttpError(`The resource was not found: ${req.method.toUpperCase()} ${req.originalUrl}`, 404, {
       method: req.method,
-      originalUrl: req.originalUrl,
+      originalUrl: req.originalUrl
     });
-
-    // Send to Sentry if available
-    if (this.options.raven) {
-      this.options.raven.captureException(error, {
-        req,
-        level: 'warning',
-        tags: { stackId: error.stackId },
-      } as any);
-    }
 
     // Log to console
     this.logger.warn(error.message, error.details);
@@ -68,26 +60,14 @@ export class ErrorReporter {
     } else if (error && error instanceof HttpError) {
       serverError = error as HttpError;
     } else {
-      serverError = new HttpError(error.message, error.status || HttpServerErrors.INTERNAL_SERVER_ERROR, {
-        code: error.code ? error.code : undefined,
+      serverError = new HttpError(error.message || error, error.status || HttpServerErrors.INTERNAL_SERVER_ERROR, {
+        code: error.code ? error.code : undefined
       });
       serverError.stack = error.stack || serverError.stack;
     }
 
-    // Send to Sentry if available
-    if (this.options.raven) {
-      this.options.raven.captureException(serverError, {
-        req,
-        level: serverError.status >= 500 ? 'error' : 'warning',
-        tags: { stackId: serverError.stackId },
-      } as any);
-    }
-
     // Log to console
-    this.logger.error(error.message, serverError.details);
-
-    // TODO: Hide stack in production
-    console.error(error.stack);
+    this.logger.error(serverError.message, serverError.details);
 
     // Respond with error
     res.error ? res.error(serverError) : res.status(serverError.status || 500).json(serverError.toJSON());
