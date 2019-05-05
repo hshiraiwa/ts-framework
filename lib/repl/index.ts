@@ -1,6 +1,7 @@
 import repl = require("repl");
 import * as path from "path";
 import * as Package from "pjson";
+import { Logger } from "nano-errors";
 import { Service, ServiceOptions, ServiceDescription } from "ts-framework-common";
 import Server from "../server";
 import { readFileSync } from "fs-extra";
@@ -18,6 +19,7 @@ export default class ReplConsole extends Service {
   public options: ReplConsoleOptions;
 
   constructor(options: ReplConsoleOptions) {
+    const logger = options.logger || Logger.initialize();
     super({
       ...options,
       name: options.name || Package.name,

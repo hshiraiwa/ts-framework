@@ -1,8 +1,11 @@
 import * as path from "path";
 import * as request from "supertest";
 import Server from "../../../lib";
+import { Logger } from "nano-errors";
 
 describe("lib.server.helpers.FilterWrapper", () => {
+  Logger.initialize();
+
   it("GET /pass_simple_filter (200)", async () => {
     const server = new Server({
       port: 3333,

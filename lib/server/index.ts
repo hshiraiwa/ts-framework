@@ -1,7 +1,8 @@
 import * as Sentry from "@sentry/node";
 import * as express from "express";
 import * as http from "http";
-import { BaseServer, Logger, LoggerInstance } from "ts-framework-common";
+import { Logger, LoggerInstance } from "nano-errors";
+import { BaseServer } from "ts-framework-common";
 import { BaseRequest } from "../base/BaseRequest";
 import { BaseResponse } from "../base/BaseResponse";
 import { LoggerComponent, RequestComponent, RouterComponent, SecurityComponent } from "../components";
@@ -17,18 +18,16 @@ export default class Server extends BaseServer {
   public logger: LoggerInstance;
   protected server?: http.Server;
   public sentry?: Sentry.NodeClient;
+  public options: ServerOptions;
 
-  constructor(public options: ServerOptions, app?: express.Application) {
-    super(options);
+  constructor(options: ServerOptions, app?: express.Application) {
+    const logger = options.logger || Logger.initialize();
+    super({ logger, ...options });
     this.app = app || express();
-    this.logger = options.logger || Logger.getInstance();
 
     this.component(
       // Sentry will be initalized in logger component
-      new LoggerComponent({
-        logger: this.options.logger,
-        sentry: this.options.sentry
-      })
+      new LoggerComponent({ logger, sentry: this.options.sentry })
     );
 
     if (this.options.repl) {
@@ -37,27 +36,12 @@ export default class Server extends BaseServer {
 
     // Adds security server components conditionally
     if (this.options.security) {
-      this.component(
-        new SecurityComponent({
-          logger: this.logger,
-          ...this.options.security
-        })
-      );
+      this.component(new SecurityComponent({ logger, ...this.options.security }));
     }
 
     // Adds base server components
-    this.component(
-      new RequestComponent({
-        logger: this.logger,
-        ...this.options.request
-      })
-    );
-    this.component(
-      new RouterComponent({
-        logger: this.logger,
-        ...this.options.router
-      })
-    );
+    this.component(new RequestComponent({ logger, ...this.options.request }));
+    this.component(new RouterComponent({ logger, ...this.options.router }));
 
     // Continue with server initialization
     this.onMount();

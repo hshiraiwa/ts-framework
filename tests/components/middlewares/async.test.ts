@@ -1,7 +1,10 @@
 import * as request from "supertest";
 import Server from "../../../lib";
+import { Logger } from "nano-errors";
 
 describe("lib.server.middlewares.Async", () => {
+  Logger.initialize();
+
   it("should not wrap a number", async () => {
     // Initialize a simple server
     const server = new Server({

@@ -1,7 +1,10 @@
 import * as request from "supertest";
 import Server from "../../../lib";
+import { Logger } from "nano-errors";
 
 describe("lib.server.middlewares.CookieParser", () => {
+  Logger.initialize();
+
   it("GET / (200)", async () => {
     // Initialize a simple server
     const server = new Server({
