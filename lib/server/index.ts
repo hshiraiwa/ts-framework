@@ -1,8 +1,7 @@
 import * as Sentry from "@sentry/node";
 import * as express from "express";
 import * as http from "http";
-import { Logger, LoggerInstance } from "nano-errors";
-import { BaseServer } from "ts-framework-common";
+import { BaseServer, Logger, LoggerInstance } from "ts-framework-common";
 import { BaseRequest } from "../base/BaseRequest";
 import { BaseResponse } from "../base/BaseResponse";
 import { LoggerComponent, RequestComponent, RouterComponent, SecurityComponent } from "../components";

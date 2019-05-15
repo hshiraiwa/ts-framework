@@ -11,11 +11,11 @@ import HttpError from "../error/http/HttpError";
 import { ServerOptions } from "./config";
 export { BaseRequest, BaseResponse, Controller, Get, Post, Put, Delete, HttpCode, HttpError, ServerOptions };
 export default class Server extends BaseServer {
-    options: ServerOptions;
     app: express.Application;
     logger: LoggerInstance;
     protected server?: http.Server;
     sentry?: Sentry.NodeClient;
+    options: ServerOptions;
     constructor(options: ServerOptions, app?: express.Application);
     onMount(): void;
     onInit(): Promise<void>;

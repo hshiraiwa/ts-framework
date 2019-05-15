@@ -1,8 +1,7 @@
 import repl = require("repl");
 import * as path from "path";
 import * as Package from "pjson";
-import { Logger } from "nano-errors";
-import { Service, ServiceOptions, ServiceDescription } from "ts-framework-common";
+import { Logger, Service, ServiceOptions, ServiceDescription } from "ts-framework-common";
 import Server from "../server";
 import { readFileSync } from "fs-extra";
 

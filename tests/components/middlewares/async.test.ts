@@ -1,6 +1,6 @@
 import * as request from "supertest";
 import Server from "../../../lib";
-import { Logger } from "nano-errors";
+import { Logger } from "ts-framework-common";
 
 describe("lib.server.middlewares.Async", () => {
   Logger.initialize();

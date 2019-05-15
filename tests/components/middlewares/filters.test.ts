@@ -1,7 +1,7 @@
 import * as path from "path";
 import * as request from "supertest";
 import Server from "../../../lib";
-import { Logger } from "nano-errors";
+import { Logger } from "ts-framework-common";
 
 describe("lib.server.helpers.FilterWrapper", () => {
   Logger.initialize();
