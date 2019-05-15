@@ -14,7 +14,7 @@ export default class LoggerComponent implements Component {
   public logger: LoggerInstance;
 
   constructor(public options: LoggerComponentOptions = {}) {
-    this.logger = options.logger || Logger.getInstance({ ...options } as LoggerOptions);
+    this.logger = options.logger || Logger.getInstance();
   }
 
   public describe() {

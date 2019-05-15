@@ -1,7 +1,10 @@
 import * as request from "supertest";
 import Server from "../../../lib";
+import { Logger } from "ts-framework-common";
 
 describe("lib.server.middlewares.CORS", () => {
+  Logger.initialize();
+
   it("GET /cors_inactive (200)", async () => {
     // Initialize a simple server
     const server = new Server({
