@@ -1,4 +1,4 @@
-import { Logger } from 'ts-framework-common';
+import { Logger, SentryTransport } from 'ts-framework-common';
 import Server, { ServerOptions } from 'ts-framework';
 import StatusController from './controllers/StatusController';
 import UptimeService from './services/UptimeService';
@@ -9,7 +9,13 @@ const port = process.env.PORT as any || 3000;
 
 // Prepare global logger instance
 const sentry = process.env.SENTRY_DSN ? { dsn: process.env.SENTRY_DSN } : undefined;
-const logger = Logger.getInstance({ sentry });
+const logger = Logger.initialize({
+  transports: [
+    ...Logger.DEFAULT_TRANSPORTS,
+    new SentryTransport({ ...sentry }),
+  ]
+});
+
 
 export default class MainServer extends Server {
   constructor(options?: ServerOptions) {
