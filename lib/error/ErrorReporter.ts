@@ -44,7 +44,7 @@ export class ErrorReporter {
     });
 
     // Log to console
-    this.logger.warn(error.message, error.details);
+    this.logger.warn(error);
 
     // Respond with error
     res.error(error);
@@ -67,7 +67,7 @@ export class ErrorReporter {
     }
 
     // Log to console
-    this.logger.error(serverError.message, serverError.details);
+    this.logger.error(serverError);
 
     // Respond with error
     res.error ? res.error(serverError) : res.status(serverError.status || 500).json(serverError.toJSON());
