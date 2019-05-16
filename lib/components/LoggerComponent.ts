@@ -1,5 +1,12 @@
 import * as Sentry from "@sentry/node";
-import { Component, ComponentOptions, ComponentType, Logger, LoggerInstance, LoggerOptions } from "ts-framework-common";
+import {
+  Component,
+  ComponentOptions,
+  ComponentType,
+  Logger,
+  LoggerInstance,
+  SentryTransport
+} from "ts-framework-common";
 import Server from "../server";
 
 export interface LoggerComponentOptions extends ComponentOptions {
@@ -14,11 +21,26 @@ export default class LoggerComponent implements Component {
   public logger: LoggerInstance;
 
   constructor(public options: LoggerComponentOptions = {}) {
-    this.logger = options.logger || Logger.getInstance();
+    try {
+      this.logger = options.logger || Logger.getInstance();
+    } catch (exception) {
+      console.warn("Could not find default logger, a new one will be initialized");
+      this.logger = Logger.initialize();
+
+      // Add sentry transport to logger, if available
+      if (this.options.sentry) {
+        this.logger.add(new SentryTransport({ sentry: this.options.sentry }));
+      }
+    }
   }
 
-  public describe() {
-    return { name: "LoggerComponent" };
+  public describe(): { name: string; context: { transports: any[] } } {
+    return {
+      name: "LoggerComponent",
+      context: {
+        transports: this.logger.transports
+      }
+    };
   }
 
   public onMount(server: Server): void {

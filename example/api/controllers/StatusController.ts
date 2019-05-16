@@ -22,4 +22,9 @@ export default class StatusController {
     // Sample of static properties
     res.json({ foo: this.foo });
   }
+
+  @Get('/error')
+  public static error(req, res) {
+    throw "unknown static error";
+  }
 }

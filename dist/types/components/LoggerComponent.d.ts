@@ -13,6 +13,9 @@ export default class LoggerComponent implements Component {
     constructor(options?: LoggerComponentOptions);
     describe(): {
         name: string;
+        context: {
+            transports: any[];
+        };
     };
     onMount(server: Server): void;
     onInit(): Promise<void>;
