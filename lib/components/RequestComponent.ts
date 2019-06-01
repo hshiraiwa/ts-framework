@@ -33,6 +33,13 @@ export default class RequestComponent implements Component {
   public onMount(server: Server) {
     // Prepare body size limit
     if (this.options.bodyLimit) {
+      // Text body
+      server.app.use(
+        bodyParser.text({
+          limit: this.options.bodyLimit
+        })
+      );
+
       // JSON body
       server.app.use(
         bodyParser.json({
@@ -71,6 +78,7 @@ export default class RequestComponent implements Component {
     }
 
     // Prepare body parser
+    server.app.use(bodyParser.text());
     server.app.use(bodyParser.json());
     server.app.use(bodyParser.urlencoded({ extended: false }));
     server.app.use(methodOverride());
