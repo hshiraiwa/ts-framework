@@ -4,6 +4,7 @@ import { LoggerInstance } from "ts-framework-common";
 export interface ErrorReporterOptions {
     sentry?: Sentry.NodeClient;
     logger?: LoggerInstance;
+    group404?: boolean;
 }
 export interface ErrorDefinitions {
     [code: string]: {

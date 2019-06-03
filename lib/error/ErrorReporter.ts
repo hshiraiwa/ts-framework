@@ -7,6 +7,7 @@ import HttpError from "./http/HttpError";
 export interface ErrorReporterOptions {
   sentry?: Sentry.NodeClient;
   logger?: LoggerInstance;
+  group404?: boolean;
 }
 
 export interface ErrorDefinitions {
@@ -37,8 +38,12 @@ export class ErrorReporter {
   }
 
   notFound(req: BaseRequest, res: BaseResponse) {
+    // Build error message
+    const message =
+      "The resource was not found" + (this.options.group404 ? "." : `: ${req.method.toUpperCase()} ${req.originalUrl}`);
+
     // Build error instance
-    const error = new HttpError(`The resource was not found: ${req.method.toUpperCase()} ${req.originalUrl}`, 404, {
+    const error = new HttpError(message, 404, {
       method: req.method,
       originalUrl: req.originalUrl
     });
