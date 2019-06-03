@@ -40,7 +40,7 @@ export class ErrorReporter {
   notFound(req: BaseRequest, res: BaseResponse) {
     // Build error message
     const message =
-      "The resource was not found" + this.options.group404 ? "." : `: ${req.method.toUpperCase()} ${req.originalUrl}`;
+      "The resource was not found" + (this.options.group404 ? "." : `: ${req.method.toUpperCase()} ${req.originalUrl}`);
 
     // Build error instance
     const error = new HttpError(message, 404, {
