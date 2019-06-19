@@ -11,7 +11,7 @@
     "dist"
   ],
   "engines": {
-    "node": "10"
+    "node": ">8 <=12"
   },
   "husky": {
     "hooks": {

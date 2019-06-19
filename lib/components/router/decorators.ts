@@ -1,14 +1,14 @@
 import { BaseController } from "./controller";
 
 /* Simple factory for generating the routes decorators */
-const routeDecoratorFactory = (method): Function => {
+const routeDecoratorFactory = (method: string): Function => {
   return (route: string, filters: Function[] = []) => {
-    return function getRouteDecorator(target, key, descriptor) {
+    return function getRouteDecorator(target: BaseController, key: string, descriptor: PropertyDescriptor) {
       target.routes = target.routes || {};
       target.routes[method] = target.routes[method] || {};
       target.routes[method][route] = {
         filters,
-        controller: target[key].bind(target)
+        controller: { target, key }
       };
       return descriptor;
     };
