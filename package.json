@@ -1,6 +1,6 @@
 {
   "name": "ts-framework",
-  "version": "2.5.3",
+  "version": "2.6.0",
   "description": "A minimalistic web framework for TS",
   "author": "Luis Brito <luis@nxtep.io>",
   "license": "MIT",
@@ -11,7 +11,7 @@
     "dist"
   ],
   "engines": {
-    "node": "10"
+    "node": ">8 <=12"
   },
   "husky": {
     "hooks": {

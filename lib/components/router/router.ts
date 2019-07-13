@@ -8,6 +8,7 @@ import { BaseRequest } from "../..";
 import FiltersWrapper from "../helpers/filter";
 import { BaseResponse } from "../helpers/response";
 import asyncMiddleware from "../middlewares/async";
+import { BaseController } from "./controller";
 
 // TODO: Inject this constants from outside
 // Prepare static full paths, relative to project root
@@ -75,7 +76,7 @@ export default class ServerRouter {
    * @param ctrl
    * @returns {{}}
    */
-  prepareControllerMethods(method, ctrl) {
+  prepareControllerMethods(method: string, ctrl: BaseController) {
     const decoratedRoutes = {};
 
     Object.keys(ctrl.routes[method] || {}).map((route: string) => {
@@ -156,7 +157,6 @@ export default class ServerRouter {
         }
 
         // Get controller from map
-        // noinspection JSUnresolvedVariable
         const ctrl = this.registerController(routes, r);
 
         // Add the filters wrapper instance to the routes map
@@ -207,6 +207,9 @@ export default class ServerRouter {
           throw e;
         }
       }
+    } else if (ctrl.target && ctrl.key) {
+      // Bind to a specfic key in the target
+      return ctrl.target[ctrl.key].bind(ctrl.target);
     } else if (!ctrl || !util.isFunction(ctrl)) {
       // Throw invalid controller error
       throw new Error(`Controller is not valid for route: ${r}`);
