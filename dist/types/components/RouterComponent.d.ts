@@ -33,6 +33,7 @@ export interface RouterComponentOptions extends ComponentOptions {
             allowExtendedTokenAttributes?: boolean;
         };
     };
+    group404?: boolean;
 }
 export default class RouterComponent implements Component {
     options: RouterComponentOptions;

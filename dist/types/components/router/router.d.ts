@@ -2,6 +2,7 @@ import * as express from "express";
 import { LoggerInstance } from "ts-framework-common";
 import { BaseRequest } from "../..";
 import { BaseResponse } from "../helpers/response";
+import { BaseController } from "./controller";
 export interface RouterOptions {
     logger?: LoggerInstance;
     app?: express.Application;
@@ -42,7 +43,7 @@ export default class ServerRouter {
      * @param ctrl
      * @returns {{}}
      */
-    prepareControllerMethods(method: any, ctrl: any): {};
+    prepareControllerMethods(method: string, ctrl: BaseController): {};
     /**
      * Prepare the decorated routes for being merged into the routes map.
      *
