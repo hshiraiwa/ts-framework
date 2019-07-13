@@ -9,7 +9,9 @@ export declare const Controller: (route?: string, filters?: Function[]) => <T ex
     new (...args: any[]): {};
     baseRoute: string;
     baseFilters: Function[];
-    routes(): any;
+    routes(): {
+        [key: string]: import("./controller").BaseControllerRoute;
+    };
 } & T;
 /**
  * The @Get route decorator.
