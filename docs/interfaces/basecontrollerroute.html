@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>HttpServerErrors | ts-framework (v2.6.0)</title>
+	<title>BaseControllerRoute | ts-framework (v2.6.0)</title>
 	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
@@ -56,82 +56,68 @@
 					<a href="../globals.html">Globals</a>
 				</li>
 				<li>
-					<a href="httpservererrors.html">HttpServerErrors</a>
+					<a href="basecontrollerroute.html">BaseControllerRoute</a>
 				</li>
 			</ul>
-			<h1>Enumeration HttpServerErrors</h1>
+			<h1>Interface BaseControllerRoute</h1>
 		</div>
 	</div>
 </header>
 <div class="container container-main">
 	<div class="row">
 		<div class="col-8 col-content">
+			<section class="tsd-panel tsd-hierarchy">
+				<h3>Hierarchy</h3>
+				<ul class="tsd-hierarchy">
+					<li>
+						<span class="target">BaseControllerRoute</span>
+					</li>
+				</ul>
+			</section>
 			<section class="tsd-panel-group tsd-index-group">
 				<h2>Index</h2>
 				<section class="tsd-panel tsd-index-panel">
 					<div class="tsd-index-content">
 						<section class="tsd-index-section tsd-is-external">
-							<h3>Enumeration members</h3>
+							<h3>Properties</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-enum-member tsd-parent-kind-enum tsd-is-external"><a href="httpservererrors.html#bad_gateway" class="tsd-kind-icon">BAD_<wbr>GATEWAY</a></li>
-								<li class="tsd-kind-enum-member tsd-parent-kind-enum tsd-is-external"><a href="httpservererrors.html#gateway_timeout" class="tsd-kind-icon">GATEWAY_<wbr>TIMEOUT</a></li>
-								<li class="tsd-kind-enum-member tsd-parent-kind-enum tsd-is-external"><a href="httpservererrors.html#internal_server_error" class="tsd-kind-icon">INTERNAL_<wbr>SERVER_<wbr>ERROR</a></li>
-								<li class="tsd-kind-enum-member tsd-parent-kind-enum tsd-is-external"><a href="httpservererrors.html#not_implemented" class="tsd-kind-icon">NOT_<wbr>IMPLEMENTED</a></li>
-								<li class="tsd-kind-enum-member tsd-parent-kind-enum tsd-is-external"><a href="httpservererrors.html#service_unavailable" class="tsd-kind-icon">SERVICE_<wbr>UNAVAILABLE</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-external"><a href="basecontrollerroute.html#controller" class="tsd-kind-icon">controller</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-external"><a href="basecontrollerroute.html#filters" class="tsd-kind-icon">filters</a></li>
 							</ul>
 						</section>
 					</div>
 				</section>
 			</section>
 			<section class="tsd-panel-group tsd-member-group tsd-is-external">
-				<h2>Enumeration members</h2>
-				<section class="tsd-panel tsd-member tsd-kind-enum-member tsd-parent-kind-enum tsd-is-external">
-					<a name="bad_gateway" class="tsd-anchor"></a>
-					<h3>BAD_<wbr>GATEWAY</h3>
-					<div class="tsd-signature tsd-kind-icon">BAD_<wbr>GATEWAY<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol"> =&nbsp;502</span></div>
+				<h2>Properties</h2>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-external">
+					<a name="controller" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> controller</h3>
+					<div class="tsd-signature tsd-kind-icon">controller<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">object</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/nxtep-io/ts-framework/blob/4433b5d/lib/error/http/HttpCode.ts#L24">error/http/HttpCode.ts:24</a></li>
+							<li>Defined in <a href="https://github.com/nxtep-io/ts-framework/blob/4433b5d/lib/components/router/controller.ts#L3">components/router/controller.ts:3</a></li>
 						</ul>
 					</aside>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-enum-member tsd-parent-kind-enum tsd-is-external">
-					<a name="gateway_timeout" class="tsd-anchor"></a>
-					<h3>GATEWAY_<wbr>TIMEOUT</h3>
-					<div class="tsd-signature tsd-kind-icon">GATEWAY_<wbr>TIMEOUT<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol"> =&nbsp;504</span></div>
-					<aside class="tsd-sources">
-						<ul>
-							<li>Defined in <a href="https://github.com/nxtep-io/ts-framework/blob/4433b5d/lib/error/http/HttpCode.ts#L26">error/http/HttpCode.ts:26</a></li>
+					<div class="tsd-type-declaration">
+						<h4>Type declaration</h4>
+						<ul class="tsd-parameters">
+							<li class="tsd-parameter">
+								<h5>key<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span></h5>
+							</li>
+							<li class="tsd-parameter">
+								<h5>target<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span></h5>
+							</li>
 						</ul>
-					</aside>
+					</div>
 				</section>
-				<section class="tsd-panel tsd-member tsd-kind-enum-member tsd-parent-kind-enum tsd-is-external">
-					<a name="internal_server_error" class="tsd-anchor"></a>
-					<h3>INTERNAL_<wbr>SERVER_<wbr>ERROR</h3>
-					<div class="tsd-signature tsd-kind-icon">INTERNAL_<wbr>SERVER_<wbr>ERROR<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol"> =&nbsp;500</span></div>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-external">
+					<a name="filters" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> filters</h3>
+					<div class="tsd-signature tsd-kind-icon">filters<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Function</span><span class="tsd-signature-symbol">[]</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/nxtep-io/ts-framework/blob/4433b5d/lib/error/http/HttpCode.ts#L22">error/http/HttpCode.ts:22</a></li>
-						</ul>
-					</aside>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-enum-member tsd-parent-kind-enum tsd-is-external">
-					<a name="not_implemented" class="tsd-anchor"></a>
-					<h3>NOT_<wbr>IMPLEMENTED</h3>
-					<div class="tsd-signature tsd-kind-icon">NOT_<wbr>IMPLEMENTED<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol"> =&nbsp;501</span></div>
-					<aside class="tsd-sources">
-						<ul>
-							<li>Defined in <a href="https://github.com/nxtep-io/ts-framework/blob/4433b5d/lib/error/http/HttpCode.ts#L23">error/http/HttpCode.ts:23</a></li>
-						</ul>
-					</aside>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-enum-member tsd-parent-kind-enum tsd-is-external">
-					<a name="service_unavailable" class="tsd-anchor"></a>
-					<h3>SERVICE_<wbr>UNAVAILABLE</h3>
-					<div class="tsd-signature tsd-kind-icon">SERVICE_<wbr>UNAVAILABLE<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol"> =&nbsp;503</span></div>
-					<aside class="tsd-sources">
-						<ul>
-							<li>Defined in <a href="https://github.com/nxtep-io/ts-framework/blob/4433b5d/lib/error/http/HttpCode.ts#L25">error/http/HttpCode.ts:25</a></li>
+							<li>Defined in <a href="https://github.com/nxtep-io/ts-framework/blob/4433b5d/lib/components/router/controller.ts#L2">components/router/controller.ts:2</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -149,23 +135,14 @@
 				<ul class="before-current">
 				</ul>
 				<ul class="current">
-					<li class="current tsd-kind-enum tsd-is-external">
-						<a href="httpservererrors.html" class="tsd-kind-icon">Http<wbr>Server<wbr>Errors</a>
+					<li class="current tsd-kind-interface tsd-is-external">
+						<a href="basecontrollerroute.html" class="tsd-kind-icon">Base<wbr>Controller<wbr>Route</a>
 						<ul>
-							<li class=" tsd-kind-enum-member tsd-parent-kind-enum tsd-is-external">
-								<a href="httpservererrors.html#bad_gateway" class="tsd-kind-icon">BAD_<wbr>GATEWAY</a>
+							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-external">
+								<a href="basecontrollerroute.html#controller" class="tsd-kind-icon">controller</a>
 							</li>
-							<li class=" tsd-kind-enum-member tsd-parent-kind-enum tsd-is-external">
-								<a href="httpservererrors.html#gateway_timeout" class="tsd-kind-icon">GATEWAY_<wbr>TIMEOUT</a>
-							</li>
-							<li class=" tsd-kind-enum-member tsd-parent-kind-enum tsd-is-external">
-								<a href="httpservererrors.html#internal_server_error" class="tsd-kind-icon">INTERNAL_<wbr>SERVER_<wbr>ERROR</a>
-							</li>
-							<li class=" tsd-kind-enum-member tsd-parent-kind-enum tsd-is-external">
-								<a href="httpservererrors.html#not_implemented" class="tsd-kind-icon">NOT_<wbr>IMPLEMENTED</a>
-							</li>
-							<li class=" tsd-kind-enum-member tsd-parent-kind-enum tsd-is-external">
-								<a href="httpservererrors.html#service_unavailable" class="tsd-kind-icon">SERVICE_<wbr>UNAVAILABLE</a>
+							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-external">
+								<a href="basecontrollerroute.html#filters" class="tsd-kind-icon">filters</a>
 							</li>
 						</ul>
 					</li>
