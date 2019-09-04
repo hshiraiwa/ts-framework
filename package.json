@@ -64,15 +64,10 @@
     "helmet": "^3.13.0",
     "method-override": "^2.3.10",
     "multer": "^1.3.0",
-    "nano-errors": "nxtep-io/nano-errors",
     "nodemon": "^1.18.8",
     "pjson": "^1.0.9",
     "request-ip": "^2.0.2",
     "rimraf": "^2.6.2",
-    "source-map-support": "^0.5.9",
-    "ts-framework-common": "nxtep-io/ts-framework-common#2.4.1",
-    "ts-node": "^7.0.1",
-    "typescript": "^3.2.2",
     "upath": "^1.1.0",
     "url-join": "^4.0.0"
   },
@@ -100,5 +95,12 @@
     "tslint-config-prettier": "^1.14.0",
     "tslint-no-circular-imports": "^0.5.0",
     "typedoc": "^0.13.0"
+  },
+  "peerDependencies": {
+    "nano-errors": "nxtep-io/nano-errors",
+    "source-map-support": "^0.5.9",
+    "ts-framework-common": "nxtep-io/ts-framework-common#2.4.1",
+    "ts-node": "^7.0.1",
+    "typescript": "^3.2.2"
   }
 }
