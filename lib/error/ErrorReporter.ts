@@ -48,11 +48,17 @@ export class ErrorReporter {
       originalUrl: req.originalUrl
     });
 
-    // Log to console
-    this.logger.warn(error);
+    Sentry.withScope(scope => {
+      if (this.options.group404) {
+        scope.setFingerprint([req.method, req.originalUrl, "404"]);
+      }
 
-    // Respond with error
-    res.error(error);
+      // Log to console
+      this.logger.warn(error);
+
+      // Respond with error
+      res.error(error);
+    });
   }
 
   unknownError(error: any, req: BaseRequest, res: BaseResponse, next: Function) {
