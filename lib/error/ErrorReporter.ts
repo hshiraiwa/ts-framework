@@ -64,6 +64,13 @@ export class ErrorReporter {
       serverError = error.inner as HttpError;
     } else if (error && error instanceof HttpError) {
       serverError = error as HttpError;
+      // Handles errors thrown by axios. Axios sends the relevant information on the error.data field
+    } else if (error && error.data) {
+      serverError = new HttpError(error.data.message, error.data.status || HttpServerErrors.INTERNAL_SERVER_ERROR, {
+        code: error.data.code
+      });
+
+      serverError.stack = error.data.stack || serverError.stack;
     } else {
       serverError = new HttpError(error.message || error, error.status || HttpServerErrors.INTERNAL_SERVER_ERROR, {
         code: error.code ? error.code : undefined
