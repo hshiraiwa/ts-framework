@@ -34,6 +34,7 @@ export interface RouterComponentOptions extends ComponentOptions {
         };
     };
     group404?: boolean;
+    omitStack?: boolean;
 }
 export default class RouterComponent implements Component {
     options: RouterComponentOptions;
