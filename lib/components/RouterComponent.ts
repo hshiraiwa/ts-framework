@@ -37,6 +37,8 @@ export interface RouterComponentOptions extends ComponentOptions {
      The information will still be availabe in the error as metadata
   */
   group404?: boolean;
+  /* Omit stack from the http error response (But still log it) */
+  omitStack?: boolean;
 }
 
 export default class RouterComponent implements Component {
@@ -91,7 +93,8 @@ export default class RouterComponent implements Component {
     errorMiddleware(this.options.errors, {
       logger: this.logger,
       sentry: this.options.sentry ? server.sentry : undefined,
-      group404: this.options.group404
+      group404: this.options.group404,
+      omitStack: this.options.omitStack
     })(server.app);
   }
 

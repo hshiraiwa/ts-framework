@@ -65,4 +65,38 @@ describe("lib.server.errors.errorReporter", () => {
 
     await server.close();
   });
+
+  it("GET /unknown_error (500) with stack omited", async () => {
+    // Initialize a simple server
+    const server = new Server({
+      port: 3333,
+      security: {
+        cors: false
+      },
+      router: {
+        omitStack: true,
+        routes: {
+          get: {
+            "/": (req, res) => {
+              throw new Error("TEST_ERROR");
+            }
+          }
+        }
+      }
+    });
+
+    // Perform a simple request to get a 200 response
+    await request(server.app)
+      .get("/")
+      .expect("Content-Type", /json/)
+      .expect(500)
+      .then((response: any) => {
+        expect(response.body.status).toBe(500);
+        expect(response.body.stack).not.toBeDefined();
+        expect(response.body.stackId).toBeDefined();
+        expect(response.body.message).toMatch(/TEST_ERROR/);
+      });
+
+    await server.close();
+  });
 });

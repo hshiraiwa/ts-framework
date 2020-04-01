@@ -5,6 +5,7 @@ export interface ErrorReporterOptions {
     sentry?: Sentry.NodeClient;
     logger?: LoggerInstance;
     group404?: boolean;
+    omitStack?: boolean;
 }
 export interface ErrorDefinitions {
     [code: string]: {

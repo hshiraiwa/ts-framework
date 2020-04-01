@@ -8,6 +8,7 @@ export interface ErrorReporterOptions {
   sentry?: Sentry.NodeClient;
   logger?: LoggerInstance;
   group404?: boolean;
+  omitStack?: boolean;
 }
 
 export interface ErrorDefinitions {
@@ -56,6 +57,10 @@ export class ErrorReporter {
       // Log to console
       this.logger.warn(error);
 
+      if (this.options.omitStack) {
+        delete error.stack;
+      }
+
       // Respond with error
       res.error(error);
     });
@@ -86,6 +91,10 @@ export class ErrorReporter {
 
     // Log to console
     this.logger.error(serverError);
+
+    if (this.options.omitStack) {
+      delete serverError.stack;
+    }
 
     // Respond with error
     res.error ? res.error(serverError) : res.status(serverError.status || 500).json(serverError.toJSON());
