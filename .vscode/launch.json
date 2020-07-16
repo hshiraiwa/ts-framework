@@ -39,6 +39,7 @@
         "--config=jest.json"
       ],
       "console": "integratedTerminal",
+      "sourceMaps": true,
       "internalConsoleOptions": "neverOpen",
     }
   ]

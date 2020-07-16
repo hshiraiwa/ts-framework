@@ -50,5 +50,20 @@ describe("lib.errors.errorHelper", () => {
       expect(errorWithNoStack.details).not.toHaveProperty("stack");
       expect(errorWithNoStack.details.bar).not.toHaveProperty("stack");
     });
+
+    it("Does not unset non-stack properties.", () => {
+      const httpError = new HttpError("TEST_ERROR", 500, {
+        stack: "foo",
+        otherProp: "foo",
+        bar: { stack: "baz", nestedOtherProp: "bar" }
+      });
+      const errorWithNoStack = stripStacks(httpError);
+
+      expect(errorWithNoStack).not.toHaveProperty("stack");
+      expect(errorWithNoStack.details).not.toHaveProperty("stack");
+      expect(errorWithNoStack.details.bar).not.toHaveProperty("stack");
+      expect(errorWithNoStack.details.otherProp).toBe("foo");
+      expect(errorWithNoStack.details.bar.nestedOtherProp).toBe("bar");
+    });
   });
 });
