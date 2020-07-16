@@ -99,4 +99,84 @@ describe("lib.server.errors.errorReporter", () => {
 
     await server.close();
   });
+
+  it("should remove deeply nested stacks on an error 500 if configured to omitStack", async () => {
+    // Initialize a simple server
+    const server = new Server({
+      port: 3333,
+      security: {
+        cors: false
+      },
+      router: {
+        omitStack: true,
+        routes: {
+          get: {
+            "/": (req, res) => {
+              const internalError = new Error("INTERNAL_ERROR");
+              throw new HttpError("TEST_ERROR", 500, {
+                message: internalError.message,
+                stack: internalError.stack
+              });
+            }
+          }
+        }
+      }
+    });
+
+    // Perform a simple request to get a 500 response
+    await request(server.app)
+      .get("/")
+      .expect("Content-Type", /json/)
+      .expect(500)
+      .then((response: any) => {
+        expect(response.body.status).toBe(500);
+        expect(response.body.stack).not.toBeDefined();
+        expect(response.body.stackId).toBeDefined();
+        expect(response.body.message).toMatch(/TEST_ERROR/);
+        expect(response.body.details.message).toMatch(/INTERNAL_ERROR/);
+        expect(response.body.details.stack).toBeUndefined();
+      });
+
+    await server.close();
+  });
+
+  it("should remove deeply nested stacks on an error 404 if configured to omitStack", async () => {
+    // Initialize a simple server
+    const server = new Server({
+      port: 3333,
+      security: {
+        cors: false
+      },
+      router: {
+        omitStack: true,
+        routes: {
+          get: {
+            "/": (req, res) => {
+              const internalError = new Error("INTERNAL_ERROR");
+              throw new HttpError("TEST_ERROR", 404, {
+                message: internalError.message,
+                stack: internalError.stack
+              });
+            }
+          }
+        }
+      }
+    });
+
+    // Perform a simple request to get a 500 response
+    await request(server.app)
+      .get("/")
+      .expect("Content-Type", /json/)
+      .expect(500)
+      .then((response: any) => {
+        expect(response.body.status).toBe(500);
+        expect(response.body.stack).not.toBeDefined();
+        expect(response.body.stackId).toBeDefined();
+        expect(response.body.message).toMatch(/TEST_ERROR/);
+        expect(response.body.details.message).toMatch(/INTERNAL_ERROR/);
+        expect(response.body.details.stack).toBeUndefined();
+      });
+
+    await server.close();
+  });
 });
