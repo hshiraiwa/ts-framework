@@ -3,6 +3,7 @@ import { BaseRequest, BaseResponse } from "../components/helpers/response";
 import { Logger, LoggerInstance } from "ts-framework-common";
 import { HttpServerErrors } from "./http/HttpCode";
 import HttpError from "./http/HttpError";
+import { stripStacks } from "./errorHelper";
 
 export interface ErrorReporterOptions {
   sentry?: Sentry.NodeClient;
@@ -58,7 +59,7 @@ export class ErrorReporter {
       this.logger.warn(error);
 
       if (this.options.omitStack) {
-        delete error.stack;
+        stripStacks(error);
       }
 
       // Respond with error
@@ -93,7 +94,7 @@ export class ErrorReporter {
     this.logger.error(serverError);
 
     if (this.options.omitStack) {
-      delete serverError.stack;
+      stripStacks(serverError);
     }
 
     // Respond with error
