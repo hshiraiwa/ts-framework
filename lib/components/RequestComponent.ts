@@ -9,6 +9,7 @@ import Server from "../server";
 export interface RequestComponentOptions extends ComponentOptions {
   logger?: LoggerInstance;
   bodyLimit?: string;
+  inflate?: boolean;
   secret?: string;
   multer?: {
     single?: string;
@@ -36,14 +37,16 @@ export default class RequestComponent implements Component {
       // Text body
       server.app.use(
         bodyParser.text({
-          limit: this.options.bodyLimit
+          limit: this.options.bodyLimit,
+          inflate: this.options.inflate
         })
       );
 
       // JSON body
       server.app.use(
         bodyParser.json({
-          limit: this.options.bodyLimit
+          limit: this.options.bodyLimit,
+          inflate: this.options.inflate
         })
       );
 
@@ -51,6 +54,7 @@ export default class RequestComponent implements Component {
       server.app.use(
         bodyParser.urlencoded({
           limit: this.options.bodyLimit,
+          inflate: this.options.inflate,
           extended: true
         })
       );
