@@ -4,6 +4,7 @@ import Server from "../server";
 export interface RequestComponentOptions extends ComponentOptions {
     logger?: LoggerInstance;
     bodyLimit?: string;
+    inflate?: boolean;
     secret?: string;
     multer?: {
         single?: string;

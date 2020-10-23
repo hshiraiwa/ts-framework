@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>ts-framework (v2.7.0)</title>
+	<title>ts-framework (v2.7.2)</title>
 	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="assets/css/main.css">
@@ -22,7 +22,7 @@
 						<li class="state loading">Preparing search index...</li>
 						<li class="state failure">The search index is not available</li>
 					</ul>
-					<a href="index.html" class="title">ts-framework (v2.7.0)</a>
+					<a href="index.html" class="title">ts-framework (v2.7.2)</a>
 				</div>
 				<div class="table-cell" id="tsd-widgets">
 					<div id="tsd-filter">
@@ -56,7 +56,7 @@
 					<a href="globals.html">Globals</a>
 				</li>
 			</ul>
-			<h1> ts-framework (v2.7.0)</h1>
+			<h1> ts-framework (v2.7.2)</h1>
 		</div>
 	</div>
 </header>
@@ -128,6 +128,7 @@
 								<li class="tsd-kind-variable tsd-is-external"><a href="globals.html#get" class="tsd-kind-icon">Get</a></li>
 								<li class="tsd-kind-variable tsd-is-external"><a href="globals.html#post" class="tsd-kind-icon">Post</a></li>
 								<li class="tsd-kind-variable tsd-is-external"><a href="globals.html#put" class="tsd-kind-icon">Put</a></li>
+								<li class="tsd-kind-variable tsd-is-external tsd-is-not-exported"><a href="globals.html#stack_property_name" class="tsd-kind-icon">STACK_<wbr>PROPERTY_<wbr>NAME</a></li>
 								<li class="tsd-kind-variable tsd-is-external tsd-is-not-exported"><a href="globals.html#ctrl_path" class="tsd-kind-icon">ctrl_<wbr>path</a></li>
 								<li class="tsd-kind-variable tsd-is-external tsd-is-not-exported"><a href="globals.html#filter_path" class="tsd-kind-icon">filter_<wbr>path</a></li>
 							</ul>
@@ -136,9 +137,11 @@
 							<h3>Functions</h3>
 							<ul class="tsd-index-list">
 								<li class="tsd-kind-function tsd-is-external"><a href="globals.html#controller" class="tsd-kind-icon">Controller</a></li>
+								<li class="tsd-kind-function tsd-is-external tsd-is-not-exported"><a href="globals.html#_stripstacksinternal" class="tsd-kind-icon">_strip<wbr>Stacks<wbr>Internal</a></li>
 								<li class="tsd-kind-function tsd-is-external"><a href="globals.html#asyncmiddleware" class="tsd-kind-icon">async<wbr>Middleware</a></li>
 								<li class="tsd-kind-function tsd-is-external"><a href="globals.html#legacyparams" class="tsd-kind-icon">legacy<wbr>Params</a></li>
 								<li class="tsd-kind-function tsd-is-external tsd-is-not-exported"><a href="globals.html#routedecoratorfactory" class="tsd-kind-icon">route<wbr>Decorator<wbr>Factory</a></li>
+								<li class="tsd-kind-function tsd-has-type-parameter tsd-is-external"><a href="globals.html#stripstacks" class="tsd-kind-icon">strip<wbr>Stacks</a></li>
 							</ul>
 						</section>
 					</div>
@@ -152,7 +155,7 @@
 					<div class="tsd-signature tsd-kind-icon">Filter<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">function</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/nxtep-io/ts-framework/blob/f55531c/lib/components/router/router.ts#L29">components/router/router.ts:29</a></li>
+							<li>Defined in <a href="https://github.com/nxtep-io/ts-framework/blob/6815057/lib/components/router/router.ts#L29">components/router/router.ts:29</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-type-declaration">
@@ -192,7 +195,7 @@
 					<div class="tsd-signature tsd-kind-icon">Http<wbr>Code<span class="tsd-signature-symbol">:</span> <a href="enums/httpsuccess.html" class="tsd-signature-type">HttpSuccess</a><span class="tsd-signature-symbol"> | </span><a href="enums/httpredirect.html" class="tsd-signature-type">HttpRedirect</a><span class="tsd-signature-symbol"> | </span><a href="enums/httpclienterrors.html" class="tsd-signature-type">HttpClientErrors</a><span class="tsd-signature-symbol"> | </span><a href="enums/httpservererrors.html" class="tsd-signature-type">HttpServerErrors</a></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/nxtep-io/ts-framework/blob/f55531c/lib/error/http/HttpCode.ts#L29">error/http/HttpCode.ts:29</a></li>
+							<li>Defined in <a href="https://github.com/nxtep-io/ts-framework/blob/6815057/lib/error/http/HttpCode.ts#L29">error/http/HttpCode.ts:29</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -202,7 +205,7 @@
 					<div class="tsd-signature tsd-kind-icon">Route<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">function</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/nxtep-io/ts-framework/blob/f55531c/lib/components/router/router.ts#L28">components/router/router.ts:28</a></li>
+							<li>Defined in <a href="https://github.com/nxtep-io/ts-framework/blob/6815057/lib/components/router/router.ts#L28">components/router/router.ts:28</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-type-declaration">
@@ -239,7 +242,7 @@
 					<div class="tsd-signature tsd-kind-icon">Route<wbr>Defs<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">object</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/nxtep-io/ts-framework/blob/f55531c/lib/components/router/router.ts#L31">components/router/router.ts:31</a></li>
+							<li>Defined in <a href="https://github.com/nxtep-io/ts-framework/blob/6815057/lib/components/router/router.ts#L31">components/router/router.ts:31</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-type-declaration">
@@ -263,7 +266,7 @@
 					<div class="tsd-signature tsd-kind-icon">BASE_<wbr>CTRLS_<wbr>PATH<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> =&nbsp;path.join(__dirname, ctrl_path)</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/nxtep-io/ts-framework/blob/f55531c/lib/components/router/router.ts#L17">components/router/router.ts:17</a></li>
+							<li>Defined in <a href="https://github.com/nxtep-io/ts-framework/blob/6815057/lib/components/router/router.ts#L17">components/router/router.ts:17</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -273,7 +276,7 @@
 					<div class="tsd-signature tsd-kind-icon">BASE_<wbr>FILTERS_<wbr>PATH<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> =&nbsp;path.join(__dirname, filter_path)</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/nxtep-io/ts-framework/blob/f55531c/lib/components/helpers/filter.ts#L7">components/helpers/filter.ts:7</a></li>
+							<li>Defined in <a href="https://github.com/nxtep-io/ts-framework/blob/6815057/lib/components/helpers/filter.ts#L7">components/helpers/filter.ts:7</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -283,7 +286,7 @@
 					<div class="tsd-signature tsd-kind-icon">Delete<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Function</span><span class="tsd-signature-symbol"> =&nbsp;routeDecoratorFactory(&quot;delete&quot;)</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/nxtep-io/ts-framework/blob/f55531c/lib/components/router/decorators.ts#L75">components/router/decorators.ts:75</a></li>
+							<li>Defined in <a href="https://github.com/nxtep-io/ts-framework/blob/6815057/lib/components/router/decorators.ts#L75">components/router/decorators.ts:75</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -309,7 +312,7 @@
 					<div class="tsd-signature tsd-kind-icon">Get<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Function</span><span class="tsd-signature-symbol"> =&nbsp;routeDecoratorFactory(&quot;get&quot;)</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/nxtep-io/ts-framework/blob/f55531c/lib/components/router/decorators.ts#L45">components/router/decorators.ts:45</a></li>
+							<li>Defined in <a href="https://github.com/nxtep-io/ts-framework/blob/6815057/lib/components/router/decorators.ts#L45">components/router/decorators.ts:45</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -335,7 +338,7 @@
 					<div class="tsd-signature tsd-kind-icon">Post<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Function</span><span class="tsd-signature-symbol"> =&nbsp;routeDecoratorFactory(&quot;post&quot;)</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/nxtep-io/ts-framework/blob/f55531c/lib/components/router/decorators.ts#L55">components/router/decorators.ts:55</a></li>
+							<li>Defined in <a href="https://github.com/nxtep-io/ts-framework/blob/6815057/lib/components/router/decorators.ts#L55">components/router/decorators.ts:55</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -361,7 +364,7 @@
 					<div class="tsd-signature tsd-kind-icon">Put<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Function</span><span class="tsd-signature-symbol"> =&nbsp;routeDecoratorFactory(&quot;put&quot;)</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/nxtep-io/ts-framework/blob/f55531c/lib/components/router/decorators.ts#L65">components/router/decorators.ts:65</a></li>
+							<li>Defined in <a href="https://github.com/nxtep-io/ts-framework/blob/6815057/lib/components/router/decorators.ts#L65">components/router/decorators.ts:65</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -382,12 +385,22 @@
 					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-variable tsd-is-external tsd-is-not-exported">
+					<a name="stack_property_name" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagConst">Const</span> STACK_<wbr>PROPERTY_<wbr>NAME</h3>
+					<div class="tsd-signature tsd-kind-icon">STACK_<wbr>PROPERTY_<wbr>NAME<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">"stack"</span><span class="tsd-signature-symbol"> =&nbsp;&quot;stack&quot;</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/nxtep-io/ts-framework/blob/6815057/lib/error/errorHelper.ts#L3">error/errorHelper.ts:3</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-variable tsd-is-external tsd-is-not-exported">
 					<a name="ctrl_path" class="tsd-anchor"></a>
 					<h3><span class="tsd-flag ts-flagConst">Const</span> ctrl_<wbr>path</h3>
 					<div class="tsd-signature tsd-kind-icon">ctrl_<wbr>path<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">"../../../api/controllers"</span><span class="tsd-signature-symbol"> =&nbsp;&quot;../../../api/controllers&quot;</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/nxtep-io/ts-framework/blob/f55531c/lib/components/router/router.ts#L15">components/router/router.ts:15</a></li>
+							<li>Defined in <a href="https://github.com/nxtep-io/ts-framework/blob/6815057/lib/components/router/router.ts#L15">components/router/router.ts:15</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -397,7 +410,7 @@
 					<div class="tsd-signature tsd-kind-icon">filter_<wbr>path<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">"../../../api/filters"</span><span class="tsd-signature-symbol"> =&nbsp;&quot;../../../api/filters&quot;</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/nxtep-io/ts-framework/blob/f55531c/lib/components/helpers/filter.ts#L6">components/helpers/filter.ts:6</a></li>
+							<li>Defined in <a href="https://github.com/nxtep-io/ts-framework/blob/6815057/lib/components/helpers/filter.ts#L6">components/helpers/filter.ts:6</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -414,7 +427,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/nxtep-io/ts-framework/blob/f55531c/lib/components/router/decorators.ts#L24">components/router/decorators.ts:24</a></li>
+									<li>Defined in <a href="https://github.com/nxtep-io/ts-framework/blob/6815057/lib/components/router/decorators.ts#L24">components/router/decorators.ts:24</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -445,6 +458,32 @@
 						</li>
 					</ul>
 				</section>
+				<section class="tsd-panel tsd-member tsd-kind-function tsd-is-external tsd-is-not-exported">
+					<a name="_stripstacksinternal" class="tsd-anchor"></a>
+					<h3>_strip<wbr>Stacks<wbr>Internal</h3>
+					<ul class="tsd-signatures tsd-kind-function tsd-is-external tsd-is-not-exported">
+						<li class="tsd-signature tsd-kind-icon">_strip<wbr>Stacks<wbr>Internal<span class="tsd-signature-symbol">(</span>obj<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span>, clone<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/nxtep-io/ts-framework/blob/6815057/lib/error/errorHelper.ts#L6">error/errorHelper.ts:6</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>obj: <span class="tsd-signature-type">any</span></h5>
+								</li>
+								<li>
+									<h5>clone: <span class="tsd-signature-type">boolean</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">any</span></h4>
+						</li>
+					</ul>
+				</section>
 				<section class="tsd-panel tsd-member tsd-kind-function tsd-is-external">
 					<a name="asyncmiddleware" class="tsd-anchor"></a>
 					<h3><span class="tsd-flag ts-flagConst">Const</span> async<wbr>Middleware</h3>
@@ -455,7 +494,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/nxtep-io/ts-framework/blob/f55531c/lib/components/middlewares/async.ts#L4">components/middlewares/async.ts:4</a></li>
+									<li>Defined in <a href="https://github.com/nxtep-io/ts-framework/blob/6815057/lib/components/middlewares/async.ts#L4">components/middlewares/async.ts:4</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -478,7 +517,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/nxtep-io/ts-framework/blob/f55531c/lib/components/middlewares/legacyParams.ts#L1">components/middlewares/legacyParams.ts:1</a></li>
+									<li>Defined in <a href="https://github.com/nxtep-io/ts-framework/blob/6815057/lib/components/middlewares/legacyParams.ts#L1">components/middlewares/legacyParams.ts:1</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -507,7 +546,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/nxtep-io/ts-framework/blob/f55531c/lib/components/router/decorators.ts#L4">components/router/decorators.ts:4</a></li>
+									<li>Defined in <a href="https://github.com/nxtep-io/ts-framework/blob/6815057/lib/components/router/decorators.ts#L4">components/router/decorators.ts:4</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -517,6 +556,43 @@
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Function</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-function tsd-has-type-parameter tsd-is-external">
+					<a name="stripstacks" class="tsd-anchor"></a>
+					<h3>strip<wbr>Stacks</h3>
+					<ul class="tsd-signatures tsd-kind-function tsd-has-type-parameter tsd-is-external">
+						<li class="tsd-signature tsd-kind-icon">strip<wbr>Stacks&lt;T&gt;<span class="tsd-signature-symbol">(</span>obj<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">T</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/nxtep-io/ts-framework/blob/6815057/lib/error/errorHelper.ts#L26">error/errorHelper.ts:26</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Recursively traverses an object and removes all stack properties in-place.</p>
+								</div>
+							</div>
+							<h4 class="tsd-type-parameters-title">Type parameters</h4>
+							<ul class="tsd-type-parameters">
+								<li>
+									<h4>T<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span></h4>
+								</li>
+							</ul>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>obj: <span class="tsd-signature-type">T</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>The error or object to be stripped of stacks</p>
+									</div>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">T</span></h4>
 						</li>
 					</ul>
 				</section>
@@ -647,6 +723,9 @@
 						<a href="globals.html#put" class="tsd-kind-icon">Put</a>
 					</li>
 					<li class=" tsd-kind-variable tsd-is-external tsd-is-not-exported">
+						<a href="globals.html#stack_property_name" class="tsd-kind-icon">STACK_<wbr>PROPERTY_<wbr>NAME</a>
+					</li>
+					<li class=" tsd-kind-variable tsd-is-external tsd-is-not-exported">
 						<a href="globals.html#ctrl_path" class="tsd-kind-icon">ctrl_<wbr>path</a>
 					</li>
 					<li class=" tsd-kind-variable tsd-is-external tsd-is-not-exported">
@@ -654,6 +733,9 @@
 					</li>
 					<li class=" tsd-kind-function tsd-is-external">
 						<a href="globals.html#controller" class="tsd-kind-icon">Controller</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-external tsd-is-not-exported">
+						<a href="globals.html#_stripstacksinternal" class="tsd-kind-icon">_strip<wbr>Stacks<wbr>Internal</a>
 					</li>
 					<li class=" tsd-kind-function tsd-is-external">
 						<a href="globals.html#asyncmiddleware" class="tsd-kind-icon">async<wbr>Middleware</a>
@@ -663,6 +745,9 @@
 					</li>
 					<li class=" tsd-kind-function tsd-is-external tsd-is-not-exported">
 						<a href="globals.html#routedecoratorfactory" class="tsd-kind-icon">route<wbr>Decorator<wbr>Factory</a>
+					</li>
+					<li class=" tsd-kind-function tsd-has-type-parameter tsd-is-external">
+						<a href="globals.html#stripstacks" class="tsd-kind-icon">strip<wbr>Stacks</a>
 					</li>
 				</ul>
 			</nav>
