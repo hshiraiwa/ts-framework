@@ -29,7 +29,7 @@ export default class LoggerComponent implements Component {
 
       // Add sentry transport to logger, if available
       if (this.options.sentry) {
-        this.logger.add(new SentryTransport({ sentry: this.options.sentry }));
+        this.logger.add(new SentryTransport(this.options.sentry));
       }
     }
   }

@@ -56,7 +56,7 @@ export class ErrorReporter {
       }
 
       // Log to console
-      this.logger.warn(error);
+      this.logger.warn(error.message, error);
 
       if (this.options.omitStack) {
         stripStacks(error);
@@ -91,7 +91,7 @@ export class ErrorReporter {
     }
 
     // Log to console
-    this.logger.error(serverError);
+    this.logger.error(serverError.message, serverError);
 
     if (this.options.omitStack) {
       stripStacks(serverError);

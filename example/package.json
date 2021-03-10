@@ -13,18 +13,18 @@
   "dependencies": {
     "pjson": "^1.0.9",
     "ts-framework": "../",
-    "ts-framework-cli": "nxtep-io/ts-framework-cli#v2",
-    "ts-framework-common": "nxtep-io/ts-framework-common#v2",
+    "ts-framework-cli": "nxtep-io/ts-framework-cli",
+    "ts-framework-common": "nxtep-io/ts-framework-common#2.5.0",
     "ts-node": "^7.0.1",
     "yargs": "^14.1.0"
   },
   "devDependencies": {
-    "@types/jest": "^22.2.3",
+    "@types/jest": "^26.0.20",
     "@types/supertest": "^2.0.4",
     "hat": "^0.0.3",
-    "jest": "^22.4.3",
+    "jest": "^26.6.3",
     "rimraf": "^2.6.2",
     "supertest": "^3.0.0",
-    "ts-jest": "^22.4.4"
+    "ts-jest": "^26.5.3"
   }
 }

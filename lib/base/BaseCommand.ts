@@ -51,5 +51,5 @@ export default abstract class BaseCommand {
     });
   }
 
-  public abstract async run(argv: any): Promise<void>;
+  public abstract run(argv: any): Promise<void>;
 }

@@ -1,4 +1,4 @@
-import { Logger, SentryTransport } from 'ts-framework-common';
+import { Logger, SentryTransport } from 'nano-errors';
 import Server, { ServerOptions } from 'ts-framework';
 import StatusController from './controllers/StatusController';
 import UptimeService from './services/UptimeService';
