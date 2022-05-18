@@ -230,7 +230,7 @@ export default class ServerRouter {
       if (this.routes.hasOwnProperty(method)) {
         for (const r in this.routes[method]) {
           if (r && this.routes[method].hasOwnProperty(r)) {
-            this.app[method](r, asyncMiddleware(this.routes[method][r]));
+            this.app[method](r, asyncMiddleware(method, r, this.routes[method][r]));
           }
         }
       }

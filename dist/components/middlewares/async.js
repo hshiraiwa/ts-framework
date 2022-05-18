@@ -1,11 +1,18 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const util = require("util");
-const asyncMiddleware = (functions) => {
+const asyncMiddleware = (method, route, functions) => {
     let fns = functions;
     // Ensure input as an array
     if (!util.isArray(fns)) {
         fns = [fns];
+    }
+    if (process.env.NEWRELIC_ENABLED === "true") {
+        const newRelicRouteNameMiddleware = (req, res, next) => {
+            require("newrelic").setTransactionName(`${method} ${route}`);
+            next();
+        };
+        fns = [newRelicRouteNameMiddleware, ...fns];
     }
     // Map the array of filters and controllers with a Promise wrapper for express error handling
     return fns.map(fn => (req, res, next) => {
